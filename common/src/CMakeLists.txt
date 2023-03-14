@@ -1,0 +1,68 @@
+
+set(SDK_NAME "")
+string(CONCAT SDK_NAME ${SDK_NAME_UPPER_CASE} "SDK")
+
+project(${SDK_NAME})
+
+set(AD_FRAMEWORK "")
+string(CONCAT AD_FRAMEWORK ${SDK_NAME_LOWER_CASE} "_ad_sdk")
+
+set(COMPILE_FEATURE_FRAMEWORK 1)
+set(ALL_FEATURE_FRAMEWORK)
+
+file(GLOB
+     oneten_src_h
+     *.h)
+
+file(GLOB
+     oneten_src_source
+     *.cc)
+
+if(OSX OR IOS)
+    file(GLOB
+        oneten_src_source_mm
+        *.mm)
+    list(APPEND oneten_src_source ${oneten_src_source_mm})
+endif()
+
+if(${COMPILE_AD_FRAMEWORK})
+    list(APPEND ${ALL_FEATURE_FRAMEWORK} ${AD_FRAMEWORK})
+endif()
+
+find_library(UIKIT UIKit)
+find_library(FOUNDATION Foundation)
+find_library(MOBILECORESERVICES MobileCoreServices)
+find_library(CFNETWORK CFNetwork)
+find_library(SYSTEMCONFIGURATION SystemConfiguration)
+
+add_subdirectory(ad)
+include_directories(ad)
+
+add_library(${PROJECT_NAME} SHARED ${oneten_src_h} ${oneten_src_source})
+add_dependencies(${PROJECT_NAME} ${SDK_AD_LIB})
+add_dependencies(${PROJECT_NAME} ${SDK_AD_MODEL_LIB})
+add_dependencies(${PROJECT_NAME} ${SDK_AD_SERVICE_LIB})
+add_dependencies(${PROJECT_NAME} ${SDK_AD_LOADER_LIB})
+
+# target_link_libraries(${PROJECT_NAME} "${PROJECT_SOURCE_DIR}/../output/${PLATFORM}/\${CONFIGURATION}\/liboneten_ad.a")
+target_link_libraries(${PROJECT_NAME} ${SDK_AD_LIB})
+target_link_libraries(${PROJECT_NAME} ${SDK_AD_MODEL_LIB})
+target_link_libraries(${PROJECT_NAME} ${SDK_AD_SERVICE_LIB})
+target_link_libraries(${PROJECT_NAME} ${SDK_AD_LOADER_LIB})
+
+set(TENON_SDK_BUNDLE_ID "")
+string(CONCAT TENON_SDK_BUNDLE_ID ${SDK_BUNDLE_ID_PREFIX} ${PRO_NAME_LOWER_CASE} ".sdk")
+apple_framework_generate(${PROJECT_NAME} ${TENON_SDK_BUNDLE_ID} "TENOneSdk")
+
+# target_link_libraries(${PROJECT_NAME} "${PROJECT_SOURCE_DIR}/output/${PLATFORM}/\${CONFIGURATION}\/${SDK_AD_MODEL_LIB}.a")
+# target_link_libraries(${PROJECT_NAME} "${PROJECT_SOURCE_DIR}/output/${PLATFORM}/\${CONFIGURATION}\/${SDK_AD_SERVICE_LIB}.a")
+# target_link_libraries(${PROJECT_NAME} "${PROJECT_SOURCE_DIR}/output/${PLATFORM}/\${CONFIGURATION}\/${SDK_AD_LOADER_LIB}.a")
+
+if(${CMAKE_VERSION} VERSION_GREATER "3.16.0")
+    target_precompile_headers(${PROJECT_NAME} PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/pch.h>")
+endif()
+
+set_target_folder_if_exist(${SDK_AD_LIB} ${PROJECT_NAME})
+set_target_folder_if_exist(${SDK_AD_MODEL_LIB} ${PROJECT_NAME}/${SDK_AD_LIB})
+set_target_folder_if_exist(${SDK_AD_SERVICE_LIB} ${PROJECT_NAME}/${SDK_AD_LIB})
+set_target_folder_if_exist(${SDK_AD_LOADER_LIB} ${PROJECT_NAME}/${SDK_AD_LIB})
