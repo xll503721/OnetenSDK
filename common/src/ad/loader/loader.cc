@@ -6,3 +6,9 @@
 //
 
 #include "loader.h"
+
+BEGIN_NAMESPACE_TENONE_AD
+
+
+
+END_NAMESPACE_TENONE_AD

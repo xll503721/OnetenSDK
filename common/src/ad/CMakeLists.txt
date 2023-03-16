@@ -17,10 +17,12 @@ if(OSX OR IOS)
 endif()
 
 add_library(${PROJECT_NAME} STATIC ${oneten_src_ad_source})
-# if(${CMAKE_VERSION} VERSION_GREATER "3.16.0")
-#     target_precompile_headers(${PROJECT_NAME} PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/pch.h>")
-# endif()
+if(${CMAKE_VERSION} VERSION_GREATER "3.16.0")
+    target_precompile_headers(${PROJECT_NAME} PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${SRC_ROOT}/pch.h>")
+endif()
 
-# add_subdirectory(model)
+include_directories(../)
+
+add_subdirectory(model)
 # add_subdirectory(service)
-# add_subdirectory(loader)
+add_subdirectory(loader)

@@ -6,7 +6,8 @@
 //
 
 #import "ViewController.h"
-#import <OneTenSDK/TENOneSdk.h>
+#import <OneTenSDK/OTOneTen.h>
+
 
 @interface ViewController ()
 
@@ -17,7 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [TENOneSdk initAppId:@"" type:TENOneSdkTypeAdvert];
+    [OTOneTenSDK initAppId:@"111" type:OTOneTenSDKTypeAd];
+    
+    
 }
 
 

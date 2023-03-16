@@ -38,7 +38,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 832FC4FDB7774355AD3B3FF2;
+			remoteGlobalIDString = E14593D4B9FF4A8194FBE773;
 			remoteInfo = OneTenSDK;
 		};
 /* End PBXContainerItemProxy section */
@@ -393,6 +393,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6YXYV74FF7;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/";
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/OneTenSDK.framework/Headers";
@@ -422,6 +423,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6YXYV74FF7;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/";
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/OneTenSDK.framework/Headers";

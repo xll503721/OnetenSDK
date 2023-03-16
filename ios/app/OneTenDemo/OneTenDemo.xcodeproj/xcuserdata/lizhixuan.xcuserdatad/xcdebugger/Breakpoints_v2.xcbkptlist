@@ -7,55 +7,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5159BB87-1C28-4E1C-8719-8DB091AF147A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../common/src/TENOneSdk.mm"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "12"
-            endingLineNumber = "12"
-            landmarkName = "+initAppId:type:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5159BB87-1C28-4E1C-8719-8DB091AF147A - a2b6a370e9a9c26"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "+[TENOneSdk initAppId:type:]"
-                  moduleName = "OneTenSDK"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lizhixuan/Documents/GithubPreject/OneTenSDK/pro/common/src/TENOneSdk.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12"
-                  endingLineNumber = "12"
-                  offsetFromSymbolStart = "92">
-               </Location>
-               <Location
-                  uuid = "5159BB87-1C28-4E1C-8719-8DB091AF147A - a2b6a370e9a9c26"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "+[TENOneSdk initAppId:type:]"
-                  moduleName = "OneTenSDK"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lizhixuan/Documents/GithubPreject/OneTenSDK/pro/common/src/TENOneSdk.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12"
-                  endingLineNumber = "12"
-                  offsetFromSymbolStart = "120">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9C6F18A0-55E4-40D3-A569-A1923E19FA96"
+            uuid = "D413D187-5ABE-4BC7-8C52-C3DF51D30629"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -64,7 +16,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "24"
             endingLineNumber = "24"
-            landmarkName = "-test"
+            landmarkName = "-startWithAppId:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -1012,3 +1012,11 @@ macro(find_host_package)
   set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE BOTH)
   set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE BOTH)
 endmacro(find_host_package)
+
+macro (set_xcode_attr_property TARGET XCODE_PROPERTY XCODE_VALUE)
+    set_property (TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${XCODE_PROPERTY} ${XCODE_VALUE})
+endmacro (set_xcode_attr_property)
+
+macro (set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE)
+    set_property (TARGET ${TARGET} PROPERTY ${XCODE_PROPERTY} ${XCODE_VALUE})
+endmacro (set_xcode_property)

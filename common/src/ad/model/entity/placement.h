@@ -8,14 +8,12 @@
 #ifndef TENONE_AD_SDK_PLACEMENT_H
 #define TENONE_AD_SDK_PLACEMENT_H
 
-#include "advert_source.h"
+#include "oneten_object.h"
 
 BEGIN_NAMESPACE_TENONE_AD
 
-class Placement {
+class Placement: OnetenObject {
     
-private:
-    std::vector<std::shared_ptr<AdvertSource>> adver_source_vector;
 };
 
 END_NAMESPACE_TENONE_AD

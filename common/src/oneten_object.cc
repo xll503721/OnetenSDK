@@ -1,11 +1,12 @@
 //
-//  placement.cpp
-//  tenone_ad_sdk
+//  oneten_object.cpp
+//  SDKCommon
 //
 //  Created by li zhixuan on 2022/11/6.
 //
 
-#include "placement.h"
+#include "oneten_object.h"
+
 BEGIN_NAMESPACE_TENONE_AD
 
 END_NAMESPACE_TENONE_AD

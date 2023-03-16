@@ -19,6 +19,8 @@ string(CONCAT SDK_AD_SERVICE_LIB ${SDK_NAME_LOWER_CASE} "_ad_service")
 set(SDK_AD_LOADER_LIB "")
 string(CONCAT SDK_AD_LOADER_LIB ${SDK_NAME_LOWER_CASE} "_ad_loader")
 
+set(SRC_ROOT ${PROJECT_SOURCE_DIR}/src)
+
 if(IOS)
     set(PLATFORM iOS)
     set(ONETEN_SDK "OneTenSDK")
@@ -37,28 +39,27 @@ macro(target_exclude_from_all_if_exist targets)
   endforeach()
 endmacro()
 
-macro (set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE)
-    set_property (TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${XCODE_PROPERTY} ${XCODE_VALUE})
-endmacro (set_xcode_property)
-
-macro(apple_framework_generate 
-      project_name 
-      bundle_id
-      public_h)
+macro(apple_framework_generate target_name identifier product_name resource_files)
   if(IOS OR OSX)
-    set_target_properties(${project_name} PROPERTIES 
-      XCODE_ATTRIBUTE_CLANG_ENABLE_OBJC_ARC "YES"
-      XCODE_ATTRIBUTE_FRAMEWORK_SEARCH_PATHS ""
-      XCODE_ATTRIBUTE_LIBRARY_SEARCH_PATHS "" 
-      XCODE_ATTRIBUTE_LIBRARY_SEARCH_PATHS ""
-      XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER ${bundle_id}
-      XCODE_ATTRIBUTE_GCC_TREAT_WARNINGS_AS_ERRORS "YES"
-      FRAMEWORK TRUE 
-      FRAMEWORK_VERSION A 
-      MACOSX_FRAMEWORK_INFO_PLIST ${CMAKE_CURRENT_LIST_DIR}/framework.plist.in
-      PUBLIC_HEADER "${CMAKE_CURRENT_LIST_DIR}/${public_h}"
-      MACOSX_FRAMEWORK_IDENTIFIER ${bundle_id} 
-    )
+    set_xcode_property(${target_name} MACOSX_FRAMEWORK_IDENTIFIER "${identifier}")
+    set_xcode_property(${target_name} MACOSX_FRAMEWORK_BUNDLE_VERSION "1")
+    set_xcode_property(${target_name} MACOSX_FRAMEWORK_SHORT_VERSION_STRING "0.0.1")
+    set_xcode_property(${target_name} FRAMEWORK TRUE)
+    set_xcode_property(${target_name} FRAMEWORK_VERSION A)
+    set_xcode_property(${target_name} XCODE_ATTRIBUTE_PRODUCT_NAME "${product_name}")
+    set_xcode_attr_property(${target_name} CLANG_ENABLE_OBJC_ARC "YES")
+    set_xcode_attr_property(${target_name} ENABLE_BITCODE "NO")
+    set_xcode_attr_property(${target_name} DEFINES_MODULE "YES")
+    set_xcode_attr_property(${target_name} DYLIB_INSTALL_NAME_BASE "@rpath")
+    set_xcode_attr_property(${target_name} LD_RUNPATH_SEARCH_PATHS "@executable_path/../Frameworks @loader_path/Frameworks")
+    if(NOT ("${resource_files}" STREQUAL ""))
+      set_source_files_properties(${resource_files} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+    endif()
+    if(OSX)
+      set(CMAKE_OSX_DEPLOYMENT_TARGET "10.11" CACHE STRING "Minimum OS X deployment version" FORCE)
+    elseif(IOS)
+      set_xcode_attr_property(${target_name} CLANG_DEBUG_INFORMATION_LEVEL[variant=Release] "line-tables-only")
+    endif()
   endif()
 endmacro()
 

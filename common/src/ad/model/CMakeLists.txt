@@ -8,6 +8,8 @@ file(GLOB
      ./entity/*.h)
 
 add_library(${PROJECT_NAME} STATIC ${sdk_ad_src_model_source})
-# if(${CMAKE_VERSION} VERSION_GREATER "3.16.0")
-#     target_precompile_headers(${PROJECT_NAME} PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/pch.h>")
-# endif()
+if(${CMAKE_VERSION} VERSION_GREATER "3.16.0")
+    target_precompile_headers(${PROJECT_NAME} PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${SRC_ROOT}/pch.h>")
+endif()
+
+include_directories(../../)
