@@ -10,6 +10,8 @@
 
 #include "oneten_object.h"
 
+#include "loader/loader.h"
+
 BEGIN_NAMESPACE_TENONE_AD
 
 class OnetenAdSDK: OnetenObject {
@@ -21,9 +23,13 @@ public:
     bool IsReady(const std::string& placement_id);
     void ShowAd(const std::string& placement_id, void* delegate);
     
+    std::shared_ptr<LoaderInterface> GetMainLoader();
+    
 private:
     OnetenAdSDK();
     ~OnetenAdSDK();
+    
+    std::shared_ptr<LoaderInterface> main_loader_;
 };
 
 END_NAMESPACE_TENONE_AD

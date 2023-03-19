@@ -17,6 +17,7 @@
 		4B11307629BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; };
 		4B11307729BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4BB47CCD29AB017600BA2B27 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BB47CCC29AB016B00BA2B27 /* libc++.tbd */; };
+		FDFCB5069C6B11D53C677722 /* Pods_OneTenDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFA66410979C7A440551F35D /* Pods_OneTenDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,11 +35,25 @@
 			remoteGlobalIDString = A98669AD29BD4D90B5A60A04;
 			remoteInfo = oneten_ad;
 		};
+		4B11314D29C3017900214261 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8FDF4F2291C144A1ACD24CAC;
+			remoteInfo = oneten_ad_loader;
+		};
+		4B11314F29C3017900214261 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 17A45D93D18C44A18C00864E;
+			remoteInfo = oneten_ad_model;
+		};
 		4BC9C3B729AB5AFE00B6AEC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = E14593D4B9FF4A8194FBE773;
+			remoteGlobalIDString = 724B833C12D346698AAA6F06;
 			remoteInfo = OneTenSDK;
 		};
 /* End PBXContainerItemProxy section */
@@ -58,6 +73,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		11E79EC1881684D69CF66811 /* Pods-OneTenDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneTenDemo.debug.xcconfig"; path = "Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		4B0E03E029A248E600392BEE /* OneTenDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneTenDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B0E03E329A248E600392BEE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4B0E03E429A248E600392BEE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -73,6 +89,8 @@
 		4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDKCommon.xcodeproj; path = ../../../common/cmake_project/SDKCommon.xcodeproj; sourceTree = "<group>"; };
 		4BB47CC829AAFC9D00BA2B27 /* OneTenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneTenSDK.framework; path = ../../../common/output/iOS/Debug/OneTenSDK.framework; sourceTree = "<group>"; };
 		4BB47CCC29AB016B00BA2B27 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		B62798A6E1BECA697224CD39 /* Pods-OneTenDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneTenDemo.release.xcconfig"; path = "Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo.release.xcconfig"; sourceTree = "<group>"; };
+		FFA66410979C7A440551F35D /* Pods_OneTenDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneTenDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +100,7 @@
 			files = (
 				4B11307629BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Frameworks */,
 				4BB47CCD29AB017600BA2B27 /* libc++.tbd in Frameworks */,
+				FDFCB5069C6B11D53C677722 /* Pods_OneTenDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +114,7 @@
 				4B0E03E229A248E600392BEE /* OneTenDemo */,
 				4B0E03E129A248E600392BEE /* Products */,
 				4B0E041229A26FBC00392BEE /* Frameworks */,
+				7AF149AE3256C9D31A72B10A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,6 +149,8 @@
 			children = (
 				4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */,
 				4B0E040629A254DA00392BEE /* liboneten_ad.a */,
+				4B11314E29C3017900214261 /* liboneten_ad_loader.a */,
+				4B11315029C3017900214261 /* liboneten_ad_model.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -138,8 +160,18 @@
 			children = (
 				4BB47CCC29AB016B00BA2B27 /* libc++.tbd */,
 				4BB47CC829AAFC9D00BA2B27 /* OneTenSDK.framework */,
+				FFA66410979C7A440551F35D /* Pods_OneTenDemo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7AF149AE3256C9D31A72B10A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				11E79EC1881684D69CF66811 /* Pods-OneTenDemo.debug.xcconfig */,
+				B62798A6E1BECA697224CD39 /* Pods-OneTenDemo.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,10 +181,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4B0E03F929A248E800392BEE /* Build configuration list for PBXNativeTarget "OneTenDemo" */;
 			buildPhases = (
+				C960C833EE1408C65EE7571D /* [CP] Check Pods Manifest.lock */,
 				4B0E03DC29A248E600392BEE /* Sources */,
 				4B0E03DD29A248E600392BEE /* Frameworks */,
 				4B0E03DE29A248E600392BEE /* Resources */,
 				4B11307829BF50AF00214261 /* Embed Frameworks */,
+				BDA8ADEAEDAD2F53AC505856 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -218,6 +252,20 @@
 			remoteRef = 4B0E040529A254DA00392BEE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		4B11314E29C3017900214261 /* liboneten_ad_loader.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liboneten_ad_loader.a;
+			remoteRef = 4B11314D29C3017900214261 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B11315029C3017900214261 /* liboneten_ad_model.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liboneten_ad_model.a;
+			remoteRef = 4B11314F29C3017900214261 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -232,6 +280,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BDA8ADEAEDAD2F53AC505856 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C960C833EE1408C65EE7571D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OneTenDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4B0E03DC29A248E600392BEE /* Sources */ = {
@@ -387,6 +477,7 @@
 		};
 		4B0E03FA29A248E800392BEE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11E79EC1881684D69CF66811 /* Pods-OneTenDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -394,7 +485,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6YXYV74FF7;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/",
+					"$(inherited)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/OneTenSDK.framework/Headers";
 				INFOPLIST_FILE = OneTenDemo/Info.plist;
@@ -417,6 +511,7 @@
 		};
 		4B0E03FB29A248E800392BEE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B62798A6E1BECA697224CD39 /* Pods-OneTenDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -424,7 +519,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6YXYV74FF7;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/",
+					"$(inherited)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = "$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/OneTenSDK.framework/Headers";
 				INFOPLIST_FILE = OneTenDemo/Info.plist;

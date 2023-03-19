@@ -7,9 +7,15 @@
 
 #import "ViewController.h"
 #import <OneTenSDK/OTOneTen.h>
+#import <WindSDK/WindSDK.h>
 
+#define AppId @"6877"//应用ID
+#define AppKey @"eccdcdbd9adbd4a7"//应用key
+#define FullScreenVideoAdPlacementId @"f21b862c1cd"//插屏广告位ID
 
-@interface ViewController ()
+@interface ViewController ()<WindIntersititialAdDelegate>
+
+@property (nonatomic, strong) WindIntersititialAd *intersititialAd;
 
 @end
 
@@ -19,8 +25,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [OTOneTenSDK initAppId:@"111" type:OTOneTenSDKTypeAd];
-    
-    
 }
 
 

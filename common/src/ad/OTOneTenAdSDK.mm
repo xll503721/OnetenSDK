@@ -23,6 +23,8 @@
 - (void)startWithAppId:(NSString *)appId {
     _appId = appId;
     TENONE_AD::OnetenAdSDK::GetInstance().Start(appId.UTF8String);
+    
+    TENONE_AD::OnetenAdSDK::GetInstance().LoadAd("1111", nullptr);
 }
 
 - (void)loadWithPlacementId:(NSString *)placementId {

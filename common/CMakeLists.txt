@@ -19,6 +19,9 @@ string(CONCAT SDK_AD_SERVICE_LIB ${SDK_NAME_LOWER_CASE} "_ad_service")
 set(SDK_AD_LOADER_LIB "")
 string(CONCAT SDK_AD_LOADER_LIB ${SDK_NAME_LOWER_CASE} "_ad_loader")
 
+set(SDK_AD_SOURCE "")
+string(CONCAT SDK_AD_SOURCE ${SDK_NAME_LOWER_CASE} "_ad_source")
+
 set(SRC_ROOT ${PROJECT_SOURCE_DIR}/src)
 
 if(IOS)

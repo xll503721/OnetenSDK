@@ -8,4 +8,9 @@
 #include "placement.h"
 BEGIN_NAMESPACE_TENONE_AD
 
+std::vector<std::shared_ptr<AdSource>> Placement::GetRequestAdSources() {
+    std::vector<std::shared_ptr<AdSource>> ad_sources;
+    return ad_sources;
+}
+
 END_NAMESPACE_TENONE_AD
