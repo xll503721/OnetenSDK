@@ -9,7 +9,7 @@
 
 #include "../oneten_ad_sdk.h"
 
-BEGIN_NAMESPACE_TENONE_AD
+BEGIN_NAMESPACE_ONETEN_AD
 
 WaterfallLoader::WaterfallLoader(std::shared_ptr<LoaderInterface> loader):MainLoader(loader) {
     
@@ -18,14 +18,37 @@ WaterfallLoader::WaterfallLoader(std::shared_ptr<LoaderInterface> loader):MainLo
 void WaterfallLoader::Classify(std::shared_ptr<Placement> placement) {
     super_class::Classify(placement);
     
+    placement_ = placement;
+    
     printf("WaterfallLoader Classify\n");
     
-    TENONE_AD::OnetenAdSDK::GetInstance().GetMainLoader()->Flow(nullptr);
-//    std::vector<std::shared_ptr<AdSource>> ad_sources = placement->GetRequestAdSources();
-//    for (std::shared_ptr<AdSource> ad_source: ad_sources) {
-//        TENONE_AD::OnetenAdSDK::GetInstance().GetMainLoader()->Flow(ad_source);
-//    }
+    StartFlow(0);
 }
 
+void WaterfallLoader::StartFlow(int32_t level) {
+    super_class::StartFlow(level);
+    
+    printf("WaterfallLoader StartFlow\n");
+    InternalStartFlow(level);
+}
 
-END_NAMESPACE_TENONE_AD
+void WaterfallLoader::InternalStartFlow(int32_t level) {
+    std::vector<std::shared_ptr<AdSource>> ad_sources = placement_->GetRequestAdSources();
+    if (ad_sources.size() > level) {
+        std::shared_ptr<AdSource> ad_source = ad_sources[level];
+        ONETEN_AD::OnetenAdSDK::GetInstance().GetRequestLoader()->Flow(ad_source);
+    }
+    
+    if (level == ad_sources.size()) {
+        std::string placement_id;
+        ONETEN_AD::OnetenAdSDK::GetInstance().EndAdLoad(placement_id);
+    }
+}
+
+void WaterfallLoader::End() {
+    super_class::End();
+    
+    printf("WaterfallLoader End\n");
+};
+
+END_NAMESPACE_ONETEN_AD

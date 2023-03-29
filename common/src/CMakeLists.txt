@@ -40,13 +40,13 @@ include_directories(ad)
 
 add_library(${PROJECT_NAME} SHARED ${oneten_src_h} ${oneten_src_source})
 add_dependencies(${PROJECT_NAME} ${SDK_AD_LIB})
-# add_dependencies(${PROJECT_NAME} ${SDK_AD_MODEL_LIB})
-# add_dependencies(${PROJECT_NAME} ${SDK_AD_SERVICE_LIB})
+add_dependencies(${PROJECT_NAME} ${SDK_AD_MODEL_LIB})
+add_dependencies(${PROJECT_NAME} ${SDK_AD_SERVICE_LIB})
 add_dependencies(${PROJECT_NAME} ${SDK_AD_LOADER_LIB})
 
 target_link_libraries(${PROJECT_NAME} ${SDK_AD_LIB})
-# target_link_libraries(${PROJECT_NAME} ${SDK_AD_MODEL_LIB})
-# target_link_libraries(${PROJECT_NAME} ${SDK_AD_SERVICE_LIB})
+target_link_libraries(${PROJECT_NAME} ${SDK_AD_MODEL_LIB})
+target_link_libraries(${PROJECT_NAME} ${SDK_AD_SERVICE_LIB})
 target_link_libraries(${PROJECT_NAME} ${SDK_AD_LOADER_LIB})
 
 set(TENON_SDK_BUNDLE_ID "")

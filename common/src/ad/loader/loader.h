@@ -1,12 +1,12 @@
 //
 //  Loader.h
-//  tenone_ad_sdk
+//  SDKCommon
 //
 //  Created by li zhixuan on 2022/11/6.
 //
 
-#ifndef TENONE_AD_SDK_LOADER_H
-#define TENONE_AD_SDK_LOADER_H
+#ifndef ONETEN_AD_SDK_LOADER_H
+#define ONETEN_AD_SDK_LOADER_H
 
 //#include "placement.h"
 //#include "header_bid.h"
@@ -14,9 +14,9 @@
 
 #include "../model/entity/placement.h"
 #include "../model/entity/ad_source.h"
+#include "oneten_object.h"
 
-
-BEGIN_NAMESPACE_TENONE_AD
+BEGIN_NAMESPACE_ONETEN_AD
 
 
 class PlacementLoaderInterface {
@@ -27,6 +27,7 @@ public:
 class WaterfallLoaderInterface {
 public:
     virtual void Classify(std::shared_ptr<Placement> placement) {};
+    virtual void StartFlow(int32_t level) {};
 };
 
 class AdSourceLoaderInterface {
@@ -46,8 +47,10 @@ class LoaderInterface:  public PlacementLoaderInterface,
 public:
     virtual void Start(const std::string& placement_id) = 0;
     virtual void End() = 0;
+    virtual bool GetIsEndInvoke() {};
+    virtual bool SetIsEndInvoke(bool is_end_invoke) {};
 };
 
-END_NAMESPACE_TENONE_AD
+END_NAMESPACE_ONETEN_AD
 
-#endif /* TENONE_AD_SDK_LOADER_H */
+#endif /* ONETEN_AD_SDK_LOADER_H */

@@ -1,16 +1,16 @@
 //
 //  placement_loader.h
-//  tenone_ad_sdk
+//  SDKCommon
 //
 //  Created by li zhixuan on 2022/12/3.
 //
 
-#ifndef TENONE_AD_SDK_PLACEMENT_LOADER_H
-#define TENONE_AD_SDK_PLACEMENT_LOADER_H
+#ifndef ONETEN_AD_SDK_PLACEMENT_LOADER_H
+#define ONETEN_AD_SDK_PLACEMENT_LOADER_H
 
 #include "main_loader.h"
 
-BEGIN_NAMESPACE_TENONE_AD
+BEGIN_NAMESPACE_ONETEN_AD
 
 class PlacementLoader: public MainLoader {
     
@@ -25,6 +25,6 @@ public:
     void RequestPlacement(const std::string& placement_id) override;
 };
 
-END_NAMESPACE_TENONE_AD
+END_NAMESPACE_ONETEN_AD
 
-#endif /* TENONE_AD_SDK_PLACEMENT_LOADER_H */
+#endif /* ONETEN_AD_SDK_PLACEMENT_LOADER_H */

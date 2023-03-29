@@ -16,6 +16,7 @@
 		4B0E03F629A248E800392BEE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0E03F529A248E800392BEE /* main.m */; };
 		4B11307629BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; };
 		4B11307729BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4B1552D029D1533B0068842B /* TENSigmobSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1552CF29D1533B0068842B /* TENSigmobSource.m */; };
 		4BB47CCD29AB017600BA2B27 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BB47CCC29AB016B00BA2B27 /* libc++.tbd */; };
 		FDFCB5069C6B11D53C677722 /* Pods_OneTenDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFA66410979C7A440551F35D /* Pods_OneTenDemo.framework */; };
 /* End PBXBuildFile section */
@@ -53,8 +54,15 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 724B833C12D346698AAA6F06;
+			remoteGlobalIDString = 29ED9A6017B741C5BF4F028C;
 			remoteInfo = OneTenSDK;
+		};
+		4BD933E629D03C7E00E4AA07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA4F28E176F24B77BFF47879;
+			remoteInfo = oneten_ad_service;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -87,6 +95,8 @@
 		4B0E03F429A248E800392BEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4B0E03F529A248E800392BEE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDKCommon.xcodeproj; path = ../../../common/cmake_project/SDKCommon.xcodeproj; sourceTree = "<group>"; };
+		4B1552C829D1533B0068842B /* TENSigmobSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TENSigmobSource.h; sourceTree = "<group>"; };
+		4B1552CF29D1533B0068842B /* TENSigmobSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TENSigmobSource.m; sourceTree = "<group>"; };
 		4BB47CC829AAFC9D00BA2B27 /* OneTenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneTenSDK.framework; path = ../../../common/output/iOS/Debug/OneTenSDK.framework; sourceTree = "<group>"; };
 		4BB47CCC29AB016B00BA2B27 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B62798A6E1BECA697224CD39 /* Pods-OneTenDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneTenDemo.release.xcconfig"; path = "Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +139,8 @@
 		4B0E03E229A248E600392BEE /* OneTenDemo */ = {
 			isa = PBXGroup;
 			children = (
+				4B1552C829D1533B0068842B /* TENSigmobSource.h */,
+				4B1552CF29D1533B0068842B /* TENSigmobSource.m */,
 				4B0E03E329A248E600392BEE /* AppDelegate.h */,
 				4B0E03E429A248E600392BEE /* AppDelegate.m */,
 				4B0E03E629A248E600392BEE /* SceneDelegate.h */,
@@ -151,6 +163,7 @@
 				4B0E040629A254DA00392BEE /* liboneten_ad.a */,
 				4B11314E29C3017900214261 /* liboneten_ad_loader.a */,
 				4B11315029C3017900214261 /* liboneten_ad_model.a */,
+				4BD933E729D03C7E00E4AA07 /* liboneten_ad_service.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -266,6 +279,13 @@
 			remoteRef = 4B11314F29C3017900214261 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		4BD933E729D03C7E00E4AA07 /* liboneten_ad_service.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liboneten_ad_service.a;
+			remoteRef = 4BD933E629D03C7E00E4AA07 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -329,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B0E03EB29A248E600392BEE /* ViewController.m in Sources */,
+				4B1552D029D1533B0068842B /* TENSigmobSource.m in Sources */,
 				4B0E03E529A248E600392BEE /* AppDelegate.m in Sources */,
 				4B0E03F629A248E800392BEE /* main.m in Sources */,
 				4B0E03E829A248E600392BEE /* SceneDelegate.m in Sources */,

@@ -1,8 +1,7 @@
 //
 //  placement.cpp
-//  tenone_ad_sdk
+//  SDKCommon
 //
 //  Created by li zhixuan on 2022/11/6.
 //
 
-#include "placement.h"

@@ -5,33 +5,45 @@
 //  Created by li zhixuan on 2023/3/16.
 //
 
-#ifndef oneten_ad_sdk_h
-#define oneten_ad_sdk_h
+#ifndef ONETEN_AD_SDK_AD_SDK_H
+#define ONETEN_AD_SDK_AD_SDK_H
 
 #include "oneten_object.h"
 
-#include "loader/loader.h"
+#include "ad/loader/loader.h"
+#include "OTOneTenAdSDK.h"
 
-BEGIN_NAMESPACE_TENONE_AD
+BEGIN_NAMESPACE_ONETEN_AD
 
 class OnetenAdSDK: OnetenObject {
     
 public:
     static OnetenAdSDK &GetInstance();
-    void Start(const std::string& app_id);
-    void LoadAd(const std::string& placement_id, void* delegate);
+    void Register(const std::string& app_id);
+    void StartAdLoad(const std::string& placement_id, void* delegate);
+    void EndAdLoad(const std::string& placement_id);
     bool IsReady(const std::string& placement_id);
     void ShowAd(const std::string& placement_id, void* delegate);
     
     std::shared_ptr<LoaderInterface> GetMainLoader();
+    std::shared_ptr<LoaderInterface> GetWaterfallLoader();
+    std::shared_ptr<LoaderInterface> GetRequestLoader();
+    std::shared_ptr<LoaderInterface> GetCacheLoader();
+    
+    
     
 private:
     OnetenAdSDK();
     ~OnetenAdSDK();
     
-    std::shared_ptr<LoaderInterface> main_loader_;
+    std::shared_ptr<LoaderInterface> start_loader_;
+    std::shared_ptr<LoaderInterface> waterfall_loader_;
+    std::shared_ptr<LoaderInterface> request_loader_;
+    std::shared_ptr<LoaderInterface> cache_loader_;
+    
+//    static thread_local OneTenAdSDK delegate_;
 };
 
-END_NAMESPACE_TENONE_AD
+END_NAMESPACE_ONETEN_AD
 
-#endif /* oneten_ad_sdk_h */
+#endif /* ONETEN_AD_SDK_AD_SDK_H */

@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 #import <OneTenSDK/OTOneTen.h>
+#import <OneTenSDK/OTOneTenAdSDK.h>
 #import <WindSDK/WindSDK.h>
 
 #define AppId @"6877"//应用ID
@@ -25,6 +26,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [OTOneTenSDK initAppId:@"111" type:OTOneTenSDKTypeAd];
+    
+    [[OTOneTenAdSDK defalutAdSDK] loadWithPlacementId:@""];
+    
+    [[OTOneTenAdSDK defalutAdSDK] setLoadCompletion:^(NSString * _Nonnull placementId, NSError * _Nonnull error, NSDictionary<NSString *,id> * _Nonnull userInfo) {
+        
+    }];
+    
+    NSError *error;
+    [[OTOneTenAdSDK defalutAdSDK] showWithSuperView:self.view placementId:@"" error:&error];
+    if (error) {
+        
+    }
 }
 
 

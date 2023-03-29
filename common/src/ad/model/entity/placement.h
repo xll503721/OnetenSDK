@@ -1,17 +1,17 @@
 //
 //  placement.h
-//  tenone_ad_sdk
+//  SDKCommon
 //
 //  Created by li zhixuan on 2022/11/6.
 //
 
-#ifndef TENONE_AD_SDK_PLACEMENT_H
-#define TENONE_AD_SDK_PLACEMENT_H
+#ifndef ONETEN_AD_SDK_PLACEMENT_H
+#define ONETEN_AD_SDK_PLACEMENT_H
 
 #include <oneten_object.h>
 #include "ad_source.h"
 
-BEGIN_NAMESPACE_TENONE_AD
+BEGIN_NAMESPACE_ONETEN_AD
 
 class Placement: OnetenObject {
     
@@ -27,6 +27,6 @@ private:
     
 };
 
-END_NAMESPACE_TENONE_AD
+END_NAMESPACE_ONETEN_AD
 
-#endif /* TENONE_AD_SDK_PLACEMENT_H */
+#endif /* ONETEN_AD_SDK_PLACEMENT_H */

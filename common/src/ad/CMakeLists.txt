@@ -24,5 +24,5 @@ endif()
 include_directories(../)
 
 add_subdirectory(model)
-# add_subdirectory(service)
+add_subdirectory(service)
 add_subdirectory(loader)

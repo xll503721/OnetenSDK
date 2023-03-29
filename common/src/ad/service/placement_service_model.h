@@ -1,23 +1,21 @@
 //
-//  placement.h
-//  tenone_ad_sdk
+//  placement_service_model.h
+//  SDKCommon
 //
 //  Created by li zhixuan on 2022/11/6.
 //
 
-#ifndef TENONE_AD_SDK_PLACEMENT_MODEL_H
-#define TENONE_AD_SDK_PLACEMENT_MODEL_H
+#ifndef ONETEN_AD_SDK_PLACEMENT_SERVICE_MODEL_H
+#define ONETEN_AD_SDK_PLACEMENT_SERVICE_MODEL_H
 
-#include "advert_source.h"
+BEGIN_NAMESPACE_ONETEN_AD
 
-BEGIN_NAMESPACE_TENONE_AD
-
-class PlacementModel {
+class PlacementServiceModel {
     
 public:
-    PlacementModel(const std::string placement_id, void* delegate);
+    PlacementServiceModel(const std::string placement_id, void* delegate);
 };
 
-END_NAMESPACE_TENONE_AD
+END_NAMESPACE_ONETEN_AD
 
-#endif /* TENONE_AD_SDK_PLACEMENT_MODEL_H */
+#endif /* ONETEN_AD_SDK_PLACEMENT_SERVICE_MODEL_H */

@@ -9,22 +9,28 @@
 
 #include "../oneten_ad_sdk.h"
 
-BEGIN_NAMESPACE_TENONE_AD
+BEGIN_NAMESPACE_ONETEN_AD
 
 NormalLoader::NormalLoader(std::shared_ptr<LoaderInterface> loader): MainLoader(loader) {
-    
+    ad_source_service_ = std::make_shared<AdSourceService>();
 }
 
 void NormalLoader::Flow(std::shared_ptr<AdSource> ad_source) {
     super_class::Flow(ad_source);
-    printf("NormalLoader Flow\n");
     
-    TENONE_AD::OnetenAdSDK::GetInstance().GetMainLoader()->Save();
+    if (ad_source->GetType() == AdSource::Type::kNormal) {
+        printf("NormalLoader Flow\n");
+        ad_source_service_->Load(ad_source, [=](){
+            ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->StartFlow(ad_source->GetLevel() + 1);
+        });
+    }
 }
 
 void NormalLoader::End() {
     super_class::End();
+    
+    printf("NormalLoader End\n");
 };
 
 
-END_NAMESPACE_TENONE_AD
+END_NAMESPACE_ONETEN_AD
