@@ -9,7 +9,7 @@
 #include <vector>
 #include "platform_macros.h"
 
-#define ONETEN_AD ONETEN_AD
+#define ONETEN_AD oneten_ad
 #define BEGIN_NAMESPACE_ONETEN_AD BEGIN_NAMESPACE(ONETEN_AD)
 #define END_NAMESPACE_ONETEN_AD END_NAMESPACE()
 

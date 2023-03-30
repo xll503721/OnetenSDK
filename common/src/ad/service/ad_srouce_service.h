@@ -33,7 +33,10 @@ public:
     ~AdSourceService();
     void Load(std::shared_ptr<AdSource> ad_source, std::function<void()> load_complete);
     
-    void AdDidLoad();
+    void LoadCompletion(int categroy_type, const std::string& error_msg);
+    
+private:
+    void* GetAdSourceServicePlatform();
     
 private:
     void* ad_source_service_ios_;

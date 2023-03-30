@@ -44,7 +44,7 @@
 #pragma mark - OTAdSourceDelegate
 
 - (void)adDidLoadWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error {
-    self.rawPrt->AdDidLoad();
+    self.rawPrt->LoadCompletion((int)categroyType, @"".UTF8String);
 }
 
 @end
@@ -56,21 +56,25 @@ AdSourceService::~AdSourceService() {
     ad_source_service_ios_ = nullptr;
 }
 
-void AdSourceService::Load(std::shared_ptr<AdSource> ad_source, std::function<void()> load_complete) {
-    OTAdSourceService *adSourceService = (__bridge OTAdSourceService *)ad_source_service_ios_;
+void* AdSourceService::GetAdSourceServicePlatform() {
     if (!ad_source_service_ios_) {
-        adSourceService = [[OTAdSourceService alloc] init];
+        OTAdSourceService *adSourceService = [[OTAdSourceService alloc] init];
         ad_source_service_ios_ = (__bridge_retained void *)(adSourceService);
         adSourceService.rawPrt = this;
     }
-    
+    return ad_source_service_ios_;
+}
+
+void AdSourceService::Load(std::shared_ptr<AdSource> ad_source, std::function<void()> load_complete) {
     load_complete_ = load_complete;
     
+    void *ad_source_service_platform = GetAdSourceServicePlatform();
+    OTAdSourceService *adSourceService = (__bridge OTAdSourceService *)ad_source_service_platform;
     NSString *className = [NSString stringWithUTF8String:ad_source->GetClassName().c_str()];
     [adSourceService loadWithClassName:className];
 }
 
-void AdSourceService::AdDidLoad() {
+void AdSourceService::LoadCompletion(int categroy_type, const std::string& error_msg) {
     if (load_complete_) {
         load_complete_();
     }

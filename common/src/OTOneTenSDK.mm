@@ -12,7 +12,6 @@
 + (void)initAppId:(NSString *)appId type:(OTOneTenSDKType)type {
     bool isiOS = isPlatform(OneTenPlatformType::kOneTenPlatformTypeiOS);
     
-
     switch (type) {
         case OTOneTenSDKTypeAd: {
             [[OTOneTenAdSDK defalutAdSDK] startWithAppId:appId];

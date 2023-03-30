@@ -34,14 +34,15 @@ void WaterfallLoader::StartFlow(int32_t level) {
 
 void WaterfallLoader::InternalStartFlow(int32_t level) {
     std::vector<std::shared_ptr<AdSource>> ad_sources = placement_->GetRequestAdSources();
-    if (ad_sources.size() > level) {
-        std::shared_ptr<AdSource> ad_source = ad_sources[level];
-        ONETEN_AD::OnetenAdSDK::GetInstance().GetRequestLoader()->Flow(ad_source);
-    }
-    
     if (level == ad_sources.size()) {
         std::string placement_id;
         ONETEN_AD::OnetenAdSDK::GetInstance().EndAdLoad(placement_id);
+        return;
+    }
+    
+    if (ad_sources.size() > level) {
+        std::shared_ptr<AdSource> ad_source = ad_sources[level];
+        ONETEN_AD::OnetenAdSDK::GetInstance().GetRequestLoader()->Flow(ad_source);
     }
 }
 

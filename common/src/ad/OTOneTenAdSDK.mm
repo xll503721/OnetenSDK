@@ -7,10 +7,11 @@
 
 #import "OTOneTenAdSDK.h"
 #include "oneten_ad_sdk.h"
+#include "oneten_ad_sdk_delegate.h"
 
 @interface OTOneTenAdSDK ()
 
-//@property ONETEN_AD::OneTenAdSDK sdk;
+@property ONETEN_AD::AdSDKDelegate sdk_delegate;
 
 @end
 
@@ -30,7 +31,7 @@
 {
     self = [super init];
     if (self) {
-        
+        _sdk_delegate.SetOCPrt((__bridge_retained void *)self);
     }
     return self;
 }
@@ -41,19 +42,25 @@
 }
 
 - (void)loadWithPlacementId:(NSString *)placementId {
-    ONETEN_AD::OnetenAdSDK::GetInstance().StartAdLoad(placementId.UTF8String, nullptr);
+    ONETEN_AD::OnetenAdSDK::GetInstance().StartAdLoad(placementId.UTF8String, _sdk_delegate);
 }
 
 - (BOOL)showWithSuperView:(UIView *)view placementId:(NSString *)placementId error:(NSError **)error {
-    ONETEN_AD::OnetenAdSDK::GetInstance().ShowAd(placementId.UTF8String, nullptr);
+    ONETEN_AD::OnetenAdSDK::GetInstance().ShowAd(placementId.UTF8String, _sdk_delegate);
 }
 
 @end
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-//void OneTenAdSDK::LoadCompletion() {
-//    
-//}
+void AdSDKDelegate::SetOCPrt(void *prt) {
+    oc_prt_ = prt;
+}
+
+void AdSDKDelegate::LoadSucceed() {
+    if ([OTOneTenAdSDK defalutAdSDK].loadCompletion) {
+        [OTOneTenAdSDK defalutAdSDK].loadCompletion(@"", nil, @{});
+    }
+}
 
 END_NAMESPACE_ONETEN_AD

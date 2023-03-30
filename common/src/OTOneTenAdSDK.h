@@ -4,15 +4,6 @@
 //
 //  Created by li zhixuan on 2022/12/11.
 //
-//#ifndef ONETEN_AD_SDK_AD_OC_SDK_H
-//#define ONETEN_AD_SDK_AD_OC_SDK_H
-//
-//BEGIN_NAMESPACE_ONETEN_AD
-//
-//END_NAMESPACE_ONETEN_AD
-//
-//#endif /*ONETEN_AD_SDK_AD_OC_SDK_H*/
-
 
 #ifdef __OBJC__
 
@@ -43,3 +34,4 @@ typedef void (^LoadCompletion) (NSString *placementId, NSError *error, NSDiction
 NS_ASSUME_NONNULL_END
 
 #endif
+
