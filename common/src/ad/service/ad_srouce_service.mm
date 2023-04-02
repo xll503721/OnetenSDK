@@ -44,7 +44,13 @@
 #pragma mark - OTAdSourceDelegate
 
 - (void)adDidLoadWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error {
-    self.rawPrt->LoadCompletion((int)categroyType, @"".UTF8String);
+    std::map<std::string, std::string> user_info;
+    ONETEN::Error *c_error = nullptr;
+    if (error) {
+        ONETEN::Error cc_error(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
+        c_error = &cc_error;
+    }
+    self.rawPrt->LoadCompletion((int)categroyType, c_error);
 }
 
 @end
@@ -65,7 +71,7 @@ void* AdSourceService::GetAdSourceServicePlatform() {
     return ad_source_service_ios_;
 }
 
-void AdSourceService::Load(std::shared_ptr<AdSource> ad_source, std::function<void()> load_complete) {
+void AdSourceService::Load(std::shared_ptr<AdSource> ad_source, LoadCompletionInvoke load_complete) {
     load_complete_ = load_complete;
     
     void *ad_source_service_platform = GetAdSourceServicePlatform();
@@ -74,9 +80,9 @@ void AdSourceService::Load(std::shared_ptr<AdSource> ad_source, std::function<vo
     [adSourceService loadWithClassName:className];
 }
 
-void AdSourceService::LoadCompletion(int categroy_type, const std::string& error_msg) {
+void AdSourceService::LoadCompletion(int categroy_type, ONETEN::Error* error) {
     if (load_complete_) {
-        load_complete_();
+        load_complete_(categroy_type, error);
     }
 }
 

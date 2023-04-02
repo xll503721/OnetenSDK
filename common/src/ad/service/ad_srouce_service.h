@@ -9,6 +9,7 @@
 #define ONETEN_AD_SDK_AD_SOURCE_SERVICE_H
 
 #include "../model/entity/ad_source.h"
+#include <error.h>
 
 #ifdef __OBJC__
 
@@ -31,16 +32,19 @@ class AdSourceService {
     
 public:
     ~AdSourceService();
-    void Load(std::shared_ptr<AdSource> ad_source, std::function<void()> load_complete);
+    using LoadCompletionInvoke = std::function<void(int categroy_type, ONETEN::Error* error)>;
     
-    void LoadCompletion(int categroy_type, const std::string& error_msg);
+    
+    void Load(std::shared_ptr<AdSource> ad_source, LoadCompletionInvoke load_complete);
+    
+    void LoadCompletion(int categroy_type, ONETEN::Error* error);
     
 private:
     void* GetAdSourceServicePlatform();
     
 private:
     void* ad_source_service_ios_;
-    std::function<void()> load_complete_;
+    LoadCompletionInvoke load_complete_;
 };
 
 END_NAMESPACE_ONETEN_AD
