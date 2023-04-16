@@ -8,7 +8,7 @@
 #ifndef ONETEN_AD_SDK_AD_SOURCE_SERVICE_H
 #define ONETEN_AD_SDK_AD_SOURCE_SERVICE_H
 
-#include "../model/entity/ad_source.h"
+#include "../entity/ad_source.h"
 #include <error.h>
 
 #ifdef __OBJC__

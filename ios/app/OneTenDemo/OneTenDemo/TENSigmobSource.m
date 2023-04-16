@@ -13,12 +13,10 @@
 
 @interface TENSigmobSource ()<WindIntersititialAdDelegate, OTAdSourceProtocol>
 
-@property (nonatomic, strong) WindIntersititialAd *intersititialAd;
-@property (nonatomic, strong) WindSplashAdView *splashAdView;
-@property (nonatomic, strong) WindNativeAdsManager *nativeAdsManager;
-@property (nonatomic, strong) WindRewardVideoAd *rewardVideoAd;
-
-@property (nonatomic, strong) NSMutableDictionary *sigmobAdDictionary;
+//@property (nonatomic, strong) WindIntersititialAd *intersititialAd;
+//@property (nonatomic, strong) WindSplashAdView *splashAdView;
+//@property (nonatomic, strong) WindNativeAdsManager *nativeAdsManager;
+//@property (nonatomic, strong) WindRewardVideoAd *rewardVideoAd;
 
 @property (nonatomic, weak) id<OTAdSourceDelegate> delegate;
 
@@ -31,7 +29,6 @@
     self = [super init];
     if (self) {
         _delegate = delegate;
-        _sigmobAdDictionary = @{}.mutableCopy;
         WindAdOptions *option = [[WindAdOptions alloc] initWithAppId:AppId appKey:AppKey];
         [WindAds startWithOptions:option];
     }
@@ -41,15 +38,15 @@
 - (BOOL)isReadyWithType:(OTAdSourceCategroyType)categroyType {
     switch (categroyType) {
         case OTAdSourceCategroyTypeInterstitial: {
-            return [self.intersititialAd isAdReady];
+            
         }
             break;
         case OTAdSourceCategroyTypeSplash: {
-            return [self.splashAdView isAdValid];
+            
         }
             break;
         case OTAdSourceCategroyTypeRewardedVideo: {
-            return [self.rewardVideoAd isAdReady];
+            
         }
             break;
         case OTAdSourceCategroyTypeNative: {
@@ -63,14 +60,13 @@
     return NO;
 }
 
-- (void)showInView:(UIView *)superView categroyType:(OTAdSourceCategroyType)categroyType {
+- (void)showWithCategroyType:(OTAdSourceCategroyType)categroyType {
     switch (categroyType) {
         case OTAdSourceCategroyTypeInterstitial: {
-            [self.intersititialAd showAdFromRootViewController:(UIViewController *)superView.nextResponder options:nil];
         }
             break;
         case OTAdSourceCategroyTypeSplash: {
-            [superView addSubview:self.splashAdView];
+            
         }
             break;
         case OTAdSourceCategroyTypeRewardedVideo: {
@@ -87,24 +83,38 @@
     }
 }
 
+- (void)loadWithCategoryType:(OTAdSourceCategroyType)categroyType adSourceType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
+    switch (categroyType) {
+        case OTAdSourceCategroyTypeInterstitial:
+            [self loadInterstitialWithType:type userInfo:userInfo];
+            break;
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - Interstitial
 - (void)loadInterstitialWithType:(OTAdSourceType)type userInfo:(NSDictionary *)userInfo {
     WindAdRequest *request = [WindAdRequest request];
     request.userId = @"user_id";
     request.placementId = FullScreenVideoAdPlacementId;
     
-    self.intersititialAd = [[WindIntersititialAd alloc] initWithRequest:request];
-    self.intersititialAd.delegate = self;
+    WindIntersititialAd *intersititialAd = [[WindIntersititialAd alloc] initWithRequest:request];
+    intersititialAd.delegate = self;
     if (type == OTAdSourceTypeS2S) {
-        [self.intersititialAd loadAdDataWithBidToken:[WindAds getSdkToken]];
+        [intersititialAd loadAdDataWithBidToken:[WindAds getSdkToken]];
         return;
     }
     if (type == OTAdSourceTypeC2S) {
-        [self.intersititialAd setCurrency:@"USD"];
-        [self.intersititialAd setBidFloor:100];
+        [intersititialAd setCurrency:@"USD"];
+        [intersititialAd setBidFloor:100];
     }
-    [self.intersititialAd loadAdData];
-    self.sigmobAdDictionary[@(OTAdSourceCategroyTypeInterstitial)] = self.intersititialAd;
+    [intersititialAd loadAdData];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithCategroyType:adSourceObject:)]) {
+        [self.delegate adWillLoadWithCategroyType:OTAdSourceCategroyTypeInterstitial adSourceObject:intersititialAd];
+    }
 }
 
 #pragma mark - Interstitial Delegate
@@ -143,13 +153,9 @@
 
 #pragma mark - Send Win Loss
 - (void)sendWinNotificationWithType:(OTAdSourceCategroyType)categroyType userInfo:(NSDictionary *)userInfo {
-    id<WindBiddingProtocol> ad = self.sigmobAdDictionary[@(categroyType)];
-    [ad sendWinNotificationWithInfo:@{}];
 }
 
 - (void)sendLossNotificationWithType:(OTAdSourceCategroyType)categroyType userInfo:(NSDictionary *)userInfo {
-    id<WindBiddingProtocol> ad = self.sigmobAdDictionary[@(categroyType)];
-    [ad sendLossNotificationWithInfo:@{}];
 }
 
 @end

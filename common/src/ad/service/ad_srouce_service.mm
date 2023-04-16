@@ -53,6 +53,10 @@
     self.rawPrt->LoadCompletion((int)categroyType, c_error);
 }
 
+- (void)adWillLoadWithCategroyType:(OTAdSourceCategroyType)categroyType adObject:(id)adObject {
+    
+}
+
 @end
 
 BEGIN_NAMESPACE_ONETEN_AD
@@ -78,6 +82,7 @@ void AdSourceService::Load(std::shared_ptr<AdSource> ad_source, LoadCompletionIn
     OTAdSourceService *adSourceService = (__bridge OTAdSourceService *)ad_source_service_platform;
     NSString *className = [NSString stringWithUTF8String:ad_source->GetClassName().c_str()];
     [adSourceService loadWithClassName:className];
+    ad_source->Load();
 }
 
 void AdSourceService::LoadCompletion(int categroy_type, ONETEN::Error* error) {

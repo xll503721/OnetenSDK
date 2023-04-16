@@ -13,7 +13,7 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class Placement: OnetenObject {
+class Placement: ONETEN::OnetenObject {
     
 public:
     std::vector<std::shared_ptr<AdSource>> GetRequestAdSources();

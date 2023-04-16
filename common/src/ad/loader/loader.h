@@ -12,9 +12,8 @@
 //#include "header_bid.h"
 //#include "advert_source.h"
 
-#include "../model/entity/placement.h"
-#include "../model/entity/ad_source.h"
-#include "oneten_object.h"
+#include "../entity/placement.h"
+#include "../entity/ad_source.h"
 
 BEGIN_NAMESPACE_ONETEN_AD
 

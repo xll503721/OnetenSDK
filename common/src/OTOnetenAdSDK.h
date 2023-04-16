@@ -9,14 +9,13 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "OTAdViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^LoadCompletion) (NSString *placementId, NSError *error, NSDictionary<NSString *, id> *userInfo);
 
-@interface OTOneTenAdSDK : NSObject
-
-+ (OTOneTenAdSDK *)defalutAdSDK;
+@interface OTOnetenAdSDK : NSObject
 
 @property (nonatomic, readonly) NSString *appId;
 @property (nonatomic, strong) LoadCompletion loadCompletion;
@@ -25,9 +24,10 @@ typedef void (^LoadCompletion) (NSString *placementId, NSError *error, NSDiction
 /// @param appId appId description
 - (void)startWithAppId:(NSString *)appId;
 
+- (void)loadWithPlacementId:(NSString *)placementId userInfo:(nullable NSDictionary<NSString *, NSString *> *)userInfo;
 - (void)loadWithPlacementId:(NSString *)placementId;
 
-- (BOOL)showWithSuperView:(UIView *)view placementId:(NSString *)placementId error:(NSError **)error;
+- (OTAdViewController *)showWithSuperView:(UIView *)view placementId:(NSString *)placementId error:(NSError **)error;
 
 @end
 

@@ -10,15 +10,21 @@
 
 #include <oneten_object.h>
 
+#ifdef __OBJC__
+#import "OTAdSource.h"
+#endif
+
 BEGIN_NAMESPACE_ONETEN_AD
 
-class AdSource: OnetenObject {
+class AdSource: ONETEN::OnetenObject {
 public:
     enum class Type {
         kS2S,
         kC2S,
         kNormal,
     };
+    
+    using this_class = AdSource;
     
     AdSource();
     Type GetType();
@@ -28,12 +34,17 @@ public:
     int32_t GetLevel();
     
     std::string GetClassName();
+    void Parse(std::string json_string);
+    
+    void Test(std::string test, std::string test2);
     
 private:
     Type type_;
     int32_t level_;
     
     std::string clazz_name_;
+    
+    PLATFORM_DECLARE
 };
 
 END_NAMESPACE_ONETEN_AD

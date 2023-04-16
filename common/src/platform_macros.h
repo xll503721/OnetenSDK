@@ -10,27 +10,40 @@ enum class OneTenPlatformType {
 bool isPlatform(OneTenPlatformType type) {
     bool is_platform = false;
     switch (type) {
-        case OneTenPlatformType::kOneTenPlatformTypeiOS: {
 #ifdef OS_IOS
+        case OneTenPlatformType::kOneTenPlatformTypeiOS: {
             is_platform = true;
-#endif
         }
             break;
-        case OneTenPlatformType::kOneTenPlatformTypeMac: {
+#endif
 #ifdef OS_MAX
+        case OneTenPlatformType::kOneTenPlatformTypeMac: {
+
             is_platform = true;
-#endif
         }
             break;
-        case OneTenPlatformType::kOneTenPlatformTypeAndroid: {
+#endif
 #ifdef OS_ANDROID
+        case OneTenPlatformType::kOneTenPlatformTypeAndroid: {
             is_platform = true;
-#endif
         }
             break;
+#endif
             
         default:
             break;
     }
     return is_platform;
+}
+
+OneTenPlatformType platform() {
+#ifdef OS_IOS
+    return OneTenPlatformType::kOneTenPlatformTypeiOS;
+#endif
+#ifdef OS_MAX
+    return OneTenPlatformType::kOneTenPlatformTypeMac;
+#endif
+#ifdef OS_ANDROID
+    return OneTenPlatformType::kOneTenPlatformTypeAndroid;
+#endif
 }

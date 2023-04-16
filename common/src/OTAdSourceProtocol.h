@@ -26,11 +26,16 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
     OTAdSourceCategroyLoadStatusTypeFailed,
 };
 
+#pragma mark - OTAdSourceDelegate
+
 @protocol OTAdSourceDelegate <NSObject>
 
+- (void)adWillLoadWithCategroyType:(OTAdSourceCategroyType)categroyType adSourceObject:(id)adSourceObject;
 - (void)adDidLoadWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error;
 
 @end
+
+#pragma mark - OTAdSourceProtocol
 
 @protocol OTAdSourceProtocol <NSObject>
 
@@ -41,9 +46,12 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 - (instancetype)initWithDelegate:(id<OTAdSourceDelegate>)delegate userInfo:(NSDictionary<id, id> *)userInfo;
 
 - (BOOL)isReadyWithType:(OTAdSourceCategroyType)categroyType;
-- (void)showInView:(UIView *)superView categroyType:(OTAdSourceCategroyType)categroyType;
+- (void)showWithCategroyType:(OTAdSourceCategroyType)categroyType;
+
+- (void)loadWithCategoryType:(OTAdSourceCategroyType)categroyType adSourceType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo;
 
 @optional
+
 /// start load interstitial ad
 /// @param type c2s s2s
 /// @param userInfo info

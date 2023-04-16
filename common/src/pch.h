@@ -7,7 +7,8 @@
 #include <iostream>
 #include <queue>
 #include <vector>
-#include "platform_macros.h"
+#include <functional>
+#include <sstream>
 
 #define ONETEN_AD oneten_ad
 #define BEGIN_NAMESPACE_ONETEN_AD BEGIN_NAMESPACE(ONETEN_AD)
@@ -19,5 +20,7 @@
 
 #define BEGIN_NAMESPACE(ns) namespace ns {
 #define END_NAMESPACE() }
+
+#include "platform.h"
 
 #endif /* ONETEN_AD_SDK_PCH_H */

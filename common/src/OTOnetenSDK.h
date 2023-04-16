@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "OTOnetenAdSDK.h"
 
 typedef NS_ENUM(NSUInteger, OTOneTenSDKType) {
     OTOneTenSDKTypeAd,
@@ -17,9 +18,13 @@ typedef NS_ENUM(NSUInteger, OTOneTenSDKType) {
     OTOneTenSDKTypeVideo,
 };
 
-@interface OTOneTenSDK : NSObject
+@interface OTOnetenSDK : NSObject
 
-+ (void)initAppId:(NSString *)appId type:(OTOneTenSDKType)type;
+@property (nonatomic, strong, readonly) OTOnetenAdSDK *adSDK;
+
++ (OTOnetenSDK *)defalutSDK;
+
+- (void)initAppId:(NSString *)appId type:(OTOneTenSDKType)type;
 
 @end
 

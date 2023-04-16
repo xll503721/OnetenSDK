@@ -8,21 +8,20 @@
 #ifndef ONETEN_AD_SDK_AD_SDK_H
 #define ONETEN_AD_SDK_AD_SDK_H
 
+#include "loader/loader.h"
+#include <oneten_ad_sdk_delegate.h>
 #include "oneten_object.h"
-
-#include "ad/loader/loader.h"
-#include "oneten_ad_sdk_delegate.h"
 
 BEGIN_NAMESPACE_ONETEN_AD
 
 #pragma mark - OnetenAdSDK
 
-class OnetenAdSDK: OnetenObject {
+class OnetenAdSDK: ONETEN::OnetenObject {
     
 public:
     static OnetenAdSDK &GetInstance();
     void Register(const std::string& app_id);
-    void StartAdLoad(const std::string& placement_id, AdSDKDelegate& delegate);
+    void StartAdLoad(const std::string& placement_id, std::map<std::string, std::string>& user_info, AdSDKDelegate& delegate);
     void EndAdLoad(const std::string& placement_id);
     bool IsReady(const std::string& placement_id);
     void ShowAd(const std::string& placement_id, AdSDKDelegate& delegate);
@@ -31,8 +30,6 @@ public:
     std::shared_ptr<LoaderInterface> GetWaterfallLoader();
     std::shared_ptr<LoaderInterface> GetRequestLoader();
     std::shared_ptr<LoaderInterface> GetCacheLoader();
-    
-    
     
 private:
     OnetenAdSDK();
@@ -44,6 +41,7 @@ private:
     std::shared_ptr<LoaderInterface> cache_loader_;
     
     AdSDKDelegate* delegate_;
+    std::map<std::string, std::string> user_info_;
 };
 
 END_NAMESPACE_ONETEN_AD

@@ -13,7 +13,7 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class MainLoader:   public OnetenObject,
+class MainLoader:   public ONETEN::OnetenObject,
                     public LoaderInterface {
     
 public:
