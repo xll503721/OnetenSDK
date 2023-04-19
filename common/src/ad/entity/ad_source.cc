@@ -27,12 +27,12 @@ void AdSource::Test(std::string test, std::string test2) {
 }
 
 void AdSource::Load() {
-    void* category_type;
-    void* ad_source_type;
-    void* user_info;
-    PLATFORM_PERFORM(category_type, ad_source_type, user_info)
+    ONETEN::Platform::Var category_type = 1;
+    ONETEN::Platform::Var ad_source_type = 1;
     
-//    platform_->Perform("", nullptr);
+    ONETEN::Platform::Var user_info = 1;
+//    ONETEN::Platform::Var<std::map<std::string, std::string>> user_info;
+    PLATFORM_PERFORM(&category_type, &ad_source_type, &user_info)
 }
 
 void AdSource::SetLevel(int32_t level) {

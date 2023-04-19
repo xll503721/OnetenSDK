@@ -31,11 +31,44 @@ public:
         kPlatformTypeAndroid,
     };
     
+    class Var {
+    public:
+        enum class Type {
+            kTypeInt,
+            kTypeBool,
+            kTypeLong,
+            kTypeFloat,
+            kTypeMap,
+            kTypeVector
+        };
+        Var() = default;
+        Var(int32_t value) {
+            data_ = value;
+            type_ = Type::kTypeInt;
+        }
+        
+        Var& operator=(int32_t value) {
+            data_ = value;
+        }
+        
+        Type GetType() {
+            return type_;
+        }
+        
+        int32_t GetData() {
+            return data_;
+        }
+        
+    private:
+        int32_t data_;
+        Type type_;
+    };
+    
     Platform() = default;
     Platform(const std::string& class_name);
     
     using PlatformInit = std::function<void* (const std::string& class_name)>;
-    using PlatformPerform = std::function<void (const void* platform_obj, const std::string& method_name, const std::vector<std::string>& parmas_name, const std::vector<void*>& parmas)>;
+    using PlatformPerform = std::function<void (const void* platform_obj, const std::string& method_name, const std::vector<std::string>& params_name, const std::vector<ONETEN::Platform::Var*>& params)>;
     
     static bool isPlatform(PlatformType type);
     static PlatformType platform();
@@ -44,7 +77,7 @@ public:
     static void SetPerformMehtod(PlatformPerform method);
     
     void Init(const std::string& class_name);
-    void Perform(const std::string& method_name, const std::string& params_name, void* params, ...);
+    void Perform(const std::string& method_name, const std::string& params_name, ONETEN::Platform::Var* params, ...);
     
 public:
     

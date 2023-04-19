@@ -39,15 +39,15 @@
         id obj = [self platformInitWithClazzName:className];
         return (__bridge_retained void *)obj;
     });
-    ONETEN::Platform::SetPerformMehtod([=] (const void* platform_obj, const std::string& method_name, const std::vector<std::string>& parmas_name, const std::vector<void*>& parmas){
+    ONETEN::Platform::SetPerformMehtod([=] (const void* platform_obj, const std::string& method_name, const std::vector<std::string>& params_name, const std::vector<ONETEN::Platform::Var*>& params){
         if (!platform_obj) {
             return;
         }
         
         NSMutableArray<NSString *> *paramStrings = @[].mutableCopy;
         NSString *methodName = [[NSString stringWithUTF8String:method_name.c_str()] lowercaseString];
-        for (int32_t i = 0; i < parmas_name.size(); i++) {
-            std::string name = parmas_name[i];
+        for (int32_t i = 0; i < params_name.size(); i++) {
+            std::string name = params_name[i];
             __block NSString *ocName = [NSString stringWithUTF8String:name.c_str()];
             
             NSArray<NSString *> *names = [ocName componentsSeparatedByString:@"_"];
@@ -72,7 +72,21 @@
             methodName = [methodName stringByAppendingFormat:@":%@:", allParamsString];
         }
         
-        [self platformPerformWithObject:(__bridge id)platform_obj selectorString:methodName params:nil];
+        NSMutableArray<id> *ocParmas = @[].mutableCopy;
+        for (ONETEN::Platform::Var* param: params) {
+            auto type = param->GetType();
+            switch (type) {
+                case ONETEN::Platform::Var::Type::kTypeInt: {
+                    [ocParmas addObject:[NSNumber numberWithInt:param->GetData()]];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        
+        [self platformPerformWithObject:(__bridge id)platform_obj selectorString:methodName params:ocParmas];
     });
 }
 
@@ -87,10 +101,6 @@
 }
 
 - (id)platformPerformWithObject:(id)obj selectorString:(NSString *)selectorString params:(NSArray *)params {
-    if ([selectorString rangeOfString:@"Delegate"].location != NSNotFound) {
-        
-    }
-    
     SEL selector = NSSelectorFromString(selectorString);
     if (![obj respondsToSelector:selector]) {
         //alert

@@ -9,7 +9,6 @@
 
 BEGIN_NAMESPACE_ONETEN
 
-
 std::string trim(std::string str) {
     str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) {
         return !std::isspace(ch);
@@ -29,6 +28,14 @@ std::vector<std::string> split(const std::string& s, char delimiter) {
         tokens.push_back(trim(token));
     }
     return tokens;
+}
+
+void replace_all(std::string& str, const std::string& from, const std::string& to) {
+  size_t start_pos = 0;
+  while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
+    str.replace(start_pos, from.length(), to);
+    start_pos += to.length();
+  }
 }
 
 Platform::PlatformInit Platform::init_fun_ = nullptr;
@@ -98,24 +105,26 @@ void Platform::Init(const std::string& class_name) {
     }
 }
 
-void Platform::Perform(const std::string& method_name, const std::string& params_name, void* params, ...) {
+void Platform::Perform(const std::string& method_name, const std::string& params_name, ONETEN::Platform::Var* params, ...) {
     if (!platform_obj_) {
         return;
     }
     
-    std::vector<void*> params_vector;
+    std::vector<ONETEN::Platform::Var*> params_vector;
+    params_vector.push_back(params);
     
     va_list args;
     va_start(args, params);
-    void* arg;
-    while ((arg = va_arg(args, void*))) {
-        params_vector.push_back(arg);
+    ONETEN::Platform::Var* arg;
+    while ((arg = va_arg(args, ONETEN::Platform::Var*))) {
+        params_vector.push_back((arg));
     }
     va_end(args);
-    
+
     std::vector<std::string> params_name_vector = split(params_name, ',');
     
     perform_fun_(platform_obj_, method_name, params_name_vector, params_vector);
 }
+
 
 END_NAMESPACE_ONETEN
