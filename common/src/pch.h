@@ -9,6 +9,7 @@
 #include <vector>
 #include <functional>
 #include <sstream>
+#include <unordered_map>
 
 #define ONETEN_AD oneten_ad
 #define BEGIN_NAMESPACE_ONETEN_AD BEGIN_NAMESPACE(ONETEN_AD)

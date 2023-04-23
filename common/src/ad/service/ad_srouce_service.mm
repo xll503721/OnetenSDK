@@ -21,24 +21,6 @@
 @implementation OTAdSourceService
 
 - (void)loadWithClassName:(NSString *)name {
-    Class clazz = NSClassFromString(name);
-    id<OTAdSourceProtocol> adSource = [clazz alloc];
-    if ([adSource conformsToProtocol:@protocol(OTAdSourceProtocol)]) {
-
-    }
-
-    if (![adSource respondsToSelector:@selector(initWithDelegate:userInfo:)]) {
-        //alert
-        return;
-    }
-
-    self.adSource = [adSource initWithDelegate:self userInfo:nil];
-
-    if (![adSource respondsToSelector:@selector(loadInterstitialWithType:userInfo:)]) {
-        //alert
-        return;
-    }
-    [adSource loadInterstitialWithType:OTAdSourceTypeNormal userInfo:nil];
 }
 
 #pragma mark - OTAdSourceDelegate

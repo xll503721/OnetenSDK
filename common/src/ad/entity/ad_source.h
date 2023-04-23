@@ -36,7 +36,7 @@ public:
     std::string GetClassName();
     void Parse(std::string json_string);
     
-    void Test(std::string test, std::string test2);
+    void InitSDK();
     
 private:
     Type type_;

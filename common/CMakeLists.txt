@@ -26,6 +26,7 @@ set(SDK_AD_SOURCE "")
 string(CONCAT SDK_AD_SOURCE ${SDK_NAME_LOWER_CASE} "_ad_source")
 
 set(SRC_ROOT ${PROJECT_SOURCE_DIR}/src)
+set(BASE_ROOT ${PROJECT_SOURCE_DIR}/../../base/src)
 
 if(IOS)
     set(PLATFORM iOS)
@@ -80,6 +81,10 @@ macro(set_target_folder_if_exist target folder)
 endmacro()
 
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/output/${PLATFORM})
+SET(LIBRARY_BASE_OUTPUT_PATH ${BASE_ROOT}/output/${PLATFORM})
+
+add_subdirectory(${BASE_ROOT} base.src)
+
 
 add_subdirectory(src)
 

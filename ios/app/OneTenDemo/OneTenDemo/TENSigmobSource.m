@@ -24,15 +24,19 @@
 
 @implementation TENSigmobSource
 
-- (instancetype)initWithDelegate:(id<OTAdSourceDelegate>)delegate userInfo:(NSDictionary<id, id> *)userInfo
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        _delegate = delegate;
-        WindAdOptions *option = [[WindAdOptions alloc] initWithAppId:AppId appKey:AppKey];
-        [WindAds startWithOptions:option];
+        
     }
     return self;
+}
+
+- (void)initSDKWithDelegate:(id<OTAdSourceDelegate>)delegate userInfo:(NSDictionary<id, id> *)userInfo {
+    _delegate = delegate;
+    WindAdOptions *option = [[WindAdOptions alloc] initWithAppId:AppId appKey:AppKey];
+    [WindAds startWithOptions:option];
 }
 
 - (BOOL)isReadyWithType:(OTAdSourceCategroyType)categroyType {
@@ -96,6 +100,9 @@
 
 #pragma mark - Interstitial
 - (void)loadInterstitialWithType:(OTAdSourceType)type userInfo:(NSDictionary *)userInfo {
+    WindAdOptions *option = [[WindAdOptions alloc] initWithAppId:AppId appKey:AppKey];
+    [WindAds startWithOptions:option];
+    
     WindAdRequest *request = [WindAdRequest request];
     request.userId = @"user_id";
     request.placementId = FullScreenVideoAdPlacementId;
@@ -157,5 +164,6 @@
 
 - (void)sendLossNotificationWithType:(OTAdSourceCategroyType)categroyType userInfo:(NSDictionary *)userInfo {
 }
+
 
 @end

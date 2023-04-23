@@ -6,6 +6,7 @@
 //
 
 #include "platform.h"
+#include <string/string.h>
 
 BEGIN_NAMESPACE_ONETEN
 
@@ -121,7 +122,10 @@ void Platform::Perform(const std::string& method_name, const std::string& params
     }
     va_end(args);
 
-    std::vector<std::string> params_name_vector = split(params_name, ',');
+    auto params_name_string = params_name;
+    BASE_STRING::ReplaceAll(params_name_string, "&", "");
+    BASE_STRING::ReplaceAll(params_name_string, " ", "");
+    std::vector<std::string> params_name_vector = BASE_STRING::Split(params_name_string, ",");
     
     perform_fun_(platform_obj_, method_name, params_name_vector, params_vector);
 }

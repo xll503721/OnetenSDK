@@ -72,21 +72,61 @@
             methodName = [methodName stringByAppendingFormat:@":%@:", allParamsString];
         }
         
+        id target = (__bridge id)platform_obj;
+        SEL selector = NSSelectorFromString(methodName);
+        if (![target respondsToSelector:selector]) {
+            //alert
+            return;
+        }
+        
+        NSMethodSignature *methodSignature = [target methodSignatureForSelector:selector];
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+        [invocation setTarget:target];
+        [invocation setSelector:selector];
+        
+        __block int32_t argIndex = 2;
         NSMutableArray<id> *ocParmas = @[].mutableCopy;
         for (ONETEN::Platform::Var* param: params) {
             auto type = param->GetType();
             switch (type) {
                 case ONETEN::Platform::Var::Type::kTypeInt: {
-                    [ocParmas addObject:[NSNumber numberWithInt:param->GetData()]];
+                    int32_t var = param->GetDataInt32();
+                    [invocation setArgument:&var atIndex:argIndex];
+                }
+                    break;
+                case ONETEN::Platform::Var::Type::kTypeMap: {
+                    std::unordered_map<std::string, ONETEN::Platform::Var>* var_map = param->GetDataMap();
+                    NSMutableDictionary<NSString *, id> *var_dict = [NSMutableDictionary dictionary];
+                    for (auto iter = var_map->begin(); iter != var_map->end(); ++iter) {
+                        NSString *key = [NSString stringWithUTF8String:iter->first.c_str()];
+                        auto value = iter->second;
+
+                        id ocValue = nil;
+                        switch (value.GetType()) {
+                            case ONETEN::Platform::Var::Type::kTypeInt:
+                                ocValue = [NSNumber numberWithInt:value.GetDataInt32()];
+                                break;
+
+                            default:
+                                break;
+                        }
+                        if (ocValue) {
+                            var_dict[key] = ocValue;
+                        }
+                    }
+                    
+                    [invocation setArgument:&var_dict atIndex:argIndex];
                 }
                     break;
                     
                 default:
                     break;
             }
+            argIndex++;
         }
         
-        [self platformPerformWithObject:(__bridge id)platform_obj selectorString:methodName params:ocParmas];
+        [invocation invoke];
+//        [self platformPerformWithObject:(__bridge id)platform_obj selectorString:methodName params:ocParmas];
     });
 }
 

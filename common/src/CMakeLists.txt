@@ -39,6 +39,7 @@ add_subdirectory(ad)
 
 include_directories(./)
 include_directories(ad)
+include_directories(./../../../base/src)
 
 add_library(${PROJECT_NAME} SHARED ${oneten_src_h} ${oneten_src_source})
 add_dependencies(${PROJECT_NAME} ${SDK_AD_LIB})
@@ -54,6 +55,8 @@ target_link_libraries(${PROJECT_NAME} ${SDK_AD_LOADER_LIB})
 target_link_libraries(${PROJECT_NAME} ${SDK_AD_ENTITY_LIB})
 target_link_libraries(${PROJECT_NAME} ${UIKIT})
 target_link_libraries(${PROJECT_NAME} ${FOUNDATION})
+
+target_link_libraries(${PROJECT_NAME} Base)
 
 set(TENON_SDK_BUNDLE_ID "")
 string(CONCAT TENON_SDK_BUNDLE_ID ${SDK_BUNDLE_ID_PREFIX} ${PRO_NAME_LOWER_CASE} ".sdk")

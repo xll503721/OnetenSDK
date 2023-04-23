@@ -17,6 +17,8 @@
 		4B11307629BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; };
 		4B11307729BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4B1552D029D1533B0068842B /* TENSigmobSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1552CF29D1533B0068842B /* TENSigmobSource.m */; };
+		4B2CA11D29F3D409009C66B3 /* Base.framework/Base in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; };
+		4B2CA11E29F3D409009C66B3 /* Base.framework/Base in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4BB47CCD29AB017600BA2B27 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BB47CCC29AB016B00BA2B27 /* libc++.tbd */; };
 		FDFCB5069C6B11D53C677722 /* Pods_OneTenDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFA66410979C7A440551F35D /* Pods_OneTenDemo.framework */; };
 /* End PBXBuildFile section */
@@ -50,11 +52,32 @@
 			remoteGlobalIDString = 17A45D93D18C44A18C00864E;
 			remoteInfo = oneten_ad_model;
 		};
+		4B2CA11729F3D409009C66B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7AC4196575914C7D8E22BFAC;
+			remoteInfo = Base;
+		};
+		4B2CA11929F3D409009C66B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C3EB84EF1A4A41A48704D0B7;
+			remoteInfo = base_string;
+		};
+		4B2CA11B29F3D409009C66B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A0D14B6672B7420E87062748;
+			remoteInfo = oneten_ad_entity;
+		};
 		4BC9C3B729AB5AFE00B6AEC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 29ED9A6017B741C5BF4F028C;
+			remoteGlobalIDString = DA899BB69B5044FC819AEAD9;
 			remoteInfo = OneTenSDK;
 		};
 		4BD933E629D03C7E00E4AA07 /* PBXContainerItemProxy */ = {
@@ -73,6 +96,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4B2CA11E29F3D409009C66B3 /* Base.framework/Base in Embed Frameworks */,
 				4B11307729BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -108,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B2CA11D29F3D409009C66B3 /* Base.framework/Base in Frameworks */,
 				4B11307629BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Frameworks */,
 				4BB47CCD29AB017600BA2B27 /* libc++.tbd in Frameworks */,
 				FDFCB5069C6B11D53C677722 /* Pods_OneTenDemo.framework in Frameworks */,
@@ -159,8 +184,11 @@
 		4B0E03FD29A254DA00392BEE /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				4B2CA11829F3D409009C66B3 /* Base.framework/Base */,
 				4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */,
+				4B2CA11A29F3D409009C66B3 /* libbase_string.a */,
 				4B0E040629A254DA00392BEE /* liboneten_ad.a */,
+				4B2CA11C29F3D409009C66B3 /* liboneten_ad_entity.a */,
 				4B11314E29C3017900214261 /* liboneten_ad_loader.a */,
 				4B11315029C3017900214261 /* liboneten_ad_model.a */,
 				4BD933E729D03C7E00E4AA07 /* liboneten_ad_service.a */,
@@ -277,6 +305,28 @@
 			fileType = archive.ar;
 			path = liboneten_ad_model.a;
 			remoteRef = 4B11314F29C3017900214261 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B2CA11829F3D409009C66B3 /* Base.framework/Base */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = Base.framework/Base;
+			path = Base.framework;
+			remoteRef = 4B2CA11729F3D409009C66B3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B2CA11A29F3D409009C66B3 /* libbase_string.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_string.a;
+			remoteRef = 4B2CA11929F3D409009C66B3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B2CA11C29F3D409009C66B3 /* liboneten_ad_entity.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liboneten_ad_entity.a;
+			remoteRef = 4B2CA11B29F3D409009C66B3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4BD933E729D03C7E00E4AA07 /* liboneten_ad_service.a */ = {

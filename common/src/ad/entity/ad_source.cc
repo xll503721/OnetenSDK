@@ -16,23 +16,35 @@ AdSource::AdSource() {
     clazz_name_ = "TENSigmobSource";
     
     PLATFORM_INIT(clazz_name_)
+    InitSDK();
 }
 
 AdSource::Type AdSource::GetType() {
     return AdSource::Type::kNormal;
 }
 
-void AdSource::Test(std::string test, std::string test2) {
-    
+void AdSource::InitSDK() {
+//    ONETEN::Platform::Var category_type = 1;
+//    ONETEN::Platform::Var ad_source_type = 2;
+//    
+//    ONETEN::Platform::Var user_info = 1;
+////    ONETEN::Platform::Var<std::map<std::string, std::string>> user_info;
+//    PLATFORM_PERFORM(&category_type, &ad_source_type, &user_info)
 }
 
 void AdSource::Load() {
     ONETEN::Platform::Var category_type = 1;
-    ONETEN::Platform::Var ad_source_type = 1;
+    ONETEN::Platform::Var ad_source_type = 2;
     
-    ONETEN::Platform::Var user_info = 1;
-//    ONETEN::Platform::Var<std::map<std::string, std::string>> user_info;
-    PLATFORM_PERFORM(&category_type, &ad_source_type, &user_info)
+    std::unordered_map<std::string, ONETEN::Platform::Var> map;
+    
+    ONETEN::Platform::Var var(1);
+    map["1"] = var;
+    
+    std::vector<ONETEN::Platform::Var> vector;
+    ONETEN::Platform::Var user_info = &map;
+    
+    PLATFORM_PERFORM(&category_type, &ad_source_type, &user_info);
 }
 
 void AdSource::SetLevel(int32_t level) {
