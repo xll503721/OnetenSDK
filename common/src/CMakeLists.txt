@@ -16,7 +16,8 @@ file(GLOB
 
 file(GLOB
      oneten_src_source
-     *.cc)
+     *.cc
+     *.m)
 
 if(OSX OR IOS)
     file(GLOB

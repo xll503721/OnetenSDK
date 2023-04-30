@@ -20,6 +20,7 @@ std::vector<std::shared_ptr<AdSource>> Placement::GetRequestAdSources() {
 //    ad_source4->SetLevel(3);
     std::shared_ptr<AdSource> ad_source5 = std::make_shared<AdSource>();
     ad_source5->SetLevel(4);
+    ad_source5->InitSDK();
 //    ad_sources.push_back(ad_source1);
 //    ad_sources.push_back(ad_source2);
 //    ad_sources.push_back(ad_source3);

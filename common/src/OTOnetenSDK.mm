@@ -7,6 +7,9 @@
 
 #define OTOnetenMsgSend(...) ((void (*)(void *, SEL, void *))objc_msgSend)(__VA_ARGS__)
 
+static NSString *kOTOnetenSDKPrefix = @"OT";
+static NSString *kOTOnetenSDKDelegate = @"Delegate";
+
 @interface OTOnetenSDK ()
 
 @end
@@ -34,12 +37,38 @@
 }
 
 - (void)_setPlatformInfo {
-    ONETEN::Platform::SetInitMehtod([=] (const std::string& class_name) {
+    ONETEN::Platform::SetInitMehtod([=] (const std::string& file_name, const std::string& class_name, void* c_plus_plus_obj) {
         NSString *className = [NSString stringWithUTF8String:class_name.c_str()];
-        id obj = [self platformInitWithClazzName:className];
-        return (__bridge_retained void *)obj;
+        id target = (id<OTPlatformProtocol>)[self platformInitWithClazzName:className];
+        
+        if (c_plus_plus_obj) {
+            NSString *fileName = [[NSString stringWithUTF8String:file_name.c_str()] lowercaseString];
+            NSArray<NSString *> *fileNames = [fileName componentsSeparatedByString:@"_"];
+            __block NSString *ocFileName = (NSString *)kOTOnetenSDKPrefix;
+            [fileNames enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                ocFileName = [ocFileName stringByAppendingString:[obj capitalizedString]];
+            }];
+            ocFileName = [ocFileName stringByAppendingString:kOTOnetenSDKDelegate];
+            
+            id<OTPlatformProtocol> delegate = (id<OTPlatformProtocol>)[self platformInitWithClazzName:ocFileName];
+            SEL selector = @selector(setDelegate:);
+            if ([target respondsToSelector:selector]) {
+                //only set, no alloc，new，copy or mutableCopy,
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                [target performSelector:selector withObject:delegate];
+#pragma clang diagnostic pop
+            }
+            
+            SEL setRawPrtSelector = @selector(setRawPrt:);
+            if ([delegate respondsToSelector:setRawPrtSelector]) {
+                delegate.rawPrt = c_plus_plus_obj;
+            }
+        }
+        
+        return (__bridge_retained void *)target;
     });
-    ONETEN::Platform::SetPerformMehtod([=] (const void* platform_obj, const std::string& method_name, const std::vector<std::string>& params_name, const std::vector<ONETEN::Platform::Var*>& params){
+    ONETEN::Platform::SetPerformMehtod([=] (const void* platform_obj, const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::vector<std::string>& params_name, const std::vector<ONETEN::Platform::Var*>& params) {
         if (!platform_obj) {
             return;
         }
@@ -84,6 +113,7 @@
         [invocation setTarget:target];
         [invocation setSelector:selector];
         
+        
         __block int32_t argIndex = 2;
         NSMutableArray<id> *ocParmas = @[].mutableCopy;
         for (ONETEN::Platform::Var* param: params) {
@@ -126,7 +156,6 @@
         }
         
         [invocation invoke];
-//        [self platformPerformWithObject:(__bridge id)platform_obj selectorString:methodName params:ocParmas];
     });
 }
 

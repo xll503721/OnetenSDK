@@ -15,12 +15,19 @@ BEGIN_NAMESPACE_ONETEN
 #define PLATFORM_DECLARE \
 std::shared_ptr<ONETEN::Platform> platform_;\
 
-#define PLATFORM_INIT(class_name) \
-platform_ = std::make_shared<ONETEN::Platform>(class_name);\
+#define PLATFORM_INIT(class_name, c_object) \
+platform_ = std::make_shared<ONETEN::Platform>(class_name, c_object);\
+
+#define PLATFORM_INIT_DELEGATE(class_name, c_object) \
+platform_ = std::make_shared<ONETEN::Platform>(class_name, c_object);\
+std::string delegate_file(__FILE_NAME__);\
+platform_->Init(delegate_file, class_name, c_object.get());
 
 #define PLATFORM_PERFORM(...) \
 std::string parmas_str = #__VA_ARGS__;\
-platform_->Perform(__func__, parmas_str, ##__VA_ARGS__, NULL);\
+std::string file(__FILE_NAME__);\
+std::string func(__FUNCTION__);\
+platform_->Perform(file, func, false, parmas_str, ##__VA_ARGS__, nullptr);\
 
 class Platform: OnetenObject {
     
@@ -91,10 +98,10 @@ public:
     };
     
     Platform() = default;
-    Platform(const std::string& class_name);
+    Platform(const std::string& class_name, std::shared_ptr<void> c_plus_plus_obj);
     
-    using PlatformInit = std::function<void* (const std::string& class_name)>;
-    using PlatformPerform = std::function<void (const void* platform_obj, const std::string& method_name, const std::vector<std::string>& params_name, const std::vector<ONETEN::Platform::Var*>& params)>;
+    using PlatformInit = std::function<void* (const std::string& file_name, const std::string& class_name, void* c_plus_plus_obj)>;
+    using PlatformPerform = std::function<void (const void* platform_obj, const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::vector<std::string>& params_name, const std::vector<ONETEN::Platform::Var*>& params)>;
     
     static bool isPlatform(PlatformType type);
     static PlatformType platform();
@@ -102,8 +109,8 @@ public:
     static void SetInitMehtod(PlatformInit method);
     static void SetPerformMehtod(PlatformPerform method);
     
-    void Init(const std::string& class_name);
-    void Perform(const std::string& method_name, const std::string& params_name, ONETEN::Platform::Var* params, ...) __attribute__((sentinel(0,1)));
+    void Init(const std::string& file_name, const std::string& class_name, void* c_plus_plus_obj);
+    void Perform(const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::string& params_name, ONETEN::Platform::Var* params, ...) __attribute__((sentinel(0,1)));
     
 public:
     
@@ -113,6 +120,7 @@ public:
 private:
     
     void* platform_obj_;
+    std::shared_ptr<void> c_plus_plus_obj_;
 };
 
 END_NAMESPACE_ONETEN

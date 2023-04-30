@@ -6,12 +6,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTAdSourceProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OTAdSource : NSObject
+@interface OTAdSourceDelegate : NSObject <OTPlatformProtocol, OTAdSourceDelegate>
 
-- (void)load;
+@property void* rawPrt;
 
 @end
 

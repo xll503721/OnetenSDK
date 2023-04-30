@@ -11,6 +11,10 @@
 #include <sstream>
 #include <unordered_map>
 
+#ifndef __FILE_NAME__
+#define __FILE_NAME__ __FILE__
+#endif
+
 #define ONETEN_AD oneten_ad
 #define BEGIN_NAMESPACE_ONETEN_AD BEGIN_NAMESPACE(ONETEN_AD)
 #define END_NAMESPACE_ONETEN_AD END_NAMESPACE()

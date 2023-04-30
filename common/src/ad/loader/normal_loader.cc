@@ -20,7 +20,7 @@ void NormalLoader::Flow(std::shared_ptr<AdSource> ad_source) {
     
     if (ad_source->GetType() == AdSource::Type::kNormal) {
         printf("NormalLoader Flow\n");
-        ad_source_service_->Load(ad_source, [=](int categroy_type, ONETEN::Error* error) {
+        ad_source_service_->Load(ad_source, [=](int32_t categroy_type, ONETEN::Error* error) {
             if (!error) {
                 std::string placement_id;
                 ONETEN_AD::OnetenAdSDK::GetInstance().EndAdLoad(placement_id);

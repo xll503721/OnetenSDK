@@ -26,6 +26,12 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
     OTAdSourceCategroyLoadStatusTypeFailed,
 };
 
+@protocol OTPlatformProtocol <NSObject>
+
+@property void* rawPrt;
+
+@end
+
 #pragma mark - OTAdSourceDelegate
 
 @protocol OTAdSourceDelegate <NSObject>

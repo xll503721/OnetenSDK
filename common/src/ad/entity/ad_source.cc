@@ -14,9 +14,10 @@ BEGIN_NAMESPACE_ONETEN_AD
 AdSource::AdSource() {
     level_ = 0;
     clazz_name_ = "TENSigmobSource";
+}
+
+AdSource::~AdSource() {
     
-    PLATFORM_INIT(clazz_name_)
-    InitSDK();
 }
 
 AdSource::Type AdSource::GetType() {
@@ -24,15 +25,16 @@ AdSource::Type AdSource::GetType() {
 }
 
 void AdSource::InitSDK() {
-//    ONETEN::Platform::Var category_type = 1;
-//    ONETEN::Platform::Var ad_source_type = 2;
-//    
-//    ONETEN::Platform::Var user_info = 1;
-////    ONETEN::Platform::Var<std::map<std::string, std::string>> user_info;
-//    PLATFORM_PERFORM(&category_type, &ad_source_type, &user_info)
+    PLATFORM_INIT_DELEGATE(clazz_name_, shared_from_this())
 }
 
-void AdSource::Load() {
+void AdSource::Load(std::shared_ptr<AdSourceDelegate> delegate) {
+    if (!delegate) {
+        return;
+    }
+    
+    delegate_ = delegate;
+    
     ONETEN::Platform::Var category_type = 1;
     ONETEN::Platform::Var ad_source_type = 2;
     
@@ -61,6 +63,10 @@ std::string AdSource::GetClassName() {
 
 void AdSource::Parse(std::string json_string) {
     
+}
+
+void AdSource::LoadCompletion(int32_t categroy_type, ONETEN::Error* error) {
+    delegate_->LoadCompletion(categroy_type);
 }
 
 END_NAMESPACE_ONETEN_AD
