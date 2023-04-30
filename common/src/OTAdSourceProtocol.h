@@ -47,10 +47,6 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 
 @required
 
-/// init advert source, should init sdk
-/// @param userInfo info
-- (void)initSDKWithDelegate:(id<OTAdSourceDelegate>)delegate userInfo:(NSDictionary<id, id> *)userInfo;
-
 - (BOOL)isReadyWithType:(OTAdSourceCategroyType)categroyType;
 - (void)showWithCategroyType:(OTAdSourceCategroyType)categroyType;
 

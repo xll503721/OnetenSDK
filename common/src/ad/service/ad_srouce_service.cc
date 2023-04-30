@@ -11,12 +11,12 @@
 BEGIN_NAMESPACE_ONETEN_AD
 
 AdSourceService::~AdSourceService() {
-    CFBridgingRelease(ad_source_service_ios_);
     ad_source_service_ios_ = nullptr;
 }
 
 void AdSourceService::Load(std::shared_ptr<AdSource> ad_source, LoadCompletionInvoke load_complete) {
     load_complete_ = load_complete;
+    
     ad_source->Load(shared_from_this());
 }
 

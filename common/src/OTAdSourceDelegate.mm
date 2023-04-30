@@ -11,15 +11,14 @@
 
 @interface OTAdSourceDelegate ()
 
+@property (nonatomic, strong) id adSourceObject;
+
 @end
 
 @implementation OTAdSourceDelegate
 
 - (void)adWillLoadWithCategroyType:(OTAdSourceCategroyType)categroyType adSourceObject:(id)adSourceObject {
-    ONETEN_AD::AdSource* ad_source = static_cast<ONETEN_AD::AdSource *>(_rawPrt);
-    if (ad_source) {
-        ad_source->LoadCompletion((int32_t)categroyType);
-    }
+    self.adSourceObject = adSourceObject;
 }
 
 - (void)adDidLoadWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error {

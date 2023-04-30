@@ -39,7 +39,7 @@ static NSString *kOTOnetenSDKDelegate = @"Delegate";
 - (void)_setPlatformInfo {
     ONETEN::Platform::SetInitMehtod([=] (const std::string& file_name, const std::string& class_name, void* c_plus_plus_obj) {
         NSString *className = [NSString stringWithUTF8String:class_name.c_str()];
-        id target = (id<OTPlatformProtocol>)[self platformInitWithClazzName:className];
+        id target = [self platformInitWithClazzName:className];
         
         if (c_plus_plus_obj) {
             NSString *fileName = [[NSString stringWithUTF8String:file_name.c_str()] lowercaseString];

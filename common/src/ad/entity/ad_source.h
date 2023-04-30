@@ -23,7 +23,7 @@ public:
     virtual void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) = 0;
 };
 
-class AdSource: public ONETEN::OnetenObject {
+class AdSource: public ONETEN::OnetenObject, public AdSourceDelegate {
 public:
     enum class Type {
         kS2S,
@@ -50,7 +50,7 @@ public:
     
     void InitSDK();
     
-    void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr);
+    void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
     
 private:
     Type type_;

@@ -29,10 +29,6 @@ void AdSource::InitSDK() {
 }
 
 void AdSource::Load(std::shared_ptr<AdSourceDelegate> delegate) {
-    if (!delegate) {
-        return;
-    }
-    
     delegate_ = delegate;
     
     ONETEN::Platform::Var category_type = 1;
@@ -66,7 +62,9 @@ void AdSource::Parse(std::string json_string) {
 }
 
 void AdSource::LoadCompletion(int32_t categroy_type, ONETEN::Error* error) {
-    delegate_->LoadCompletion(categroy_type);
+    if (delegate_) {
+        delegate_->LoadCompletion(categroy_type);
+    }
 }
 
 END_NAMESPACE_ONETEN_AD
