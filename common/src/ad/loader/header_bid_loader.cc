@@ -15,8 +15,8 @@ HeaderBidLoader::HeaderBidLoader(std::shared_ptr<LoaderInterface> loader): MainL
     ad_source_service_ = std::make_shared<AdSourceService>();
 }
 
-void HeaderBidLoader::Flow(std::shared_ptr<AdSource> ad_source) {
-    super_class::Flow(ad_source);
+void HeaderBidLoader::Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement) {
+    super_class::Flow(ad_source, placement);
     
     if (ad_source->GetType() == AdSource::Type::kS2S ||
         ad_source->GetType() == AdSource::Type::kC2S) {
@@ -28,7 +28,7 @@ void HeaderBidLoader::Flow(std::shared_ptr<AdSource> ad_source) {
                 ONETEN_AD::OnetenAdSDK::GetInstance().EndAdLoad(placement_id);
                 return;
             }
-            ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->StartFlow(ad_source->GetLevel() + 1);
+            ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->StartFlow(ad_source->GetLevel() + 1, placement);
         });
     }
 }

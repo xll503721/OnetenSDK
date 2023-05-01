@@ -16,7 +16,7 @@ BEGIN_NAMESPACE_ONETEN_AD
 
 #pragma mark - OnetenAdSDK
 
-class OnetenAdSDK: ONETEN::OnetenObject {
+class OnetenAdSDK: ONETEN::Object {
     
 public:
     static OnetenAdSDK &GetInstance();

@@ -9,11 +9,8 @@
 #define ONETEN_AD_SDK_AD_SOURCE_H
 
 #include <oneten_object.h>
-#include <Error.h>
-
-#ifdef __OBJC__
-#import "OTAdSourceDelegate.h"
-#endif
+#include <error.h>
+#include "entity_interface.h"
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -23,7 +20,7 @@ public:
     virtual void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) = 0;
 };
 
-class AdSource: public ONETEN::OnetenObject, public AdSourceDelegate {
+class AdSource: public ONETEN::Object, public AdSourceDelegate, public EntityInterface {
 public:
     enum class Type {
         kS2S,
@@ -34,7 +31,7 @@ public:
     using this_class = AdSource;
     
     std::shared_ptr<AdSource> shared_from_this() {
-        return std::static_pointer_cast<AdSource>(ONETEN::OnetenObject::shared_from_this());
+        return std::static_pointer_cast<AdSource>(ONETEN::Object::shared_from_this());
     }
     
     AdSource();
@@ -51,6 +48,7 @@ public:
     void InitSDK();
     
     void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
+    std::string Identifier() override;
     
 private:
     Type type_;

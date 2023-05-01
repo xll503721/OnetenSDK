@@ -26,17 +26,17 @@ public:
 class WaterfallLoaderInterface {
 public:
     virtual void Classify(std::shared_ptr<Placement> placement) {};
-    virtual void StartFlow(int32_t level) {};
+    virtual void StartFlow(int32_t level, std::shared_ptr<Placement> placement) {};
 };
 
 class AdSourceLoaderInterface {
 public:
-    virtual void Flow(std::shared_ptr<AdSource> ad_source) {};
+    virtual void Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement) {};
 };
 
 class CacheLoaderInterface {
 public:
-    virtual void Save() {};
+    virtual void Save(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement) {};
 };
 
 class LoaderInterface:  public PlacementLoaderInterface,

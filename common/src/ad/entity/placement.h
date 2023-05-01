@@ -10,13 +10,16 @@
 
 #include <oneten_object.h>
 #include "ad_source.h"
+#include "entity_interface.h"
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class Placement: ONETEN::OnetenObject {
+class Placement: public ONETEN::Object, public EntityInterface {
     
 public:
     std::vector<std::shared_ptr<AdSource>> GetRequestAdSources();
+    
+    std::string Identifier() override;
     
 private:
     std::vector<std::shared_ptr<AdSource>> requesting_ad_sources_;

@@ -7,7 +7,8 @@
 
 #include "placement_loader.h"
 
-#include "../oneten_ad_sdk.h"
+#include <ad/oneten_ad_sdk.h>
+#include <ad/entity/placement.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -19,7 +20,8 @@ void PlacementLoader::Start(const std::string& placement_id) {
     super_class::Start(placement_id);
     printf("PlacementLoader Start\n");
     
-    ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->Classify(nullptr);
+    std::shared_ptr<Placement> placement = std::make_shared<Placement>();
+    ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->Classify(placement);
 }
 
 void PlacementLoader::RequestPlacement(const std::string& placement_id) {

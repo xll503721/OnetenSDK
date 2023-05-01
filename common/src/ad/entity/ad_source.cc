@@ -6,8 +6,7 @@
 //
 
 #include "ad_source.h"
-#include "../oneten_ad_sdk.h"
-#include <OTOnetenSDK.h>
+#include <ad/oneten_ad_sdk.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -63,8 +62,12 @@ void AdSource::Parse(std::string json_string) {
 
 void AdSource::LoadCompletion(int32_t categroy_type, ONETEN::Error* error) {
     if (delegate_) {
-        delegate_->LoadCompletion(categroy_type);
+        delegate_->LoadCompletion(categroy_type, error);
     }
+}
+
+std::string AdSource::Identifier() {
+    
 }
 
 END_NAMESPACE_ONETEN_AD

@@ -13,14 +13,14 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class AdSourceService: public ONETEN::OnetenObject, public AdSourceDelegate {
+class AdSourceService: public ONETEN::Object, public AdSourceDelegate {
     
 public:
     ~AdSourceService();
     using LoadCompletionInvoke = std::function<void(int32_t categroy_type, ONETEN::Error* error)>;
     
     std::shared_ptr<AdSourceService> shared_from_this() {
-        return std::static_pointer_cast<AdSourceService>(ONETEN::OnetenObject::shared_from_this());
+        return std::static_pointer_cast<AdSourceService>(ONETEN::Object::shared_from_this());
     }
     
     void Load(std::shared_ptr<AdSource> ad_source, LoadCompletionInvoke load_complete);

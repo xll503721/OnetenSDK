@@ -30,4 +30,8 @@ std::vector<std::shared_ptr<AdSource>> Placement::GetRequestAdSources() {
     return ad_sources;
 }
 
+std::string Placement::Identifier() {
+    
+}
+
 END_NAMESPACE_ONETEN_AD

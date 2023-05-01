@@ -25,15 +25,15 @@ void MainLoader::Classify(std::shared_ptr<Placement> placement) {
     }
 }
 
-void MainLoader::StartFlow(int32_t level) {
+void MainLoader::StartFlow(int32_t level, std::shared_ptr<Placement> placement) {
     if (mainloader_) {
-        mainloader_->StartFlow(level);
+        mainloader_->StartFlow(level, placement);
     }
 }
 
-void MainLoader::Flow(std::shared_ptr<AdSource> ad_source) {
+void MainLoader::Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement) {
     if (mainloader_) {
-        mainloader_->Flow(ad_source);
+        mainloader_->Flow(ad_source, placement);
     }
 }
 

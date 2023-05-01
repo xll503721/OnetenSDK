@@ -20,8 +20,8 @@ private:
 public:
     WaterfallLoader(std::shared_ptr<LoaderInterface> loader);
     void Classify(std::shared_ptr<Placement> placement);
-    void StartFlow(int32_t level);
-    void InternalStartFlow(int32_t level);
+    void StartFlow(int32_t level, std::shared_ptr<Placement> placement);
+    void InternalStartFlow(int32_t level, std::shared_ptr<Placement> placement);
     
     void End();
     

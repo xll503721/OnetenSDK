@@ -8,11 +8,11 @@
 #ifndef ONETEN_AD_SDK_PLACEMENT_H
 #define ONETEN_AD_SDK_PLACEMENT_H
 
-#include "../oneten_object.h"
+#include <ad/oneten_object.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class PlacementModel: OnetenObject {
+class PlacementModel: ONETEN::Object {
     
 };
 

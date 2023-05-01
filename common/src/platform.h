@@ -29,7 +29,7 @@ std::string file(__FILE_NAME__);\
 std::string func(__FUNCTION__);\
 platform_->Perform(file, func, false, parmas_str, ##__VA_ARGS__, nullptr);\
 
-class Platform: OnetenObject {
+class Platform: Object {
     
 public:
     enum class PlatformType {

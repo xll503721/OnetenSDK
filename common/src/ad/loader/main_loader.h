@@ -13,7 +13,7 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class MainLoader:   public ONETEN::OnetenObject,
+class MainLoader:   public ONETEN::Object,
                     public LoaderInterface {
     
 public:
@@ -23,8 +23,8 @@ public:
 
     void Classify(std::shared_ptr<Placement> placement) override;
                         
-    void StartFlow(int32_t level) override;
-    void Flow(std::shared_ptr<AdSource> ad_source) override;
+    void StartFlow(int32_t level, std::shared_ptr<Placement> placement) override;
+    void Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement) override;
     
     void NextLoader();
     void End() override;

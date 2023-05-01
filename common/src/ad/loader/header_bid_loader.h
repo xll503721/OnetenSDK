@@ -22,7 +22,7 @@ private:
     
 public:
     HeaderBidLoader(std::shared_ptr<LoaderInterface> loader);
-    void Flow(std::shared_ptr<AdSource> ad_source);
+    void Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement);
     void End();
 };
 

@@ -13,7 +13,7 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class SDKDelegate: ONETEN::OnetenObject {
+class SDKDelegate: ONETEN::Object {
     
 public:
     
