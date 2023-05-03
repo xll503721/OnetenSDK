@@ -13,7 +13,7 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class EntityInterface {
+class EntityInterface: public ONETEN::Object {
     
 public:
     virtual std::string Identifier() = 0;

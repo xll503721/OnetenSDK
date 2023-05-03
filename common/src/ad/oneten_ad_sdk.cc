@@ -13,6 +13,10 @@
 #include "loader/normal_loader.h"
 #include "loader/cache_loader.h"
 
+#include <ad/model/placement_model.h>
+#include <ad/model/cache_model.h>
+#include <ad/model/model_factory.h>
+
 BEGIN_NAMESPACE_ONETEN_AD
 
 //thread_local AdSDKDelegate* delegate_ = nullptr;
@@ -23,6 +27,8 @@ OnetenAdSDK &OnetenAdSDK::GetInstance() {
 }
 
 OnetenAdSDK::OnetenAdSDK() {
+    REGISTER_MODEL(PlacementModel)
+    REGISTER_MODEL(CacheModel)
 }
 
 OnetenAdSDK::~OnetenAdSDK() {

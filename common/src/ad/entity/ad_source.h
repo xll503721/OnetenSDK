@@ -20,7 +20,7 @@ public:
     virtual void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) = 0;
 };
 
-class AdSource: public ONETEN::Object, public AdSourceDelegate, public EntityInterface {
+class AdSource: public AdSourceDelegate, public EntityInterface {
 public:
     enum class Type {
         kS2S,

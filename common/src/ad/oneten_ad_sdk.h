@@ -8,9 +8,9 @@
 #ifndef ONETEN_AD_SDK_AD_SDK_H
 #define ONETEN_AD_SDK_AD_SDK_H
 
-#include "loader/loader.h"
+#include <ad/loader/loader.h>
 #include <oneten_ad_sdk_delegate.h>
-#include "oneten_object.h"
+#include <oneten_object.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 

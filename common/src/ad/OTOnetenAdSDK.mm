@@ -21,7 +21,7 @@
 {
     self = [super init];
     if (self) {
-        _sdk_delegate.SetOCPrt((__bridge_retained void *)self);
+        _sdk_delegate.SetOCPrt((__bridge void *)self);
     }
     return self;
 }
@@ -69,9 +69,13 @@ void AdSDKDelegate::SetOCPrt(void *prt) {
 }
 
 void AdSDKDelegate::LoadSucceed() {
-//    if ([OTOneTenSDK defalutSDK].loadCompletion) {
-//        [OTOneTenSDK defalutSDK].loadCompletion(@"", nil, @{});
-//    }
+    if (oc_prt_) {
+        OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
+        if (ad_sdk.loadCompletion) {
+            ad_sdk.loadCompletion(@"", nil, nil);
+        }
+        
+    }
 }
 
 END_NAMESPACE_ONETEN_AD

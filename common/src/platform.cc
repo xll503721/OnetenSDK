@@ -7,6 +7,7 @@
 
 #include "platform.h"
 #include <string/string.h>
+#include <storage/memory/storage_memory.h>
 #include <ad/entity/ad_source.h>
 
 BEGIN_NAMESPACE_ONETEN
@@ -17,7 +18,6 @@ Platform::PlatformPerform Platform::perform_fun_ = nullptr;
 Platform::Platform(const std::string& class_name, std::shared_ptr<void> c_plus_plus_obj):
 platform_obj_(nullptr),
 c_plus_plus_obj_(c_plus_plus_obj) {
-    
 }
 
 bool Platform::isPlatform(PlatformType type) {

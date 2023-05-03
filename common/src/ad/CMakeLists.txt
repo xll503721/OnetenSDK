@@ -22,6 +22,7 @@ if(${CMAKE_VERSION} VERSION_GREATER "3.16.0")
 endif()
 
 include_directories(../)
+include_directories(../../../../base/src)
 
 add_subdirectory(model)
 add_subdirectory(service)

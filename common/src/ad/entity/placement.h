@@ -14,7 +14,7 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class Placement: public ONETEN::Object, public EntityInterface {
+class Placement: public EntityInterface {
     
 public:
     std::vector<std::shared_ptr<AdSource>> GetRequestAdSources();

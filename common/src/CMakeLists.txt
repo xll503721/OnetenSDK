@@ -48,16 +48,16 @@ add_dependencies(${PROJECT_NAME} ${SDK_AD_MODEL_LIB})
 add_dependencies(${PROJECT_NAME} ${SDK_AD_SERVICE_LIB})
 add_dependencies(${PROJECT_NAME} ${SDK_AD_LOADER_LIB})
 add_dependencies(${PROJECT_NAME} ${SDK_AD_ENTITY_LIB})
+add_dependencies(${PROJECT_NAME} Base)
 
-target_link_libraries(${PROJECT_NAME} ${SDK_AD_LIB})
-target_link_libraries(${PROJECT_NAME} ${SDK_AD_MODEL_LIB})
-target_link_libraries(${PROJECT_NAME} ${SDK_AD_SERVICE_LIB})
-target_link_libraries(${PROJECT_NAME} ${SDK_AD_LOADER_LIB})
-target_link_libraries(${PROJECT_NAME} ${SDK_AD_ENTITY_LIB})
-target_link_libraries(${PROJECT_NAME} ${UIKIT})
-target_link_libraries(${PROJECT_NAME} ${FOUNDATION})
-
-target_link_libraries(${PROJECT_NAME} Base)
+target_link_libraries(${PROJECT_NAME} 
+                        ${SDK_AD_LIB} 
+                        ${SDK_AD_MODEL_LIB} 
+                        ${SDK_AD_SERVICE_LIB} 
+                        ${SDK_AD_LOADER_LIB} 
+                        ${SDK_AD_ENTITY_LIB}
+                        Base)
+target_link_libraries(${PROJECT_NAME} ${UIKIT} ${FOUNDATION})
 
 set(TENON_SDK_BUNDLE_ID "")
 string(CONCAT TENON_SDK_BUNDLE_ID ${SDK_BUNDLE_ID_PREFIX} ${PRO_NAME_LOWER_CASE} ".sdk")

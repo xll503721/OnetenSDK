@@ -15,6 +15,10 @@
 #define __FILE_NAME__ __FILE__
 #endif
 
+#define REGISTER_MODEL(name) \
+std::shared_ptr<name> model_##name = std::make_shared<name>();\
+ModelFactory::GetInstance().SetModel(ModelFactory::ModelType::kModelType##name, model_##name);\
+
 #define ONETEN_AD oneten_ad
 #define BEGIN_NAMESPACE_ONETEN_AD BEGIN_NAMESPACE(ONETEN_AD)
 #define END_NAMESPACE_ONETEN_AD END_NAMESPACE()

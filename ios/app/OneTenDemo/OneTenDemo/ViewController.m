@@ -27,11 +27,11 @@
     // Do any additional setup after loading the view.
     [[OTOnetenSDK defalutSDK] initAppId:@"111" type:OTOneTenSDKTypeAd];
     
-    [[OTOnetenSDK defalutSDK].adSDK loadWithPlacementId:@"" userInfo:@{}];
-    
     [[OTOnetenSDK defalutSDK].adSDK setLoadCompletion:^(NSString * _Nonnull placementId, NSError * _Nonnull error, NSDictionary<NSString *,id> * _Nonnull userInfo) {
         
     }];
+    
+    [[OTOnetenSDK defalutSDK].adSDK loadWithPlacementId:@"" userInfo:@{}];
     
     NSError *error;
     [[OTOnetenSDK defalutSDK].adSDK showWithSuperView:self.view placementId:@"" error:&error];

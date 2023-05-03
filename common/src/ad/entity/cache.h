@@ -11,11 +11,10 @@
 #include "placement.h"
 #include "ad_source.h"
 #include "entity_interface.h"
-#include <oneten_object.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class Cache: public ONETEN::Object, public EntityInterface {
+class Cache: public EntityInterface {
     
 public:
     Cache(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement);

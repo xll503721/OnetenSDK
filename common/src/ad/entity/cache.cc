@@ -17,7 +17,7 @@ ad_source_(ad_source) {
 
 
 std::string Cache::Identifier() {
-    
+    return placement_->Identifier() + ad_source_->Identifier();
 }
 
 END_NAMESPACE_ONETEN_AD

@@ -10,6 +10,8 @@
 
 #include <ad/entity/ad_source.h>
 #include <ad/entity/placement.h>
+#include <ad/entity/placement_cache.h>
+#include <ad/model/cache_model.h>
 #include <error.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
@@ -17,6 +19,7 @@ BEGIN_NAMESPACE_ONETEN_AD
 class CacheService: public ONETEN::Object {
     
 public:
+    CacheService();
     virtual ~CacheService();
     
     std::shared_ptr<CacheService> shared_from_this() {
@@ -25,8 +28,13 @@ public:
     
     void Save(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement);
     
+    std::shared_ptr<PlacementCache> GetHighestPrice(const std::string& placement_id);
+    
 private:
-
+    void Sort(std::shared_ptr<AdSourceCache> obj1, std::shared_ptr<AdSourceCache> obj2);
+    
+private:
+    std::shared_ptr<CacheModel> cacheModel_;
 };
 
 END_NAMESPACE_ONETEN_AD

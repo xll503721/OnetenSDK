@@ -85,6 +85,5 @@ SET(LIBRARY_BASE_OUTPUT_PATH ${BASE_ROOT}/output/${PLATFORM})
 
 add_subdirectory(${BASE_ROOT} base.src)
 
-
 add_subdirectory(src)
 
