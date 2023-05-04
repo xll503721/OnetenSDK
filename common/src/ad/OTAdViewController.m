@@ -9,23 +9,39 @@
 
 @interface OTAdViewController ()
 
+@property (nonatomic, strong) id<OTAdSourceProtocol> adSource;
+@property (nonatomic, assign) OTAdSourceCategroyType category;
+
+@property (nonatomic, assign) BOOL isShowing;
+
 @end
 
 @implementation OTAdViewController
+
+- (instancetype)initWithAdSource:(id<OTAdSourceProtocol>)adSource category:(OTAdSourceCategroyType)category
+{
+    self = [super init];
+    if (self) {
+        _adSource = adSource;
+        _category = category;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
+    
+    if (!self.isShowing) {
+        self.isShowing = !self.isShowing;
+        if ([self.adSource respondsToSelector:@selector(showWithCategroyType:rootViewController:)]) {
+            [self.adSource showWithCategroyType:self.category rootViewController:self];
+        }
+    }
 }
-*/
 
 @end

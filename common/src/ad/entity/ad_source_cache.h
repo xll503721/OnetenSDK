@@ -10,14 +10,26 @@
 
 #include "entity_interface.h"
 #include "ad_source.h"
+#include <platform.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
 class AdSourceCache: public EntityInterface {
     
 public:
-    static std::shared_ptr<AdSourceCache> Convert(std::shared_ptr<AdSource> placement);
+    AdSourceCache() = default;
+    AdSourceCache(std::shared_ptr<AdSource> ad_source);
     
+    static std::shared_ptr<AdSourceCache> Convert(std::shared_ptr<AdSource> ad_source);
+    
+    std::string Identifier() override;
+    
+    void* GetPlatformObj();
+    
+    AdSource::Category GetCategory();
+    
+private:
+    PLATFORM_DECLARE
 };
 
 END_NAMESPACE_ONETEN_AD

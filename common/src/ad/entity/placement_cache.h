@@ -17,6 +17,9 @@ BEGIN_NAMESPACE_ONETEN_AD
 class PlacementCache: public EntityInterface {
     
 public:
+    PlacementCache() = default;
+    PlacementCache(std::shared_ptr<Placement> placement);
+    
     std::string Identifier() override;
     
     static std::shared_ptr<PlacementCache> Convert(std::shared_ptr<Placement> placement);

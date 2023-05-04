@@ -10,11 +10,16 @@
 BEGIN_NAMESPACE_ONETEN_AD
 
 std::shared_ptr<PlacementCache> PlacementCache::Convert(std::shared_ptr<Placement> placement) {
-    std::shared_ptr<PlacementCache> placement_cache;
+    std::shared_ptr<PlacementCache> placement_cache = std::make_shared<PlacementCache>();
+    
     return placement_cache;
 }
 
 std::string PlacementCache::Identifier() {
+    return "qwertyuiop";
+}
+
+PlacementCache::PlacementCache(std::shared_ptr<Placement> placement) {
     
 }
 

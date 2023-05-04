@@ -13,16 +13,22 @@
 
 @interface TENSigmobSource ()<WindIntersititialAdDelegate, OTAdSourceProtocol>
 
+@property (nonatomic, strong) id adSource;
+
 //@property (nonatomic, strong) WindIntersititialAd *intersititialAd;
 //@property (nonatomic, strong) WindSplashAdView *splashAdView;
 //@property (nonatomic, strong) WindNativeAdsManager *nativeAdsManager;
 //@property (nonatomic, strong) WindRewardVideoAd *rewardVideoAd;
 
-@property (nonatomic, weak) id<OTAdSourceDelegate> delegate;
+@property (nonatomic, strong) id<OTAdSourceDelegate> delegate;
 
 @end
 
 @implementation TENSigmobSource
+
+- (void)dealloc {
+    NSLog(@"TENSigmobSource");
+}
 
 - (instancetype)init
 {
@@ -38,7 +44,9 @@
 - (BOOL)isReadyWithType:(OTAdSourceCategroyType)categroyType {
     switch (categroyType) {
         case OTAdSourceCategroyTypeInterstitial: {
-            
+            if ([self.adSource isKindOfClass:[WindIntersititialAd class]]) {
+                return [(WindIntersititialAd *)self.adSource isAdReady];
+            }
         }
             break;
         case OTAdSourceCategroyTypeSplash: {
@@ -60,9 +68,12 @@
     return NO;
 }
 
-- (void)showWithCategroyType:(OTAdSourceCategroyType)categroyType {
+- (void)showWithCategroyType:(OTAdSourceCategroyType)categroyType rootViewController:(UIViewController *)viewController {
     switch (categroyType) {
         case OTAdSourceCategroyTypeInterstitial: {
+            if ([self.adSource isKindOfClass:[WindIntersititialAd class]]) {
+                return [(WindIntersititialAd *)self.adSource showAdFromRootViewController:viewController options:nil];
+            }
         }
             break;
         case OTAdSourceCategroyTypeSplash: {
@@ -112,6 +123,7 @@
         [intersititialAd setBidFloor:100];
     }
     [intersititialAd loadAdData];
+    self.adSource = intersititialAd;
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithCategroyType:adSourceObject:)]) {
         [self.delegate adWillLoadWithCategroyType:OTAdSourceCategroyTypeInterstitial adSourceObject:intersititialAd];

@@ -29,6 +29,8 @@ OnetenAdSDK &OnetenAdSDK::GetInstance() {
 OnetenAdSDK::OnetenAdSDK() {
     REGISTER_MODEL(PlacementModel)
     REGISTER_MODEL(CacheModel)
+    
+    cache_service_ = std::make_shared<CacheService>();
 }
 
 OnetenAdSDK::~OnetenAdSDK() {
@@ -91,11 +93,13 @@ void OnetenAdSDK::EndAdLoad(const std::string& placement_id) {
 }
 
 bool OnetenAdSDK::IsReady(const std::string& placement_id) {
-    
+    auto cache = cache_service_->GetHighestPrice(placement_id);
+    return cache != nullptr;
 }
 
-void OnetenAdSDK::ShowAd(const std::string& placement_id, AdSDKDelegate& delegate) {
-    
+std::shared_ptr<AdSourceCache> OnetenAdSDK::ShowAd(const std::string& placement_id, AdSDKDelegate& delegate) {
+    auto cache = cache_service_->GetHighestPrice(placement_id);
+    return cache;
 }
 
 END_NAMESPACE_ONETEN_AD

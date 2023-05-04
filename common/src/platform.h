@@ -112,6 +112,8 @@ public:
     void Init(const std::string& file_name, const std::string& class_name, void* c_plus_plus_obj);
     void Perform(const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::string& params_name, ONETEN::Platform::Var* params, ...) __attribute__((sentinel(0,1)));
     
+    void* GetPlatformObj();
+    
 public:
     
     static PlatformInit init_fun_;

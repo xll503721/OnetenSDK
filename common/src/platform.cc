@@ -110,5 +110,8 @@ void Platform::Perform(const std::string& file_name, const std::string& method_n
     perform_fun_(platform_obj_, file_name_string, method_name, is_set_delegate, params_name_vector, params_vector);
 }
 
+void* Platform::GetPlatformObj() {
+    return platform_obj_;
+}
 
 END_NAMESPACE_ONETEN

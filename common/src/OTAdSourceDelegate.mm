@@ -19,11 +19,6 @@
 
 - (void)adWillLoadWithCategroyType:(OTAdSourceCategroyType)categroyType adSourceObject:(id)adSourceObject {
     self.adSourceObject = adSourceObject;
-    
-    ONETEN_AD::AdSource* ad_source = static_cast<ONETEN_AD::AdSource *>(_rawPrt);
-    if (ad_source) {
-        ad_source->LoadCompletion((int32_t)categroyType);
-    }
 }
 
 - (void)adDidLoadWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error {

@@ -27,7 +27,7 @@ typedef void (^LoadCompletion) (NSString *placementId, NSError *error, NSDiction
 - (void)loadWithPlacementId:(NSString *)placementId userInfo:(nullable NSDictionary<NSString *, NSString *> *)userInfo;
 - (void)loadWithPlacementId:(NSString *)placementId;
 
-- (OTAdViewController *)showWithSuperView:(UIView *)view placementId:(NSString *)placementId error:(NSError **)error;
+- (OTAdViewController *)showWithPlacementId:(NSString *)placementId error:(NSError **)error;
 
 @end
 

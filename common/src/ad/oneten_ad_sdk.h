@@ -11,6 +11,7 @@
 #include <ad/loader/loader.h>
 #include <oneten_ad_sdk_delegate.h>
 #include <oneten_object.h>
+#include <ad/service/cache_service.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -24,7 +25,7 @@ public:
     void StartAdLoad(const std::string& placement_id, std::map<std::string, std::string>& user_info, AdSDKDelegate& delegate);
     void EndAdLoad(const std::string& placement_id);
     bool IsReady(const std::string& placement_id);
-    void ShowAd(const std::string& placement_id, AdSDKDelegate& delegate);
+    std::shared_ptr<AdSourceCache> ShowAd(const std::string& placement_id, AdSDKDelegate& delegate);
     
     std::shared_ptr<LoaderInterface> GetMainLoader();
     std::shared_ptr<LoaderInterface> GetWaterfallLoader();
@@ -42,6 +43,8 @@ private:
     
     AdSDKDelegate* delegate_;
     std::map<std::string, std::string> user_info_;
+    
+    std::shared_ptr<CacheService> cache_service_;
 };
 
 END_NAMESPACE_ONETEN_AD

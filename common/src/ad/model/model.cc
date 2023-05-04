@@ -16,18 +16,28 @@ bool Model::Save(const std::shared_ptr<EntityInterface> objc) {
     }
 }
 
-std::shared_ptr<EntityInterface>& Model::Read(const std::string& key) {
-    
+std::shared_ptr<EntityInterface> Model::Read(const std::string& key) {
+    if (map_.find(key) == map_.end()) {
+        return nullptr;
+    }
+    return map_[key];
 }
 
 bool Model::Update(const std::shared_ptr<EntityInterface> objc) {
-    if (objc) {
-        map_[objc->Identifier()] = objc;
+    if (!objc) {
+        return false;
     }
+    
+    map_[objc->Identifier()] = objc;
+    return true;
 }
 
 bool Model::Remove(const std::string& key) {
-    return map_.Remove(key);
+    if (map_.find(key) == map_.end()) {
+        return false;
+    }
+    map_.erase(key);
+    return true;
 }
 
 END_NAMESPACE_ONETEN_AD

@@ -20,7 +20,7 @@ public:
     
     bool Save(const std::shared_ptr<EntityInterface> objc);
     
-    std::shared_ptr<EntityInterface>& Read(const std::string& key);
+    std::shared_ptr<EntityInterface> Read(const std::string& key);
     
     bool Update(const std::shared_ptr<EntityInterface> objc);
     
@@ -28,7 +28,7 @@ public:
     
 private:
     
-    BASE_STORAGE_MEMORY::StorageMemory<std::string, std::shared_ptr<EntityInterface>> map_;
+    std::map<std::string, std::shared_ptr<EntityInterface>> map_;
 };
 
 END_NAMESPACE_ONETEN_AD

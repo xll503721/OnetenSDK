@@ -70,4 +70,8 @@ std::string AdSource::Identifier() {
     
 }
 
+std::shared_ptr<ONETEN::Platform> AdSource::GetPlatform() {
+    return platform_;
+}
+
 END_NAMESPACE_ONETEN_AD

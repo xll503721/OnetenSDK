@@ -28,16 +28,20 @@
     [[OTOnetenSDK defalutSDK] initAppId:@"111" type:OTOneTenSDKTypeAd];
     
     [[OTOnetenSDK defalutSDK].adSDK setLoadCompletion:^(NSString * _Nonnull placementId, NSError * _Nonnull error, NSDictionary<NSString *,id> * _Nonnull userInfo) {
-        
+        [self showAdViewController];
     }];
     
     [[OTOnetenSDK defalutSDK].adSDK loadWithPlacementId:@"" userInfo:@{}];
-    
+}
+
+- (void)showAdViewController {
     NSError *error;
-    [[OTOnetenSDK defalutSDK].adSDK showWithSuperView:self.view placementId:@"" error:&error];
+    OTAdViewController *adViewController = [[OTOnetenSDK defalutSDK].adSDK showWithPlacementId:@"" error:&error];
     if (error) {
-        
+        return;
     }
+    
+    [self addChildViewController:adViewController];
 }
 
 

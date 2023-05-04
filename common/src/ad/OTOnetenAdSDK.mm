@@ -48,15 +48,17 @@
     ONETEN_AD::OnetenAdSDK::GetInstance().StartAdLoad(placementId.UTF8String, user_info, _sdk_delegate);
 }
 
-- (OTAdViewController *)showWithSuperView:(UIView *)view placementId:(NSString *)placementId error:(NSError **)error {
+- (OTAdViewController *)showWithPlacementId:(NSString *)placementId error:(NSError **)error {
     bool isReady = ONETEN_AD::OnetenAdSDK::GetInstance().IsReady(placementId.UTF8String);
     if (!isReady) {
         *error = [NSError errorWithDomain:@"ad show" code:1000 userInfo:@{}];
         return nil;
     }
     
-    OTAdViewController *adViewController = [[OTAdViewController alloc] init];
-    ONETEN_AD::OnetenAdSDK::GetInstance().ShowAd(placementId.UTF8String, _sdk_delegate);
+    auto ad_source = ONETEN_AD::OnetenAdSDK::GetInstance().ShowAd(placementId.UTF8String, _sdk_delegate);
+    void* platformObj = ad_source->GetPlatformObj();
+    OTAdViewController *adViewController = [[OTAdViewController alloc] initWithAdSource:(__bridge id<OTAdSourceProtocol>)platformObj category:(OTAdSourceCategroyType)ad_source->GetCategory()];
+    
     return adViewController;
 }
 

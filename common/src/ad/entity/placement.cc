@@ -31,7 +31,7 @@ std::vector<std::shared_ptr<AdSource>> Placement::GetRequestAdSources() {
 }
 
 std::string Placement::Identifier() {
-    
+    return "qwertyuiop";
 }
 
 END_NAMESPACE_ONETEN_AD

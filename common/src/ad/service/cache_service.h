@@ -28,7 +28,7 @@ public:
     
     void Save(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement);
     
-    std::shared_ptr<PlacementCache> GetHighestPrice(const std::string& placement_id);
+    std::shared_ptr<AdSourceCache> GetHighestPrice(const std::string& placement_id);
     
 private:
     void Sort(std::shared_ptr<AdSourceCache> obj1, std::shared_ptr<AdSourceCache> obj2);

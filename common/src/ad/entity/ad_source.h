@@ -28,6 +28,14 @@ public:
         kNormal,
     };
     
+    enum class Category {
+        kSplash,
+        kInterstitial,
+        kBanner,
+        kRewardedVideo,
+        kNative,
+    };
+    
     using this_class = AdSource;
     
     std::shared_ptr<AdSource> shared_from_this() {
@@ -49,6 +57,8 @@ public:
     
     void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
     std::string Identifier() override;
+    
+    std::shared_ptr<ONETEN::Platform> GetPlatform();
     
 private:
     Type type_;

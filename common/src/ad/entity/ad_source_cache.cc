@@ -9,9 +9,26 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-std::shared_ptr<AdSourceCache> AdSourceCache::Convert(std::shared_ptr<AdSource> placement) {
-    std::shared_ptr<AdSourceCache> ad_source_cache;
+AdSourceCache::AdSourceCache(std::shared_ptr<AdSource> ad_source):
+platform_(ad_source->GetPlatform()) {
+    
+}
+
+std::string AdSourceCache::Identifier() {
+    return "2222";
+}
+
+std::shared_ptr<AdSourceCache> AdSourceCache::Convert(std::shared_ptr<AdSource> ad_source) {
+    std::shared_ptr<AdSourceCache> ad_source_cache = std::make_shared<AdSourceCache>(ad_source);
     return ad_source_cache;
+}
+
+void* AdSourceCache::GetPlatformObj() {
+    return platform_->GetPlatformObj();
+}
+
+AdSource::Category AdSourceCache::GetCategory() {
+    return AdSource::Category::kInterstitial;
 }
 
 END_NAMESPACE_ONETEN_AD

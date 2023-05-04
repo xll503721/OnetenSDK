@@ -28,11 +28,18 @@ void CacheService::Save(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Pla
     cacheModel_->Save(placement_cache);
 }
 
-std::shared_ptr<PlacementCache> CacheService::GetHighestPrice(const std::string& placement_id) {
-    
-    std::shared_ptr<EntityInterface> entity = cacheModel_->Read(placement_id);
+std::shared_ptr<AdSourceCache> CacheService::GetHighestPrice(const std::string& placement_id) {
+    std::shared_ptr<EntityInterface> entity = cacheModel_->Read("qwertyuiop");
+    if (!entity) {
+        return nullptr;
+    }
     std::shared_ptr<PlacementCache> placement_cache = std::static_pointer_cast<PlacementCache>(entity);
+    PlacementCache::AdSourceCacheList list = placement_cache->GetAdSourceCaches();
+    if (!(list.size() > 0)) {
+        return nullptr;
+    }
     
+    return list[0];
 }
 
 void CacheService::Sort(std::shared_ptr<AdSourceCache> obj1, std::shared_ptr<AdSourceCache> obj2) {
