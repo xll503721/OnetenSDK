@@ -7,6 +7,15 @@
 
 #import "OTAdViewController.h"
 
+@interface OTAdView : UIView
+
+@end
+
+@implementation OTAdView
+
+@end
+
+
 @interface OTAdViewController ()
 
 @property (nonatomic, strong) id<OTAdSourceProtocol> adSource;
@@ -31,6 +40,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    OTAdView *view = [[OTAdView alloc] initWithFrame:self.view.bounds];
+    self.view = view;
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent {

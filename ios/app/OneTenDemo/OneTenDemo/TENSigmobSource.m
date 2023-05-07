@@ -6,14 +6,13 @@
 //
 
 #import "TENSigmobSource.h"
+#import "OTAdSourceDelegate.h"
 
 #define AppId @"6877"//应用ID
 #define AppKey @"eccdcdbd9adbd4a7"//应用key
 #define FullScreenVideoAdPlacementId @"f21b862c1cd"//插屏广告位ID
 
 @interface TENSigmobSource ()<WindIntersititialAdDelegate, OTAdSourceProtocol>
-
-@property (nonatomic, strong) id adSource;
 
 //@property (nonatomic, strong) WindIntersititialAd *intersititialAd;
 //@property (nonatomic, strong) WindSplashAdView *splashAdView;
@@ -25,10 +24,6 @@
 @end
 
 @implementation TENSigmobSource
-
-- (void)dealloc {
-    NSLog(@"TENSigmobSource");
-}
 
 - (instancetype)init
 {
@@ -44,8 +39,8 @@
 - (BOOL)isReadyWithType:(OTAdSourceCategroyType)categroyType {
     switch (categroyType) {
         case OTAdSourceCategroyTypeInterstitial: {
-            if ([self.adSource isKindOfClass:[WindIntersititialAd class]]) {
-                return [(WindIntersititialAd *)self.adSource isAdReady];
+            if ([self.delegate.adSourceObject isKindOfClass:[WindIntersititialAd class]]) {
+                return [(WindIntersititialAd *)self.delegate.adSourceObject isAdReady];
             }
         }
             break;
@@ -71,8 +66,8 @@
 - (void)showWithCategroyType:(OTAdSourceCategroyType)categroyType rootViewController:(UIViewController *)viewController {
     switch (categroyType) {
         case OTAdSourceCategroyTypeInterstitial: {
-            if ([self.adSource isKindOfClass:[WindIntersititialAd class]]) {
-                return [(WindIntersititialAd *)self.adSource showAdFromRootViewController:viewController options:nil];
+            if ([self.delegate.adSourceObject isKindOfClass:[WindIntersititialAd class]]) {
+                return [(WindIntersititialAd *)self.delegate.adSourceObject showAdFromRootViewController:viewController options:nil];
             }
         }
             break;
@@ -123,7 +118,6 @@
         [intersititialAd setBidFloor:100];
     }
     [intersititialAd loadAdData];
-    self.adSource = intersititialAd;
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithCategroyType:adSourceObject:)]) {
         [self.delegate adWillLoadWithCategroyType:OTAdSourceCategroyTypeInterstitial adSourceObject:intersititialAd];

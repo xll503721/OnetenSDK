@@ -83,7 +83,7 @@ void Platform::Init(const std::string& file_name, const std::string& class_name,
     }
 }
 
-void Platform::Perform(const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::string& params_name, ONETEN::Platform::Var* params, ...) {
+void* Platform::Perform(const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::string& params_name, ONETEN::Platform::Var* params, ...) {
     if (!platform_obj_) {
         return;
     }
@@ -107,7 +107,9 @@ void Platform::Perform(const std::string& file_name, const std::string& method_n
     auto file_name_string = file_name;
     BASE_STRING::ReplaceAll(file_name_string, ".cc", "");
     
-    perform_fun_(platform_obj_, file_name_string, method_name, is_set_delegate, params_name_vector, params_vector);
+    auto method_name_string = method_name;
+    method_name_string[0] = tolower(method_name_string[0]);
+    return perform_fun_(platform_obj_, file_name_string, method_name_string, is_set_delegate, params_name_vector, params_vector);
 }
 
 void* Platform::GetPlatformObj() {

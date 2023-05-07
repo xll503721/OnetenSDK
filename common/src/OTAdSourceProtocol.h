@@ -39,6 +39,8 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 - (void)adWillLoadWithCategroyType:(OTAdSourceCategroyType)categroyType adSourceObject:(id)adSourceObject;
 - (void)adDidLoadWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error;
 
+@property (nonatomic, readonly) id adSourceObject;
+
 @end
 
 #pragma mark - OTAdSourceProtocol

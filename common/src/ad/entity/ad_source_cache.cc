@@ -6,6 +6,7 @@
 //
 
 #include "ad_source_cache.h"
+#include <platform.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -29,6 +30,13 @@ void* AdSourceCache::GetPlatformObj() {
 
 AdSource::Category AdSourceCache::GetCategory() {
     return AdSource::Category::kInterstitial;
+}
+
+bool AdSourceCache::IsReady() {
+    ONETEN::Platform::Var type = 1;
+    
+    PLATFORM_PERFORM(&type);
+    return static_cast<bool>(GET_PLATFORM_PERFORM_RESULT);
 }
 
 END_NAMESPACE_ONETEN_AD

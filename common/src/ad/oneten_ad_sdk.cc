@@ -94,7 +94,7 @@ void OnetenAdSDK::EndAdLoad(const std::string& placement_id) {
 
 bool OnetenAdSDK::IsReady(const std::string& placement_id) {
     auto cache = cache_service_->GetHighestPrice(placement_id);
-    return cache != nullptr;
+    return cache != nullptr && cache->IsReady();
 }
 
 std::shared_ptr<AdSourceCache> OnetenAdSDK::ShowAd(const std::string& placement_id, AdSDKDelegate& delegate) {

@@ -28,6 +28,8 @@ public:
     
     AdSource::Category GetCategory();
     
+    bool IsReady();
+    
 private:
     PLATFORM_DECLARE
 };

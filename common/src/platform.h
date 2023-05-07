@@ -27,7 +27,9 @@ platform_->Init(delegate_file, class_name, c_object.get());
 std::string parmas_str = #__VA_ARGS__;\
 std::string file(__FILE_NAME__);\
 std::string func(__FUNCTION__);\
-platform_->Perform(file, func, false, parmas_str, ##__VA_ARGS__, nullptr);\
+void* PLATFORM_PERFORM_RESULT = platform_->Perform(file, func, false, parmas_str, ##__VA_ARGS__, nullptr);\
+
+#define GET_PLATFORM_PERFORM_RESULT PLATFORM_PERFORM_RESULT
 
 class Platform: Object {
     
@@ -101,7 +103,7 @@ public:
     Platform(const std::string& class_name, std::shared_ptr<void> c_plus_plus_obj);
     
     using PlatformInit = std::function<void* (const std::string& file_name, const std::string& class_name, void* c_plus_plus_obj)>;
-    using PlatformPerform = std::function<void (const void* platform_obj, const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::vector<std::string>& params_name, const std::vector<ONETEN::Platform::Var*>& params)>;
+    using PlatformPerform = std::function<void* (const void* platform_obj, const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::vector<std::string>& params_name, const std::vector<ONETEN::Platform::Var*>& params)>;
     
     static bool isPlatform(PlatformType type);
     static PlatformType platform();
@@ -110,7 +112,7 @@ public:
     static void SetPerformMehtod(PlatformPerform method);
     
     void Init(const std::string& file_name, const std::string& class_name, void* c_plus_plus_obj);
-    void Perform(const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::string& params_name, ONETEN::Platform::Var* params, ...) __attribute__((sentinel(0,1)));
+    void* Perform(const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::string& params_name, ONETEN::Platform::Var* params, ...) __attribute__((sentinel(0,1)));
     
     void* GetPlatformObj();
     

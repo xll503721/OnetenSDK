@@ -8,7 +8,7 @@
 #define OTOnetenMsgSend(...) ((void (*)(void *, SEL, void *))objc_msgSend)(__VA_ARGS__)
 
 static NSString *kOTOnetenSDKPrefix = @"OT";
-static NSString *kOTOnetenSDKDelegate = @"Delegate";
+static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
 
 @interface OTOnetenSDK ()
 
@@ -68,13 +68,14 @@ static NSString *kOTOnetenSDKDelegate = @"Delegate";
         
         return (__bridge_retained void *)target;
     });
-    ONETEN::Platform::SetPerformMehtod([=] (const void* platform_obj, const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::vector<std::string>& params_name, const std::vector<ONETEN::Platform::Var*>& params) {
+    
+    ONETEN::Platform::SetPerformMehtod([=] (const void* platform_obj, const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::vector<std::string>& params_name, const std::vector<ONETEN::Platform::Var*>& params) -> void* {
         if (!platform_obj) {
-            return;
+            return nullptr;
         }
         
         NSMutableArray<NSString *> *paramStrings = @[].mutableCopy;
-        NSString *methodName = [[NSString stringWithUTF8String:method_name.c_str()] lowercaseString];
+        NSString *methodName = [NSString stringWithUTF8String:method_name.c_str()];
         for (int32_t i = 0; i < params_name.size(); i++) {
             std::string name = params_name[i];
             __block NSString *ocName = [NSString stringWithUTF8String:name.c_str()];
@@ -94,25 +95,24 @@ static NSString *kOTOnetenSDKDelegate = @"Delegate";
             [paramStrings addObject:ocName];
         }
         
-        methodName = [methodName stringByAppendingFormat:@"With%@", paramStrings.firstObject];
+        methodName = [methodName stringByAppendingFormat:@"With%@:", paramStrings.firstObject];
         [paramStrings removeObjectAtIndex:0];
         if (paramStrings.count > 0) {
             NSString *allParamsString = [paramStrings componentsJoinedByString:@":"];
-            methodName = [methodName stringByAppendingFormat:@":%@:", allParamsString];
+            methodName = [methodName stringByAppendingFormat:@"%@:", allParamsString];
         }
         
         id target = (__bridge id)platform_obj;
         SEL selector = NSSelectorFromString(methodName);
         if (![target respondsToSelector:selector]) {
             //alert
-            return;
+            return nullptr;
         }
         
         NSMethodSignature *methodSignature = [target methodSignatureForSelector:selector];
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
         [invocation setTarget:target];
         [invocation setSelector:selector];
-        
         
         __block int32_t argIndex = 2;
         NSMutableArray<id> *ocParmas = @[].mutableCopy;
@@ -156,6 +156,12 @@ static NSString *kOTOnetenSDKDelegate = @"Delegate";
         }
         
         [invocation invoke];
+        
+        if (methodSignature.methodReturnLength) {
+            __autoreleasing id returnValue = nil;
+            [invocation getReturnValue:&returnValue];
+            return (__bridge void *)returnValue;
+        }
     });
 }
 

@@ -10,9 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OTAdSourceDelegate : NSObject <OTPlatformProtocol, OTAdSourceDelegate>
+@interface OTAdSourceObjectDelegate : NSObject <OTPlatformProtocol, OTAdSourceDelegate>
 
 @property void* rawPrt;
+
+@property (nonatomic, readonly) id adSourceObject;
 
 @end
 

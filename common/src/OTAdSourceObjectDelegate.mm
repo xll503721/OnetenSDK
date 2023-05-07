@@ -5,20 +5,18 @@
 //  Created by li zhixuan on 2023/4/8.
 //
 
-#import "OTAdSourceDelegate.h"
+#import "OTAdSourceObjectDelegate.h"
 #import "OTAdSourceProtocol.h"
 #include <ad/entity/ad_source.h>
 
-@interface OTAdSourceDelegate ()
-
-@property (nonatomic, strong) id adSourceObject;
+@interface OTAdSourceObjectDelegate ()
 
 @end
 
-@implementation OTAdSourceDelegate
+@implementation OTAdSourceObjectDelegate
 
 - (void)adWillLoadWithCategroyType:(OTAdSourceCategroyType)categroyType adSourceObject:(id)adSourceObject {
-    self.adSourceObject = adSourceObject;
+    _adSourceObject = adSourceObject;
 }
 
 - (void)adDidLoadWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error {
