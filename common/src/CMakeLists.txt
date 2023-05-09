@@ -41,6 +41,7 @@ add_subdirectory(ad)
 include_directories(./)
 include_directories(ad)
 include_directories(./../../../base/src)
+include_directories(./../../../base/thirdparty)
 
 add_library(${PROJECT_NAME} SHARED ${oneten_src_h} ${oneten_src_source})
 add_dependencies(${PROJECT_NAME} ${SDK_AD_LIB})

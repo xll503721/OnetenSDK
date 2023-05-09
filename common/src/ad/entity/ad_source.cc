@@ -7,6 +7,7 @@
 
 #include "ad_source.h"
 #include <ad/oneten_ad_sdk.h>
+#include <string/string.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -56,8 +57,8 @@ std::string AdSource::GetClassName() {
     return clazz_name_;
 }
 
-void AdSource::Parse(std::string json_string) {
-    
+void AdSource::Parse(const char *json_string) {
+    json_.Parse("");
 }
 
 void AdSource::LoadCompletion(int32_t categroy_type, ONETEN::Error* error) {

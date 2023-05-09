@@ -6,7 +6,7 @@
 //
 
 #import "TENSigmobSource.h"
-#import "OTAdSourceDelegate.h"
+#import "OTAdSourceProtocol.h"
 
 #define AppId @"6877"//应用ID
 #define AppKey @"eccdcdbd9adbd4a7"//应用key

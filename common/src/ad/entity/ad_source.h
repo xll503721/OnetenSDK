@@ -11,6 +11,7 @@
 #include <oneten_object.h>
 #include <error.h>
 #include "entity_interface.h"
+#include <json/json.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -51,7 +52,7 @@ public:
     int32_t GetLevel();
     
     std::string GetClassName();
-    void Parse(std::string json_string);
+    void Parse(const char *json_string);
     
     void InitSDK();
     
@@ -64,6 +65,7 @@ private:
     Type type_;
     int32_t level_;
     std::string clazz_name_;
+    BASE_JSON::Json json_;
     PLATFORM_DECLARE
     
 public:

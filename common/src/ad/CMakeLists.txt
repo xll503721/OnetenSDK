@@ -23,6 +23,7 @@ endif()
 
 include_directories(../)
 include_directories(../../../../base/src)
+include_directories(../../../../base/thirdparty)
 
 add_subdirectory(model)
 add_subdirectory(service)
