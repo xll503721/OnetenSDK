@@ -57,13 +57,11 @@ std::string AdSource::GetClassName() {
     return clazz_name_;
 }
 
-void AdSource::Parse(const char *json_string) {
-    json_.Parse("");
-}
-
-void AdSource::LoadCompletion(int32_t categroy_type, ONETEN::Error* error) {
-    if (delegate_) {
-        delegate_->LoadCompletion(categroy_type, error);
+void AdSource::Parse(const std::string& json_string) {
+    json_.Parse(json_string.c_str(), json_string.size());
+    BASE_JSON::Json clazz_name = json_["class_name"];
+    if (clazz_name.IsString()) {
+        clazz_name_ = clazz_name.AsString();
     }
 }
 
@@ -73,6 +71,13 @@ std::string AdSource::Identifier() {
 
 std::shared_ptr<ONETEN::Platform> AdSource::GetPlatform() {
     return platform_;
+}
+
+#pragma mark - AdSourceDelegate
+void AdSource::LoadCompletion(int32_t categroy_type, ONETEN::Error* error) {
+    if (delegate_) {
+        delegate_->LoadCompletion(categroy_type, error);
+    }
 }
 
 END_NAMESPACE_ONETEN_AD

@@ -17,6 +17,8 @@
 #include <ad/model/cache_model.h>
 #include <ad/model/model_factory.h>
 
+#include <thread/thread_pool.h>
+
 BEGIN_NAMESPACE_ONETEN_AD
 
 //thread_local AdSDKDelegate* delegate_ = nullptr;
@@ -60,25 +62,27 @@ void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::str
     delegate_ = &delegate;
     user_info_ = user_info;
     
-    std::shared_ptr<MainLoader> start_main_loader = std::make_shared<MainLoader>(nullptr);
-    std::shared_ptr<PlacementLoader> placement_loader = std::make_shared<PlacementLoader>(start_main_loader);
-    
-    std::shared_ptr<MainLoader> waterfall_main_loader = std::make_shared<MainLoader>(nullptr);
-    std::shared_ptr<WaterfallLoader> waterfall_loader = std::make_shared<WaterfallLoader>(waterfall_main_loader);
-    
-    std::shared_ptr<MainLoader> request_main_loader = std::make_shared<MainLoader>(nullptr);
-    std::shared_ptr<HeaderBidLoader> header_bid_loader = std::make_shared<HeaderBidLoader>(request_main_loader);
-    std::shared_ptr<NormalLoader> normal_loader = std::make_shared<NormalLoader>(header_bid_loader);
-    
-    std::shared_ptr<MainLoader> save_main_loader = std::make_shared<MainLoader>(nullptr);
-    std::shared_ptr<CacheLoader> cache_loader = std::make_shared<CacheLoader>(save_main_loader);
-    
-    start_loader_ = placement_loader;
-    waterfall_loader_ = waterfall_loader;
-    request_loader_ = normal_loader;
-    cache_loader_ = cache_loader;
-    
-    start_loader_->Start(placement_id);
+    BASE_THREAD::ThreadPool::DefaultPool().Schedule([=](){
+        std::shared_ptr<MainLoader> start_main_loader = std::make_shared<MainLoader>(nullptr);
+        std::shared_ptr<PlacementLoader> placement_loader = std::make_shared<PlacementLoader>(start_main_loader);
+        
+        std::shared_ptr<MainLoader> waterfall_main_loader = std::make_shared<MainLoader>(nullptr);
+        std::shared_ptr<WaterfallLoader> waterfall_loader = std::make_shared<WaterfallLoader>(waterfall_main_loader);
+        
+        std::shared_ptr<MainLoader> request_main_loader = std::make_shared<MainLoader>(nullptr);
+        std::shared_ptr<HeaderBidLoader> header_bid_loader = std::make_shared<HeaderBidLoader>(request_main_loader);
+        std::shared_ptr<NormalLoader> normal_loader = std::make_shared<NormalLoader>(header_bid_loader);
+        
+        std::shared_ptr<MainLoader> save_main_loader = std::make_shared<MainLoader>(nullptr);
+        std::shared_ptr<CacheLoader> cache_loader = std::make_shared<CacheLoader>(save_main_loader);
+        
+        start_loader_ = placement_loader;
+        waterfall_loader_ = waterfall_loader;
+        request_loader_ = normal_loader;
+        cache_loader_ = cache_loader;
+        
+        start_loader_->Start(placement_id);
+    });
 }
 
 void OnetenAdSDK::EndAdLoad(const std::string& placement_id) {

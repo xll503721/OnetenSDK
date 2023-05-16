@@ -52,7 +52,7 @@ public:
     int32_t GetLevel();
     
     std::string GetClassName();
-    void Parse(const char *json_string);
+    void Parse(const std::string& json_string);
     
     void InitSDK();
     

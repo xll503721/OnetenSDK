@@ -29,9 +29,12 @@
 {
     self = [super init];
     if (self) {
-        WindAdOptions *option = [[WindAdOptions alloc] initWithAppId:AppId appKey:AppKey];
-        [WindAds startWithOptions:option];
-        [WindAds setDebugEnable:NO];
+        static dispatch_once_t onceToken ;
+        dispatch_once(&onceToken, ^{
+            WindAdOptions *option = [[WindAdOptions alloc] initWithAppId:AppId appKey:AppKey];
+            [WindAds startWithOptions:option];
+            [WindAds setDebugEnable:NO];
+        });
     }
     return self;
 }
