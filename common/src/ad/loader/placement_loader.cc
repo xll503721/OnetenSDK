@@ -13,25 +13,24 @@
 BEGIN_NAMESPACE_ONETEN_AD
 
 PlacementLoader::PlacementLoader(std::shared_ptr<LoaderInterface> loader): MainLoader(loader) {
-    
+    otlog_info << "";
 }
 
 void PlacementLoader::Start(const std::string& placement_id) {
     super_class::Start(placement_id);
-    printf("PlacementLoader Start\n");
+    otlog_info << "";
     
     std::shared_ptr<Placement> placement = std::make_shared<Placement>();
     ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->Classify(placement);
 }
 
 void PlacementLoader::RequestPlacement(const std::string& placement_id) {
-    printf("PlacementLoader RequestPlacement\n");
+    otlog_info << "";
 }
 
 void PlacementLoader::End() {
     super_class::End();
-    
-    printf("PlacementLoader End\n");
+    otlog_info << "";
 };
 
 

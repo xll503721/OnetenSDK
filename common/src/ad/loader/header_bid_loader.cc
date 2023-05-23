@@ -12,15 +12,16 @@
 BEGIN_NAMESPACE_ONETEN_AD
 
 HeaderBidLoader::HeaderBidLoader(std::shared_ptr<LoaderInterface> loader): MainLoader(loader) {
+    otlog_info << "";
     ad_source_service_ = std::make_shared<AdSourceService>();
 }
 
 void HeaderBidLoader::Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement) {
     super_class::Flow(ad_source, placement);
+    otlog_info << "";
     
     if (ad_source->GetType() == AdSource::Type::kS2S ||
         ad_source->GetType() == AdSource::Type::kC2S) {
-        printf("HeaderBidLoader Flow\n");
         
         ad_source_service_->Load(ad_source, [=](int categroy_type, ONETEN::Error* error) {
             if (!error) {
@@ -35,8 +36,7 @@ void HeaderBidLoader::Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<
 
 void HeaderBidLoader::End() {
     super_class::End();
-    
-    printf("HeaderBidLoader End\n");
+    otlog_info << "";
 };
 
 

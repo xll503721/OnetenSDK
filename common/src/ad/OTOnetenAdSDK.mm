@@ -35,7 +35,7 @@
     [self loadWithPlacementId:placementId userInfo:nil];
 }
 
-- (void)loadWithPlacementId:(NSString *)placementId userInfo:(NSDictionary<NSString *, NSString *> *)userInfo {
+- (BOOL)loadWithPlacementId:(NSString *)placementId userInfo:(NSDictionary<NSString *, NSString *> *)userInfo {
     std::map<std::string, std::string> user_info;
     for (int i = 0; i < userInfo.allKeys.count; i++) {
         NSString *key = userInfo.allKeys[i];
@@ -74,7 +74,9 @@ void AdSDKDelegate::LoadSucceed() {
     if (oc_prt_) {
         OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
         if (ad_sdk.loadCompletion) {
-            ad_sdk.loadCompletion(@"", nil, nil);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                ad_sdk.loadCompletion(@"", nil, nil);
+            });
         }
         
     }

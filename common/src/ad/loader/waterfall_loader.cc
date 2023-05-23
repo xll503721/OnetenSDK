@@ -12,23 +12,22 @@
 BEGIN_NAMESPACE_ONETEN_AD
 
 WaterfallLoader::WaterfallLoader(std::shared_ptr<LoaderInterface> loader):MainLoader(loader) {
-    
+    otlog_info << "";
 }
 
 void WaterfallLoader::Classify(std::shared_ptr<Placement> placement) {
     super_class::Classify(placement);
+    otlog_info << "";
     
     placement_ = placement;
-    
-    printf("WaterfallLoader Classify\n");
     
     StartFlow(0, placement_);
 }
 
 void WaterfallLoader::StartFlow(int32_t level, std::shared_ptr<Placement> placement) {
     super_class::StartFlow(level, placement);
+    otlog_info << "";
     
-    printf("WaterfallLoader StartFlow\n");
     InternalStartFlow(level, placement);
 }
 
@@ -48,8 +47,7 @@ void WaterfallLoader::InternalStartFlow(int32_t level, std::shared_ptr<Placement
 
 void WaterfallLoader::End() {
     super_class::End();
-    
-    printf("WaterfallLoader End\n");
+    otlog_info << "";
 };
 
 END_NAMESPACE_ONETEN_AD

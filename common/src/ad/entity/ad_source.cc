@@ -29,6 +29,7 @@ void AdSource::InitSDK() {
 }
 
 void AdSource::Load(std::shared_ptr<AdSourceDelegate> delegate) {
+    otlog_info << "";
     delegate_ = delegate;
     
     ONETEN::Platform::Var category_type = 1;

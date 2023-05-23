@@ -10,6 +10,7 @@
 #include <functional>
 #include <sstream>
 #include <unordered_map>
+#include <log/log.h>
 
 #ifndef __FILE_NAME__
 #define __FILE_NAME__ __FILE__

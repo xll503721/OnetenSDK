@@ -13,14 +13,15 @@
 BEGIN_NAMESPACE_ONETEN_AD
 
 NormalLoader::NormalLoader(std::shared_ptr<LoaderInterface> loader): MainLoader(loader) {
+    otlog_info << "";
     ad_source_service_ = std::make_shared<AdSourceService>();
 }
 
 void NormalLoader::Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement) {
     super_class::Flow(ad_source, placement);
+    otlog_info << "";
     
     if (ad_source->GetType() == AdSource::Type::kNormal) {
-        printf("NormalLoader Flow\n");
         ad_source_service_->Load(ad_source, [=](int32_t categroy_type, ONETEN::Error* error) {
             if (!error) {
                 ONETEN_AD::OnetenAdSDK::GetInstance().GetCacheLoader()->Save(ad_source, placement);
@@ -36,8 +37,7 @@ void NormalLoader::Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Pla
 
 void NormalLoader::End() {
     super_class::End();
-    
-    printf("NormalLoader End\n");
+    otlog_info << "";
 };
 
 

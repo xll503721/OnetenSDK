@@ -59,10 +59,11 @@ std::shared_ptr<LoaderInterface> OnetenAdSDK::GetRequestLoader() {
 }
 
 void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::string, std::string>& user_info, AdSDKDelegate& delegate) {
+    otlog_info << "";
     delegate_ = &delegate;
     user_info_ = user_info;
     
-    BASE_THREAD::ThreadPool::DefaultPool().Schedule([=](){
+//    BASE_THREAD::ThreadPool::DefaultPool().Schedule([=](){
         std::shared_ptr<MainLoader> start_main_loader = std::make_shared<MainLoader>(nullptr);
         std::shared_ptr<PlacementLoader> placement_loader = std::make_shared<PlacementLoader>(start_main_loader);
         
@@ -82,7 +83,7 @@ void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::str
         cache_loader_ = cache_loader;
         
         start_loader_->Start(placement_id);
-    });
+//    });
 }
 
 void OnetenAdSDK::EndAdLoad(const std::string& placement_id) {

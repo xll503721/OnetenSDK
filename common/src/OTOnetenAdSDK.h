@@ -24,7 +24,7 @@ typedef void (^LoadCompletion) (NSString *placementId, NSError *error, NSDiction
 /// @param appId appId description
 - (void)startWithAppId:(NSString *)appId;
 
-- (void)loadWithPlacementId:(NSString *)placementId userInfo:(nullable NSDictionary<NSString *, NSString *> *)userInfo;
+- (BOOL)loadWithPlacementId:(NSString *)placementId userInfo:(nullable NSDictionary<NSString *, NSString *> *)userInfo;
 - (void)loadWithPlacementId:(NSString *)placementId;
 
 - (OTAdViewController *)showWithPlacementId:(NSString *)placementId error:(NSError **)error;
