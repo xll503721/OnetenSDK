@@ -23,14 +23,14 @@ void HeaderBidLoader::Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<
     if (ad_source->GetType() == AdSource::Type::kS2S ||
         ad_source->GetType() == AdSource::Type::kC2S) {
         
-        ad_source_service_->Load(ad_source, [=](int categroy_type, ONETEN::Error* error) {
-            if (!error) {
-                std::string placement_id;
-                ONETEN_AD::OnetenAdSDK::GetInstance().EndAdLoad(placement_id);
-                return;
-            }
-            ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->StartFlow(ad_source->GetLevel() + 1, placement);
-        });
+//        ad_source_service_->Load(ad_source, [=](int categroy_type, ONETEN::Error* error) {
+//            if (!error) {
+//                std::string placement_id;
+//                ONETEN_AD::OnetenAdSDK::GetInstance().EndAdLoad(placement_id);
+//                return;
+//            }
+//            ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->StartFlow(ad_source->GetLevel() + 1, placement);
+//        });
     }
 }
 

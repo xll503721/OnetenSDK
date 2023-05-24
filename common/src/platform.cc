@@ -109,7 +109,31 @@ void* Platform::Perform(const std::string& file_name, const std::string& method_
     
     auto method_name_string = method_name;
     method_name_string[0] = tolower(method_name_string[0]);
-    return perform_fun_(platform_obj_, file_name_string, method_name_string, is_set_delegate, params_name_vector, params_vector);
+    std::string full_method_name_string = method_name_string;
+    if (isPlatform(PlatformType::kPlatformTypeiOS)) {
+        full_method_name_string += "With";
+        
+        std::vector<std::string> upper_params_name_word;
+        for (int i = 0; i < params_name_vector.size(); i++) {
+            auto params_name = params_name_vector[i];
+            std::vector<std::string> params_name_word = BASE_STRING::Split(params_name, "_");
+            
+            std::string full_params_name;
+            for (int j = 0; j < params_name_word.size(); j++) {
+                auto one_word = params_name_word[j];
+                if (i == 0 || j != 0) {
+                    one_word[0] = std::toupper(one_word[0]);
+                }
+                full_params_name += one_word;
+                if (j == params_name_word.size() - 1) {
+                    full_params_name += ":";
+                }
+            }
+            full_method_name_string += full_params_name;
+        }
+    }
+    
+    return perform_fun_(platform_obj_, file_name_string, full_method_name_string, is_set_delegate, params_name_vector, params_vector);
 }
 
 void* Platform::GetPlatformObj() {

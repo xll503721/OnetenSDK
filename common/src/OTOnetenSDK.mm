@@ -74,36 +74,10 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
             return nullptr;
         }
         
-        NSMutableArray<NSString *> *paramStrings = @[].mutableCopy;
-        NSString *methodName = [NSString stringWithUTF8String:method_name.c_str()];
-        for (int32_t i = 0; i < params_name.size(); i++) {
-            std::string name = params_name[i];
-            __block NSString *ocName = [NSString stringWithUTF8String:name.c_str()];
-            
-            NSArray<NSString *> *names = [ocName componentsSeparatedByString:@"_"];
-            if (names.count > 0) {
-                ocName = @"";
-                [names enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    NSString *firstWord = obj;
-                    if (idx != 0 || i == 0) {
-                        firstWord = [firstWord capitalizedString];
-                    }
-                    ocName = [ocName stringByAppendingString:firstWord];
-                }];
-            }
-            
-            [paramStrings addObject:ocName];
-        }
-        
-        methodName = [methodName stringByAppendingFormat:@"With%@:", paramStrings.firstObject];
-        [paramStrings removeObjectAtIndex:0];
-        if (paramStrings.count > 0) {
-            NSString *allParamsString = [paramStrings componentsJoinedByString:@":"];
-            methodName = [methodName stringByAppendingFormat:@"%@:", allParamsString];
-        }
+        NSString *methodString = [NSString stringWithUTF8String:method_name.c_str()];
         
         id target = (__bridge id)platform_obj;
-        SEL selector = NSSelectorFromString(methodName);
+        SEL selector = NSSelectorFromString(methodString);
         if (![target respondsToSelector:selector]) {
             //alert
             return nullptr;
