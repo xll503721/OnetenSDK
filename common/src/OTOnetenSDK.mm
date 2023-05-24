@@ -37,7 +37,7 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
 }
 
 - (void)_setPlatformInfo {
-    ONETEN::Platform::SetInitMehtod([=] (const std::string& file_name, const std::string& class_name, void* c_plus_plus_obj) {
+    BASE_PLATFORM::Platform::SetInitMehtod([=] (const std::string& file_name, const std::string& class_name, void* c_plus_plus_obj) {
         NSString *className = [NSString stringWithUTF8String:class_name.c_str()];
         id target = [self platformInitWithClazzName:className];
         
@@ -69,7 +69,7 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
         return (__bridge_retained void *)target;
     });
     
-    ONETEN::Platform::SetPerformMehtod([=] (const void* platform_obj, const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::vector<std::string>& params_name, const std::vector<ONETEN::Platform::Var*>& params) -> void* {
+    BASE_PLATFORM::Platform::SetPerformMehtod([=] (const void* platform_obj, const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::vector<std::string>& params_name, const std::vector<BASE_PLATFORM::Platform::Var*>& params) -> void* {
         if (!platform_obj) {
             return nullptr;
         }
@@ -90,16 +90,16 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
         
         __block int32_t argIndex = 2;
         NSMutableArray<id> *ocParmas = @[].mutableCopy;
-        for (ONETEN::Platform::Var* param: params) {
+        for (BASE_PLATFORM::Platform::Var* param: params) {
             auto type = param->GetType();
             switch (type) {
-                case ONETEN::Platform::Var::Type::kTypeInt: {
+                case BASE_PLATFORM::Platform::Var::Type::kTypeInt: {
                     int32_t var = param->GetDataInt32();
                     [invocation setArgument:&var atIndex:argIndex];
                 }
                     break;
-                case ONETEN::Platform::Var::Type::kTypeMap: {
-                    std::unordered_map<std::string, ONETEN::Platform::Var>* var_map = param->GetDataMap();
+                case BASE_PLATFORM::Platform::Var::Type::kTypeMap: {
+                    std::unordered_map<std::string, BASE_PLATFORM::Platform::Var>* var_map = param->GetDataMap();
                     NSMutableDictionary<NSString *, id> *var_dict = [NSMutableDictionary dictionary];
                     for (auto iter = var_map->begin(); iter != var_map->end(); ++iter) {
                         NSString *key = [NSString stringWithUTF8String:iter->first.c_str()];
@@ -107,7 +107,7 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
 
                         id ocValue = nil;
                         switch (value.GetType()) {
-                            case ONETEN::Platform::Var::Type::kTypeInt:
+                            case BASE_PLATFORM::Platform::Var::Type::kTypeInt:
                                 ocValue = [NSNumber numberWithInt:value.GetDataInt32()];
                                 break;
 

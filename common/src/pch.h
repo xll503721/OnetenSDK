@@ -11,6 +11,7 @@
 #include <sstream>
 #include <unordered_map>
 #include <log/log.h>
+#include <platform/platform.h>
 
 #ifndef __FILE_NAME__
 #define __FILE_NAME__ __FILE__
@@ -30,7 +31,5 @@ ModelFactory::GetInstance().SetModel(ModelFactory::ModelType::kModelType##name, 
 
 #define BEGIN_NAMESPACE(ns) namespace ns {
 #define END_NAMESPACE() }
-
-#include "platform.h"
 
 #endif /* ONETEN_AD_SDK_PCH_H */

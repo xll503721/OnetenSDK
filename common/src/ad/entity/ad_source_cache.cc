@@ -6,7 +6,6 @@
 //
 
 #include "ad_source_cache.h"
-#include <platform.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -33,7 +32,7 @@ AdSource::Category AdSourceCache::GetCategory() {
 }
 
 bool AdSourceCache::IsReady() {
-    ONETEN::Platform::Var type = 1;
+    BASE_PLATFORM::Platform::Var type = 1;
     
     PLATFORM_PERFORM(&type);
     return static_cast<bool>(GET_PLATFORM_PERFORM_RESULT);

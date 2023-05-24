@@ -10,7 +10,6 @@
 
 #include "entity_interface.h"
 #include "ad_source.h"
-#include <platform.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 

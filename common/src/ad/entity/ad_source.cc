@@ -32,16 +32,16 @@ void AdSource::Load(std::shared_ptr<AdSourceDelegate> delegate) {
     otlog_info << "";
     delegate_ = delegate;
     
-    ONETEN::Platform::Var category_type = 1;
-    ONETEN::Platform::Var ad_source_type = 2;
+    BASE_PLATFORM::Platform::Var category_type = 1;
+    BASE_PLATFORM::Platform::Var ad_source_type = 2;
     
-    std::unordered_map<std::string, ONETEN::Platform::Var> map;
+    std::unordered_map<std::string, BASE_PLATFORM::Platform::Var> map;
     
-    ONETEN::Platform::Var var(1);
+    BASE_PLATFORM::Platform::Var var(1);
     map["1"] = var;
     
-    std::vector<ONETEN::Platform::Var> vector;
-    ONETEN::Platform::Var user_info = &map;
+    std::vector<BASE_PLATFORM::Platform::Var> vector;
+    BASE_PLATFORM::Platform::Var user_info = &map;
     
     PLATFORM_PERFORM(&category_type, &ad_source_type, &user_info);
 }
@@ -70,7 +70,7 @@ std::string AdSource::Identifier() {
     
 }
 
-std::shared_ptr<ONETEN::Platform> AdSource::GetPlatform() {
+std::shared_ptr<BASE_PLATFORM::Platform> AdSource::GetPlatform() {
     return platform_;
 }
 

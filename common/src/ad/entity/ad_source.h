@@ -59,7 +59,7 @@ public:
     void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
     std::string Identifier() override;
     
-    std::shared_ptr<ONETEN::Platform> GetPlatform();
+    std::shared_ptr<BASE_PLATFORM::Platform> GetPlatform();
     
 private:
     Type type_;
