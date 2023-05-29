@@ -19,6 +19,7 @@
 
 #define REGISTER_MODEL(name) \
 std::shared_ptr<name> model_##name = std::make_shared<name>();\
+otlog_info << "register model:" << #name;\
 ModelFactory::GetInstance().SetModel(ModelFactory::ModelType::kModelType##name, model_##name);\
 
 #define ONETEN_AD oneten_ad

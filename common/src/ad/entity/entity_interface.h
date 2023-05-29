@@ -17,6 +17,8 @@ class EntityInterface: public ONETEN::Object {
     
 public:
     virtual std::string Identifier() = 0;
+protected:
+    std::string identifier_;
 };
 
 END_NAMESPACE_ONETEN_AD

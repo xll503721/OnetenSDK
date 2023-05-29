@@ -20,14 +20,13 @@ public:
     PlacementCache() = default;
     PlacementCache(std::shared_ptr<Placement> placement);
     
-    std::string Identifier() override;
-    
     static std::shared_ptr<PlacementCache> Convert(std::shared_ptr<Placement> placement);
     
     bool AddAdSourceCache(std::shared_ptr<AdSourceCache> ad_source_cache);
     
     using AdSourceCacheList = std::vector<std::shared_ptr<AdSourceCache>>;
     AdSourceCacheList GetAdSourceCaches();
+    std::string Identifier() override;
     
 private:
     

@@ -16,6 +16,7 @@ ModelFactory &ModelFactory::GetInstance() {
 
 std::shared_ptr<Model> ModelFactory::GetModel(ModelType type) {
     if (map_.find(type) == map_.end()) {
+        otlog_fault << "not found type:" << "" << "model, check model register";
         return nullptr;
     }
 

@@ -17,17 +17,26 @@ BEGIN_NAMESPACE_ONETEN_AD
 class Placement: public EntityInterface {
     
 public:
+    explicit Placement(const std::string& json_string);
+    
     std::vector<std::shared_ptr<AdSource>> GetRequestAdSources();
     
     std::string Identifier() override;
+    std::shared_ptr<BASE_JSON::Json> GetJson();
+    
+private:
+    void Parse(const std::string& json_string);
+    void ParseAdSource();
     
 private:
     std::vector<std::shared_ptr<AdSource>> requesting_ad_sources_;
     std::vector<std::shared_ptr<AdSource>> completed_ad_sources_;
     std::vector<std::shared_ptr<AdSource>> ad_sources_;
     std::vector<std::shared_ptr<AdSource>> s2s_ad_sources_;
+    std::vector<std::shared_ptr<AdSource>> c2s_ad_sources_;
     std::vector<std::shared_ptr<AdSource>> normal_ad_sources_;
     
+    std::shared_ptr<BASE_JSON::Json> json_;
 };
 
 END_NAMESPACE_ONETEN_AD

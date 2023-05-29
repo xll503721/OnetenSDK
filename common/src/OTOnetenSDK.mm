@@ -69,7 +69,7 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
         return (__bridge_retained void *)target;
     });
     
-    BASE_PLATFORM::Platform::SetPerformMehtod([=] (const void* platform_obj, const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::vector<std::string>& params_name, const std::vector<BASE_PLATFORM::Platform::Var*>& params) -> void* {
+    BASE_PLATFORM::Platform::SetPerformMehtod([=] (const void* platform_obj, const std::string& file_name, const std::string& method_name, bool is_set_delegate, const std::vector<std::string>& params_name, const std::vector<BASE_PLATFORM::Platform::Var*>& params) -> std::shared_ptr<BASE_PLATFORM::Platform::Var> {
         if (!platform_obj) {
             return nullptr;
         }
@@ -94,12 +94,12 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
             auto type = param->GetType();
             switch (type) {
                 case BASE_PLATFORM::Platform::Var::Type::kTypeInt: {
-                    int32_t var = param->GetDataInt32();
+                    int32_t var = param->GetInt32();
                     [invocation setArgument:&var atIndex:argIndex];
                 }
                     break;
                 case BASE_PLATFORM::Platform::Var::Type::kTypeMap: {
-                    std::unordered_map<std::string, BASE_PLATFORM::Platform::Var>* var_map = param->GetDataMap();
+                    std::unordered_map<std::string, BASE_PLATFORM::Platform::Var>* var_map = param->GetMap();
                     NSMutableDictionary<NSString *, id> *var_dict = [NSMutableDictionary dictionary];
                     for (auto iter = var_map->begin(); iter != var_map->end(); ++iter) {
                         NSString *key = [NSString stringWithUTF8String:iter->first.c_str()];
@@ -108,7 +108,7 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
                         id ocValue = nil;
                         switch (value.GetType()) {
                             case BASE_PLATFORM::Platform::Var::Type::kTypeInt:
-                                ocValue = [NSNumber numberWithInt:value.GetDataInt32()];
+                                ocValue = [NSNumber numberWithInt:value.GetInt32()];
                                 break;
 
                             default:
@@ -131,11 +131,20 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
         
         [invocation invoke];
         
+        std::shared_ptr<BASE_PLATFORM::Platform::Var> ret_var = nullptr;
         if (methodSignature.methodReturnLength) {
             __autoreleasing id returnValue = nil;
             [invocation getReturnValue:&returnValue];
-            return (__bridge void *)returnValue;
+            
+            if (object_getClass(returnValue) && [returnValue isKindOfClass:[NSString class]]) {
+                NSString *returnString = (NSString *)returnValue;
+                ret_var = std::make_shared<BASE_PLATFORM::Platform::Var>(returnString.UTF8String);
+            } else {
+                auto ret_var = std::make_shared<BASE_PLATFORM::Platform::Var>((__bridge void *)returnValue);
+            }
+            return ret_var;
         }
+        return ret_var;
     });
 }
 

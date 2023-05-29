@@ -11,9 +11,10 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-AdSource::AdSource() {
-    level_ = 0;
-    clazz_name_ = "TENSigmobSource";
+AdSource::AdSource(std::shared_ptr<BASE_JSON::Json> json):
+level_(0),
+json_(json) {
+    Parse();
 }
 
 AdSource::~AdSource() {
@@ -25,25 +26,23 @@ AdSource::Type AdSource::GetType() {
 }
 
 void AdSource::InitSDK() {
-    PLATFORM_INIT_DELEGATE(clazz_name_, shared_from_this())
+    
 }
 
 void AdSource::Load(std::shared_ptr<AdSourceDelegate> delegate) {
     otlog_info << "";
     delegate_ = delegate;
     
-    BASE_PLATFORM::Platform::Var category_type = 1;
-    BASE_PLATFORM::Platform::Var ad_source_type = 2;
+    auto category_type = PLATFORM_VAR_GENERATE(1);
+    auto ad_source_type = PLATFORM_VAR_GENERATE(2);
     
     std::unordered_map<std::string, BASE_PLATFORM::Platform::Var> map;
-    
-    BASE_PLATFORM::Platform::Var var(1);
-    map["1"] = var;
+    map["1"] = PLATFORM_VAR_GENERATE(1);
     
     std::vector<BASE_PLATFORM::Platform::Var> vector;
     BASE_PLATFORM::Platform::Var user_info = &map;
     
-    PLATFORM_PERFORM(&category_type, &ad_source_type, &user_info);
+    PLATFORM_INVOKE(&category_type, &ad_source_type, &user_info)
 }
 
 void AdSource::SetLevel(int32_t level) {
@@ -58,11 +57,16 @@ std::string AdSource::GetClassName() {
     return clazz_name_;
 }
 
-void AdSource::Parse(const std::string& json_string) {
-    json_.Parse(json_string.c_str(), json_string.size());
-    BASE_JSON::Json clazz_name = json_["class_name"];
+void AdSource::Parse() {
+    BASE_JSON::Json clazz_name = json_->operator[]("clazz_name");
     if (clazz_name.IsString()) {
         clazz_name_ = clazz_name.AsString();
+        SET_PLATFORM_GENERATE_NAME(clazz_name_)
+    }
+    
+    BASE_JSON::Json id = json_->operator[]("id");
+    if (id.IsString()) {
+        identifier_ = clazz_name.AsString();
     }
 }
 
@@ -70,8 +74,10 @@ std::string AdSource::Identifier() {
     
 }
 
-std::shared_ptr<BASE_PLATFORM::Platform> AdSource::GetPlatform() {
-    return platform_;
+#pragma mark - getter
+
+std::shared_ptr<BASE_JSON::Json> AdSource::GetJson() {
+    return json_;
 }
 
 #pragma mark - AdSourceDelegate

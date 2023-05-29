@@ -20,7 +20,8 @@ void PlacementLoader::Start(const std::string& placement_id) {
     super_class::Start(placement_id);
     otlog_info << "";
     
-    std::shared_ptr<Placement> placement = std::make_shared<Placement>();
+    std::string placement_json_string = "{\"id\": \"123456789\", \"ad_sources\": [{\"clazz_name\": \"TENSigmobSource\"}]}";
+    std::shared_ptr<Placement> placement = std::make_shared<Placement>(placement_json_string);
     ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->Classify(placement);
 }
 

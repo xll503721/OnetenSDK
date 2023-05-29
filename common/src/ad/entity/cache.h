@@ -8,22 +8,21 @@
 #ifndef ONETEN_AD_SDK_CACHE_H
 #define ONETEN_AD_SDK_CACHE_H
 
-#include "placement.h"
-#include "ad_source.h"
+#include "placement_cache.h"
+#include "ad_source_cache.h"
 #include "entity_interface.h"
 
 BEGIN_NAMESPACE_ONETEN_AD
 
+template<typename T>
 class Cache: public EntityInterface {
     
 public:
-    Cache(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement);
     
-    std::string Identifier() override;
+    virtual T get(const std::string& key) = 0;
     
-private:
-    std::shared_ptr<Placement> placement_;
-    std::shared_ptr<AdSource> ad_source_;
+protected:
+    std::shared_ptr<PlacementCache> placement_cache_;
 };
 
 END_NAMESPACE_ONETEN_AD

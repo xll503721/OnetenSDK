@@ -10,12 +10,13 @@
 BEGIN_NAMESPACE_ONETEN_AD
 
 AdSourceCache::AdSourceCache(std::shared_ptr<AdSource> ad_source):
-platform_(ad_source->GetPlatform()) {
+platform_(ad_source->GetPlatform()),
+json_(ad_source->GetJson()) {
     
 }
 
 std::string AdSourceCache::Identifier() {
-    return "2222";
+    return identifier_;
 }
 
 std::shared_ptr<AdSourceCache> AdSourceCache::Convert(std::shared_ptr<AdSource> ad_source) {
@@ -23,19 +24,18 @@ std::shared_ptr<AdSourceCache> AdSourceCache::Convert(std::shared_ptr<AdSource> 
     return ad_source_cache;
 }
 
-void* AdSourceCache::GetPlatformObj() {
-    return platform_->GetPlatformObj();
-}
-
 AdSource::Category AdSourceCache::GetCategory() {
     return AdSource::Category::kInterstitial;
 }
 
+void* AdSourceCache::GetPlatformObj() {
+    return platform_->GetPlatformObj();
+}
+
 bool AdSourceCache::IsReady() {
-    BASE_PLATFORM::Platform::Var type = 1;
-    
-    PLATFORM_PERFORM(&type);
-    return static_cast<bool>(GET_PLATFORM_PERFORM_RESULT);
+    auto type = PLATFORM_VAR_GENERATE(static_cast<int32_t>(GetCategory()));
+    PLATFORM_INVOKE(&type)
+    return static_cast<bool>(GET_PLATFORM_INVOKE_RESULT->GetBool());
 }
 
 END_NAMESPACE_ONETEN_AD

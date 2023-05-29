@@ -9,18 +9,17 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
+PlacementCache::PlacementCache(std::shared_ptr<Placement> placement) {
+    identifier_ = placement->GetJson()->operator[]("").AsString();
+}
+
 std::shared_ptr<PlacementCache> PlacementCache::Convert(std::shared_ptr<Placement> placement) {
-    std::shared_ptr<PlacementCache> placement_cache = std::make_shared<PlacementCache>();
-    
+    std::shared_ptr<PlacementCache> placement_cache = std::make_shared<PlacementCache>(placement);
     return placement_cache;
 }
 
 std::string PlacementCache::Identifier() {
-    return "qwertyuiop";
-}
-
-PlacementCache::PlacementCache(std::shared_ptr<Placement> placement) {
-    
+    return identifier_;
 }
 
 bool PlacementCache::AddAdSourceCache(std::shared_ptr<AdSourceCache> ad_source_cache) {
@@ -42,6 +41,12 @@ PlacementCache::AdSourceCacheList PlacementCache::GetAdSourceCaches() {
         }
     }
     return list;
+}
+
+#pragma mark - getter
+
+std::shared_ptr<BASE_JSON::Json> GetJson() {
+    
 }
 
 END_NAMESPACE_ONETEN_AD

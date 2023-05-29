@@ -43,7 +43,7 @@ public:
         return std::static_pointer_cast<AdSource>(ONETEN::Object::shared_from_this());
     }
     
-    AdSource();
+    AdSource(std::shared_ptr<BASE_JSON::Json> json);
     virtual ~AdSource();
     Type GetType();
     
@@ -52,21 +52,22 @@ public:
     int32_t GetLevel();
     
     std::string GetClassName();
-    void Parse(const std::string& json_string);
+    void Parse();
     
     void InitSDK();
     
+    std::shared_ptr<BASE_JSON::Json> GetJson();
+    
     void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
     std::string Identifier() override;
-    
-    std::shared_ptr<BASE_PLATFORM::Platform> GetPlatform();
     
 private:
     Type type_;
     int32_t level_;
     std::string clazz_name_;
-    BASE_JSON::Json json_;
-    PLATFORM_DECLARE
+    std::shared_ptr<BASE_JSON::Json> json_;
+    
+    PLATFORM_GENERATE()
     
 public:
     std::shared_ptr<AdSourceDelegate> delegate_;

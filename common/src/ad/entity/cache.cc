@@ -9,15 +9,5 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-Cache::Cache(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement):
-placement_(placement),
-ad_source_(ad_source) {
-    
-}
-
-
-std::string Cache::Identifier() {
-    return placement_->Identifier() + ad_source_->Identifier();
-}
 
 END_NAMESPACE_ONETEN_AD

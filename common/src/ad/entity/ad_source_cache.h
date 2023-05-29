@@ -10,6 +10,7 @@
 
 #include "entity_interface.h"
 #include "ad_source.h"
+#include <json/json.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -22,15 +23,13 @@ public:
     static std::shared_ptr<AdSourceCache> Convert(std::shared_ptr<AdSource> ad_source);
     
     std::string Identifier() override;
-    
+    AdSource::Category GetCategory();
+    bool IsReady();
     void* GetPlatformObj();
     
-    AdSource::Category GetCategory();
-    
-    bool IsReady();
-    
 private:
-    PLATFORM_DECLARE
+    PLATFORM_GENERATE()
+    std::shared_ptr<BASE_JSON::Json> json_;
 };
 
 END_NAMESPACE_ONETEN_AD
