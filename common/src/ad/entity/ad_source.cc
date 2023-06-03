@@ -8,6 +8,7 @@
 #include "ad_source.h"
 #include <ad/oneten_ad_sdk.h>
 #include <string/string.h>
+#include <thread/thread_pool.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -33,16 +34,17 @@ void AdSource::Load(std::shared_ptr<AdSourceDelegate> delegate) {
     otlog_info << "";
     delegate_ = delegate;
     
-    auto category_type = PLATFORM_VAR_GENERATE(1);
-    auto ad_source_type = PLATFORM_VAR_GENERATE(2);
-    
-    std::unordered_map<std::string, BASE_PLATFORM::Platform::Var> map;
-    map["1"] = PLATFORM_VAR_GENERATE(1);
-    
-    std::vector<BASE_PLATFORM::Platform::Var> vector;
-    BASE_PLATFORM::Platform::Var user_info = &map;
-    
-    PLATFORM_INVOKE(&category_type, &ad_source_type, &user_info)
+    BASE_THREAD::ThreadPool::DefaultPool().GetMain()->Post([=] () {
+        auto category_type = PLATFORM_VAR_GENERATE(1);
+        auto ad_source_type = PLATFORM_VAR_GENERATE(2);
+        
+        std::unordered_map<std::string, BASE_PLATFORM::Platform::Var> map;
+        map["1"] = PLATFORM_VAR_GENERATE(1);
+        
+        std::vector<BASE_PLATFORM::Platform::Var> vector;
+        BASE_PLATFORM::Platform::Var user_info = &map;
+        PLATFORM_INVOKE(&category_type, &ad_source_type, &user_info)
+    });
 }
 
 void AdSource::SetLevel(int32_t level) {

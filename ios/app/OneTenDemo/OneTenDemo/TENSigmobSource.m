@@ -25,6 +25,10 @@
 
 @implementation TENSigmobSource
 
+- (void)dealloc {
+    
+}
+
 - (instancetype)init
 {
     self = [super init];
@@ -109,7 +113,7 @@
     WindAdRequest *request = [WindAdRequest request];
     request.userId = @"user_id";
     request.placementId = FullScreenVideoAdPlacementId;
-    
+
     WindIntersititialAd *intersititialAd = [[WindIntersititialAd alloc] initWithRequest:request];
     intersititialAd.delegate = self;
     if (type == OTAdSourceTypeS2S) {

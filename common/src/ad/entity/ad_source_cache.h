@@ -25,7 +25,6 @@ public:
     std::string Identifier() override;
     AdSource::Category GetCategory();
     bool IsReady();
-    void* GetPlatformObj();
     
 private:
     PLATFORM_GENERATE()

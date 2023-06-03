@@ -13,6 +13,10 @@
 
 @property ONETEN_AD::AdSDKDelegate sdk_delegate;
 
+/// init app id
+/// @param appId appId description
+- (void)startWithAppId:(NSString *)appId;
+
 @end
 
 @implementation OTOnetenAdSDK
@@ -29,6 +33,8 @@
 - (void)startWithAppId:(NSString *)appId {
     _appId = appId;
     ONETEN_AD::OnetenAdSDK::GetInstance().Register(appId.UTF8String);
+    
+    [self loadWithPlacementId:@"" userInfo:nil];
 }
 
 - (void)loadWithPlacementId:(NSString *)placementId {
@@ -45,6 +51,11 @@
         std::string c_value(value.UTF8String);
         user_info[c_key] = c_value;
     }
+    
+    if (self.stageCallBack) {
+        self.stageCallBack(OTOnetenAdSDKStageTypeStart, placementId, nil, userInfo);
+    }
+    
     ONETEN_AD::OnetenAdSDK::GetInstance().StartAdLoad(placementId.UTF8String, user_info, _sdk_delegate);
 }
 
@@ -73,9 +84,9 @@ void AdSDKDelegate::SetOCPrt(void *prt) {
 void AdSDKDelegate::LoadSucceed() {
     if (oc_prt_) {
         OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
-        if (ad_sdk.loadCompletion) {
+        if (ad_sdk.stageCallBack) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                ad_sdk.loadCompletion(@"", nil, nil);
+                ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeLoaded, @"", nil, nil);
             });
         }
         

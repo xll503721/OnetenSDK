@@ -136,12 +136,7 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
             __autoreleasing id returnValue = nil;
             [invocation getReturnValue:&returnValue];
             
-            if (object_getClass(returnValue) && [returnValue isKindOfClass:[NSString class]]) {
-                NSString *returnString = (NSString *)returnValue;
-                ret_var = std::make_shared<BASE_PLATFORM::Platform::Var>(returnString.UTF8String);
-            } else {
-                auto ret_var = std::make_shared<BASE_PLATFORM::Platform::Var>((__bridge void *)returnValue);
-            }
+            auto ret_var = std::make_shared<BASE_PLATFORM::Platform::Var>((__bridge void *)returnValue);
             return ret_var;
         }
         return ret_var;
@@ -185,7 +180,10 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
 //    ONETEN::Platform::init_fun_ = nullptr;
     switch (type) {
         case OTOneTenSDKTypeAd: {
-            [self.adSDK startWithAppId:appId];
+            SEL selector = NSSelectorFromString(@"startWithAppId:");
+            if ([self.adSDK respondsToSelector:selector]) {
+                [self.adSDK performSelector:selector withObject:appId];
+            }
         }
             break;
             

@@ -27,11 +27,11 @@
     // Do any additional setup after loading the view.
     [[OTOnetenSDK defalutSDK] initAppId:@"111" type:OTOneTenSDKTypeAd];
     
-    [[OTOnetenSDK defalutSDK].adSDK setLoadCompletion:^(NSString * _Nonnull placementId, NSError * _Nonnull error, NSDictionary<NSString *,id> * _Nonnull userInfo) {
-        [self showAdViewController];
+    [[OTOnetenSDK defalutSDK].adSDK setStageCallBack:^(OTOnetenAdSDKStageType stageType, NSString * _Nonnull placementId, NSError * _Nullable error, NSDictionary<NSString *,id> * _Nullable userInfo) {
+        if (stageType == OTOnetenAdSDKStageTypeLoaded) {
+            [self showAdViewController];
+        }
     }];
-    
-    [[OTOnetenSDK defalutSDK].adSDK loadWithPlacementId:@"" userInfo:@{}];
 }
 
 - (void)showAdViewController {

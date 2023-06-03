@@ -13,16 +13,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^LoadCompletion) (NSString *placementId, NSError *error, NSDictionary<NSString *, id> *userInfo);
+typedef NS_ENUM(NSUInteger, OTOnetenAdSDKStageType) {
+    OTOnetenAdSDKStageTypeStart,
+    OTOnetenAdSDKStageTypeLoaded,
+    OTOnetenAdSDKStageTypeLoadFailed,
+};
+
+typedef void (^StageCallBack) (OTOnetenAdSDKStageType stageType, NSString *placementId, NSError * _Nullable error, NSDictionary<NSString *, id> * _Nullable userInfo);
 
 @interface OTOnetenAdSDK : NSObject
 
 @property (nonatomic, readonly) NSString *appId;
-@property (nonatomic, strong) LoadCompletion loadCompletion;
-
-/// init app id
-/// @param appId appId description
-- (void)startWithAppId:(NSString *)appId;
+@property (nonatomic, strong) StageCallBack stageCallBack;
 
 - (BOOL)loadWithPlacementId:(NSString *)placementId userInfo:(nullable NSDictionary<NSString *, NSString *> *)userInfo;
 - (void)loadWithPlacementId:(NSString *)placementId;

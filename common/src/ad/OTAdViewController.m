@@ -6,6 +6,7 @@
 //
 
 #import "OTAdViewController.h"
+#import "OTOnetenSDK.h"
 
 @interface OTAdView : UIView
 
@@ -52,6 +53,8 @@
         self.isShowing = !self.isShowing;
         if ([self.adSource respondsToSelector:@selector(showWithCategroyType:rootViewController:)]) {
             [self.adSource showWithCategroyType:self.category rootViewController:self];
+            
+//            [[OTOnetenSDK defalutSDK].adSDK loadWithPlacementId:@"" userInfo:nil];
         }
     }
 }

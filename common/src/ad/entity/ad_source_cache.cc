@@ -28,14 +28,10 @@ AdSource::Category AdSourceCache::GetCategory() {
     return AdSource::Category::kInterstitial;
 }
 
-void* AdSourceCache::GetPlatformObj() {
-    return platform_->GetPlatformObj();
-}
-
 bool AdSourceCache::IsReady() {
     auto type = PLATFORM_VAR_GENERATE(static_cast<int32_t>(GetCategory()));
     PLATFORM_INVOKE(&type)
-    return static_cast<bool>(GET_PLATFORM_INVOKE_RESULT->GetBool());
+    return static_cast<bool>(GET_PLATFORM_INVOKE_RESULT);
 }
 
 END_NAMESPACE_ONETEN_AD
