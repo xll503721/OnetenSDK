@@ -13,6 +13,9 @@ class AdSDKDelegate {
     
 public:
     void LoadSucceed();
+    void ShowSucceed();
+    void ClickSucceed();
+    void CloseSucceed();
     void SetOCPrt(void* prt);
     
 private:

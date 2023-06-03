@@ -17,6 +17,11 @@ typedef NS_ENUM(NSUInteger, OTOnetenAdSDKStageType) {
     OTOnetenAdSDKStageTypeStart,
     OTOnetenAdSDKStageTypeLoaded,
     OTOnetenAdSDKStageTypeLoadFailed,
+    
+    OTOnetenAdSDKStageTypeShow,
+    OTOnetenAdSDKStageTypeDismiss,
+    
+    OTOnetenAdSDKStageTypeClick,
 };
 
 typedef void (^StageCallBack) (OTOnetenAdSDKStageType stageType, NSString *placementId, NSError * _Nullable error, NSDictionary<NSString *, id> * _Nullable userInfo);

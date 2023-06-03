@@ -34,8 +34,8 @@ void AdSource::Load(std::shared_ptr<AdSourceDelegate> delegate) {
     otlog_info << "";
     delegate_ = delegate;
     
-    BASE_THREAD::ThreadPool::DefaultPool().GetMain()->Post([=] () {
-        auto category_type = PLATFORM_VAR_GENERATE(1);
+    BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=] () {
+        auto category_type = PLATFORM_VAR_GENERATE(static_cast<int32_t>(category_));
         auto ad_source_type = PLATFORM_VAR_GENERATE(2);
         
         std::unordered_map<std::string, BASE_PLATFORM::Platform::Var> map;
@@ -68,7 +68,12 @@ void AdSource::Parse() {
     
     BASE_JSON::Json id = json_->operator[]("id");
     if (id.IsString()) {
-        identifier_ = clazz_name.AsString();
+        identifier_ = id.AsString();
+    }
+    
+    BASE_JSON::Json category = json_->operator[]("category");
+    if (category.IsInteger()) {
+        category_ = static_cast<Category>(category.AsInteger());
     }
 }
 
@@ -84,8 +89,54 @@ std::shared_ptr<BASE_JSON::Json> AdSource::GetJson() {
 
 #pragma mark - AdSourceDelegate
 void AdSource::LoadCompletion(int32_t categroy_type, ONETEN::Error* error) {
+    if (error) {
+        otlog_info << "failed";
+    } else {
+        otlog_info << "success";
+    }
     if (delegate_) {
-        delegate_->LoadCompletion(categroy_type, error);
+        BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kOther, [=] () {
+            delegate_->LoadCompletion(categroy_type, error);
+        });
+    }
+}
+
+void AdSource::ShowCompletion(int32_t categroy_type, ONETEN::Error* error) {
+    if (error) {
+        otlog_info << "failed";
+    } else {
+        otlog_info << "success";
+    }
+    if (delegate_) {
+        BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kOther, [=] () {
+            delegate_->ShowCompletion(categroy_type, error);
+        });
+    }
+}
+
+void AdSource::CloseCompletion(int32_t categroy_type, ONETEN::Error* error) {
+    if (error) {
+        otlog_info << "failed";
+    } else {
+        otlog_info << "success";
+    }
+    if (delegate_) {
+        BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kOther, [=] () {
+            delegate_->CloseCompletion(categroy_type, error);
+        });
+    }
+}
+
+void AdSource::ClickCompletion(int32_t categroy_type, ONETEN::Error* error) {
+    if (error) {
+        otlog_info << "failed";
+    } else {
+        otlog_info << "success";
+    }
+    if (delegate_) {
+        BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kOther, [=] () {
+            delegate_->ClickCompletion(categroy_type, error);
+        });
     }
 }
 

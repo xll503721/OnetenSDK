@@ -14,12 +14,12 @@
 		4B0E03F029A248E800392BEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B0E03EF29A248E800392BEE /* Assets.xcassets */; };
 		4B0E03F329A248E800392BEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B0E03F129A248E800392BEE /* LaunchScreen.storyboard */; };
 		4B0E03F629A248E800392BEE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0E03F529A248E800392BEE /* main.m */; };
-		4B11307629BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; };
-		4B11307729BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4B1552D029D1533B0068842B /* TENSigmobSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1552CF29D1533B0068842B /* TENSigmobSource.m */; };
-		4B2CA11D29F3D409009C66B3 /* Base.framework/Base in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; };
-		4B2CA11E29F3D409009C66B3 /* Base.framework/Base in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4BB47CCD29AB017600BA2B27 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BB47CCC29AB016B00BA2B27 /* libc++.tbd */; };
+		4BD72FCF2A1E4C8500FA2CEE /* Base.framework/Base in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; };
+		4BD72FD02A1E4C8500FA2CEE /* Base.framework/Base in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4BD72FD22A1E4C9200FA2CEE /* OneTenSDK.framework/OneTenSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; };
+		4BD72FD32A1E4C9200FA2CEE /* OneTenSDK.framework/OneTenSDK in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FDFCB5069C6B11D53C677722 /* Pods_OneTenDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFA66410979C7A440551F35D /* Pods_OneTenDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +115,27 @@
 			remoteGlobalIDString = A8239DB2AE974A31B3C34C7D;
 			remoteInfo = OneTenSDK;
 		};
+		4BD72FC92A1E4C4B00FA2CEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6C0B910290BD40449A5B3417;
+			remoteInfo = base_device;
+		};
+		4BD72FCB2A1E4C4B00FA2CEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A03EDFA01B844BA18F176CD0;
+			remoteInfo = base_log;
+		};
+		4BD72FCD2A1E4C4B00FA2CEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F71E3811471C4360B8C54CF0;
+			remoteInfo = base_platform;
+		};
 		4BD933E629D03C7E00E4AA07 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
@@ -125,14 +146,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		4B11307829BF50AF00214261 /* Embed Frameworks */ = {
+		4BD72FD12A1E4C8500FA2CEE /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4B2CA11E29F3D409009C66B3 /* Base.framework/Base in Embed Frameworks */,
-				4B11307729BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Embed Frameworks */,
+				4BD72FD32A1E4C9200FA2CEE /* OneTenSDK.framework/OneTenSDK in Embed Frameworks */,
+				4BD72FD02A1E4C8500FA2CEE /* Base.framework/Base in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,9 +188,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B2CA11D29F3D409009C66B3 /* Base.framework/Base in Frameworks */,
-				4B11307629BF50AF00214261 /* OneTenSDK.framework/OneTenSDK in Frameworks */,
+				4BD72FCF2A1E4C8500FA2CEE /* Base.framework/Base in Frameworks */,
 				4BB47CCD29AB017600BA2B27 /* libc++.tbd in Frameworks */,
+				4BD72FD22A1E4C9200FA2CEE /* OneTenSDK.framework/OneTenSDK in Frameworks */,
 				FDFCB5069C6B11D53C677722 /* Pods_OneTenDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,19 +220,19 @@
 		4B0E03E229A248E600392BEE /* OneTenDemo */ = {
 			isa = PBXGroup;
 			children = (
-				4B1552C829D1533B0068842B /* TENSigmobSource.h */,
-				4B1552CF29D1533B0068842B /* TENSigmobSource.m */,
 				4B0E03E329A248E600392BEE /* AppDelegate.h */,
 				4B0E03E429A248E600392BEE /* AppDelegate.m */,
+				4B0E03EF29A248E800392BEE /* Assets.xcassets */,
+				4B0E03F429A248E800392BEE /* Info.plist */,
+				4B0E03F129A248E800392BEE /* LaunchScreen.storyboard */,
+				4B0E03F529A248E800392BEE /* main.m */,
+				4B0E03EC29A248E600392BEE /* Main.storyboard */,
 				4B0E03E629A248E600392BEE /* SceneDelegate.h */,
 				4B0E03E729A248E600392BEE /* SceneDelegate.m */,
+				4B1552C829D1533B0068842B /* TENSigmobSource.h */,
+				4B1552CF29D1533B0068842B /* TENSigmobSource.m */,
 				4B0E03E929A248E600392BEE /* ViewController.h */,
 				4B0E03EA29A248E600392BEE /* ViewController.m */,
-				4B0E03EC29A248E600392BEE /* Main.storyboard */,
-				4B0E03EF29A248E800392BEE /* Assets.xcassets */,
-				4B0E03F129A248E800392BEE /* LaunchScreen.storyboard */,
-				4B0E03F429A248E800392BEE /* Info.plist */,
-				4B0E03F529A248E800392BEE /* main.m */,
 			);
 			path = OneTenDemo;
 			sourceTree = "<group>";
@@ -221,8 +242,11 @@
 			children = (
 				4B2CA11829F3D409009C66B3 /* Base.framework/Base */,
 				4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */,
+				4BD72FCA2A1E4C4B00FA2CEE /* libbase_device.a */,
 				4BBE4C662A15F24B0063B715 /* libbase_json.a */,
+				4BD72FCC2A1E4C4B00FA2CEE /* libbase_log.a */,
 				4BBE4C682A15F24B0063B715 /* libbase_mmap.a */,
+				4BD72FCE2A1E4C4B00FA2CEE /* libbase_platform.a */,
 				4BBE4C6A2A15F24B0063B715 /* libbase_storage_memory.a */,
 				4B2CA11A29F3D409009C66B3 /* libbase_string.a */,
 				4BBE4C6C2A15F24B0063B715 /* libbase_thread.a */,
@@ -266,8 +290,7 @@
 				4B0E03DC29A248E600392BEE /* Sources */,
 				4B0E03DD29A248E600392BEE /* Frameworks */,
 				4B0E03DE29A248E600392BEE /* Resources */,
-				4B11307829BF50AF00214261 /* Embed Frameworks */,
-				BDA8ADEAEDAD2F53AC505856 /* [CP] Embed Pods Frameworks */,
+				4BD72FD12A1E4C8500FA2CEE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -404,6 +427,27 @@
 			remoteRef = 4BBE4C6D2A15F24B0063B715 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		4BD72FCA2A1E4C4B00FA2CEE /* libbase_device.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_device.a;
+			remoteRef = 4BD72FC92A1E4C4B00FA2CEE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BD72FCC2A1E4C4B00FA2CEE /* libbase_log.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_log.a;
+			remoteRef = 4BD72FCB2A1E4C4B00FA2CEE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BD72FCE2A1E4C4B00FA2CEE /* libbase_platform.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_platform.a;
+			remoteRef = 4BD72FCD2A1E4C4B00FA2CEE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4BD933E729D03C7E00E4AA07 /* liboneten_ad_service.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -427,23 +471,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BDA8ADEAEDAD2F53AC505856 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C960C833EE1408C65EE7571D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

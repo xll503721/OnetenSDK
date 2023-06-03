@@ -59,11 +59,11 @@ std::shared_ptr<LoaderInterface> OnetenAdSDK::GetRequestLoader() {
 }
 
 void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::string, std::string>& user_info, AdSDKDelegate& delegate) {
-    otlog_info << "";
     delegate_ = &delegate;
     user_info_ = user_info;
     
     BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kOther, [=](){
+        otlog_info << "placement id:" << placement_id;
         std::shared_ptr<MainLoader> start_main_loader = std::make_shared<MainLoader>(nullptr);
         std::shared_ptr<PlacementLoader> placement_loader = std::make_shared<PlacementLoader>(start_main_loader);
         
@@ -97,9 +97,29 @@ void OnetenAdSDK::EndAdLoad(const std::string& placement_id) {
     }
 }
 
+void OnetenAdSDK::DidShowAd(const std::string& placement_id) {
+    if (delegate_) {
+        delegate_->ShowSucceed();
+    }
+}
+
+void OnetenAdSDK::DidCloseAd(const std::string& placement_id) {
+    if (delegate_) {
+        delegate_->CloseSucceed();
+    }
+}
+
+void OnetenAdSDK::DidClickAd(const std::string& placement_id) {
+    if (delegate_) {
+        delegate_->ClickSucceed();
+    }
+}
+
 bool OnetenAdSDK::IsReady(const std::string& placement_id) {
     auto cache = cache_service_->GetHighestPrice(placement_id);
-    return cache != nullptr && cache->IsReady();
+    bool isReady = (cache != nullptr && cache->IsReady());
+    otlog_info << "placement id:" << placement_id << ", is ready:" << isReady;
+    return isReady;
 }
 
 std::shared_ptr<AdSourceCache> OnetenAdSDK::ShowAd(const std::string& placement_id, AdSDKDelegate& delegate) {

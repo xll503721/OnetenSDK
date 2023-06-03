@@ -23,7 +23,6 @@ public:
     static OnetenAdSDK &GetInstance();
     void Register(const std::string& app_id);
     void StartAdLoad(const std::string& placement_id, std::map<std::string, std::string>& user_info, AdSDKDelegate& delegate);
-    void EndAdLoad(const std::string& placement_id);
     bool IsReady(const std::string& placement_id);
     std::shared_ptr<AdSourceCache> ShowAd(const std::string& placement_id, AdSDKDelegate& delegate);
     
@@ -31,6 +30,11 @@ public:
     std::shared_ptr<LoaderInterface> GetWaterfallLoader();
     std::shared_ptr<LoaderInterface> GetRequestLoader();
     std::shared_ptr<LoaderInterface> GetCacheLoader();
+    
+    void EndAdLoad(const std::string& placement_id);
+    void DidShowAd(const std::string& placement_id);
+    void DidCloseAd(const std::string& placement_id);
+    void DidClickAd(const std::string& placement_id);
     
 private:
     OnetenAdSDK();

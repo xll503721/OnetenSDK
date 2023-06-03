@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithAdSource:(id<OTAdSourceProtocol>)adSource category:(OTAdSourceCategroyType)category;
 
+@property (nonatomic, assign) CGRect frame;
+
 @end
 
 NS_ASSUME_NONNULL_END

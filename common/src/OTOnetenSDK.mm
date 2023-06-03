@@ -175,9 +175,6 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
 }
 
 - (void)initAppId:(NSString *)appId type:(OTOneTenSDKType)type {
-//    bool isiOS = ONETEN::Platform::isPlatform(ONETEN::Platform::PlatformType::kPlatformTypeiOS);
-    
-//    ONETEN::Platform::init_fun_ = nullptr;
     switch (type) {
         case OTOneTenSDKTypeAd: {
             SEL selector = NSSelectorFromString(@"startWithAppId:");

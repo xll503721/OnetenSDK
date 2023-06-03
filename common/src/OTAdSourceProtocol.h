@@ -39,6 +39,17 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 - (void)adWillLoadWithCategroyType:(OTAdSourceCategroyType)categroyType adSourceObject:(id)adSourceObject;
 - (void)adDidLoadWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error;
 
+- (void)adWillShowWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error;
+- (void)adDidShowWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error;
+
+- (void)adWillDismissWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error;
+- (void)adDidDismissWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error;
+
+- (void)adWillCloseWithCategroyType:(OTAdSourceCategroyType)categroyType;
+- (void)adDidCloseWithCategroyType:(OTAdSourceCategroyType)categroyType;
+
+- (void)adDidClickWithCategroyType:(OTAdSourceCategroyType)categroyType;
+
 @property (nonatomic, readonly) id adSourceObject;
 
 @end
@@ -48,6 +59,8 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 @protocol OTAdSourceProtocol <NSObject>
 
 @required
+
+@property (nonatomic, strong) id<OTAdSourceDelegate> delegate;
 
 - (BOOL)isReadyWithType:(OTAdSourceCategroyType)categroyType;
 - (void)showWithCategroyType:(OTAdSourceCategroyType)categroyType rootViewController:(UIViewController *)viewController;

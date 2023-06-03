@@ -27,8 +27,13 @@ public:
     bool IsReady();
     
 private:
+    void Parse();
+    
+private:
     PLATFORM_GENERATE()
     std::shared_ptr<BASE_JSON::Json> json_;
+    
+    AdSource::Category category_;
 };
 
 END_NAMESPACE_ONETEN_AD

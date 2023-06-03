@@ -12,7 +12,7 @@ BEGIN_NAMESPACE_ONETEN_AD
 AdSourceCache::AdSourceCache(std::shared_ptr<AdSource> ad_source):
 platform_(ad_source->GetPlatform()),
 json_(ad_source->GetJson()) {
-    
+    Parse();
 }
 
 std::string AdSourceCache::Identifier() {
@@ -25,7 +25,20 @@ std::shared_ptr<AdSourceCache> AdSourceCache::Convert(std::shared_ptr<AdSource> 
 }
 
 AdSource::Category AdSourceCache::GetCategory() {
-    return AdSource::Category::kInterstitial;
+    return category_;
+}
+
+void AdSourceCache::Parse() {
+    BASE_JSON::Json id = json_->operator[]("id");
+    if (id.IsString()) {
+        identifier_ = id.AsString();
+    }
+    
+    BASE_JSON::Json category = json_->operator[]("category");
+    if (category.IsInteger()) {
+        category_ = static_cast<AdSource::Category>(category.AsInteger());
+    }
+    json_ = nullptr;
 }
 
 bool AdSourceCache::IsReady() {

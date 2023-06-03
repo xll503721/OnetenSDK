@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TENSigmobSource : NSObject
 
+@property (nonatomic, strong) id<OTAdSourceDelegate> delegate;
+
 @end
 
 NS_ASSUME_NONNULL_END

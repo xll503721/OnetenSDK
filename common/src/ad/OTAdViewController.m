@@ -28,6 +28,10 @@
 
 @implementation OTAdViewController
 
+- (void)dealloc {
+    
+}
+
 - (instancetype)initWithAdSource:(id<OTAdSourceProtocol>)adSource category:(OTAdSourceCategroyType)category
 {
     self = [super init];
@@ -51,10 +55,15 @@
     
     if (!self.isShowing) {
         self.isShowing = !self.isShowing;
+        
+        if (self.category == OTAdSourceCategroyTypeSplash && [self.adSource.delegate.adSourceObject isKindOfClass:[UIView class]]) {
+            UIView *splashView = (UIView *)self.adSource.delegate.adSourceObject;
+            splashView.frame = self.frame;
+            [self.view addSubview:splashView];
+        }
+        
         if ([self.adSource respondsToSelector:@selector(showWithCategroyType:rootViewController:)]) {
             [self.adSource showWithCategroyType:self.category rootViewController:self];
-            
-//            [[OTOnetenSDK defalutSDK].adSDK loadWithPlacementId:@"" userInfo:nil];
         }
     }
 }

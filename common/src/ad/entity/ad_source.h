@@ -19,6 +19,9 @@ class AdSourceDelegate {
     
 public:
     virtual void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) = 0;
+    virtual void ShowCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) = 0;
+    virtual void CloseCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) = 0;
+    virtual void ClickCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) = 0;
 };
 
 class AdSource: public AdSourceDelegate, public EntityInterface {
@@ -57,12 +60,17 @@ public:
     void InitSDK();
     
     std::shared_ptr<BASE_JSON::Json> GetJson();
-    
-    void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
+
     std::string Identifier() override;
+    void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
+    void ShowCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
+    void CloseCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
+    void ClickCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
     
 private:
     Type type_;
+    Category category_;
+    
     int32_t level_;
     std::string clazz_name_;
     std::shared_ptr<BASE_JSON::Json> json_;

@@ -32,4 +32,59 @@
     }
 }
 
+- (void)adWillShowWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error {
+    
+}
+
+- (void)adDidShowWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error {
+    ONETEN_AD::AdSource* ad_source = static_cast<ONETEN_AD::AdSource *>(_rawPrt);
+    if (ad_source) {
+        std::map<std::string, std::string> user_info;
+        ONETEN::Error *c_error = nullptr;
+        if (error) {
+            ONETEN::Error cc_error(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
+            c_error = &cc_error;
+        }
+        ad_source->ShowCompletion((int32_t)categroyType, c_error);
+    }
+}
+
+- (void)adWillDismissWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error {
+    ONETEN_AD::AdSource* ad_source = static_cast<ONETEN_AD::AdSource *>(_rawPrt);
+    if (ad_source) {
+        std::map<std::string, std::string> user_info;
+        ONETEN::Error *c_error = nullptr;
+        if (error) {
+            ONETEN::Error cc_error(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
+            c_error = &cc_error;
+        }
+        ad_source->CloseCompletion((int32_t)categroyType, c_error);
+    }
+}
+
+- (void)adDidDismissWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error {
+    ONETEN_AD::AdSource* ad_source = static_cast<ONETEN_AD::AdSource *>(_rawPrt);
+    if (ad_source) {
+        std::map<std::string, std::string> user_info;
+        ONETEN::Error *c_error = nullptr;
+        if (error) {
+            ONETEN::Error cc_error(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
+            c_error = &cc_error;
+        }
+        ad_source->CloseCompletion((int32_t)categroyType, c_error);
+    }
+}
+
+- (void)adWillCloseWithCategroyType:(OTAdSourceCategroyType)categroyType {
+    
+}
+
+- (void)adDidCloseWithCategroyType:(OTAdSourceCategroyType)categroyType {
+    
+}
+
+- (void)adDidClickWithCategroyType:(OTAdSourceCategroyType)categroyType {
+    
+}
+
 @end

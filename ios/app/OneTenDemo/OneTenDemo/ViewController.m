@@ -16,7 +16,7 @@
 
 @interface ViewController ()<WindIntersititialAdDelegate>
 
-@property (nonatomic, strong) WindIntersititialAd *intersititialAd;
+@property (nonatomic, strong) OTAdViewController *adViewController;
 
 @end
 
@@ -31,17 +31,26 @@
         if (stageType == OTOnetenAdSDKStageTypeLoaded) {
             [self showAdViewController];
         }
+        
+        if (stageType == OTOnetenAdSDKStageTypeDismiss) {
+            [self.adViewController.view removeFromSuperview];
+            [self.adViewController removeFromParentViewController];
+            [self.adViewController dismissViewControllerAnimated:YES completion:nil];
+        }
     }];
 }
 
 - (void)showAdViewController {
     NSError *error;
-    OTAdViewController *adViewController = [[OTOnetenSDK defalutSDK].adSDK showWithPlacementId:@"" error:&error];
+    self.adViewController = [[OTOnetenSDK defalutSDK].adSDK showWithPlacementId:@"" error:&error];
     if (error) {
         return;
     }
     
-    [self addChildViewController:adViewController];
+    self.adViewController.view.frame = self.view.frame;
+    self.adViewController.frame = self.view.frame;
+    [self.view addSubview:self.adViewController.view];
+    [self addChildViewController:self.adViewController];
 }
 
 

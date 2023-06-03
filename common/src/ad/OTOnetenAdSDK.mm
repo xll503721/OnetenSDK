@@ -93,4 +93,40 @@ void AdSDKDelegate::LoadSucceed() {
     }
 }
 
+void AdSDKDelegate::ShowSucceed() {
+    if (oc_prt_) {
+        OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
+        if (ad_sdk.stageCallBack) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeShow, @"", nil, nil);
+            });
+        }
+        
+    }
+}
+
+void AdSDKDelegate::CloseSucceed() {
+    if (oc_prt_) {
+        OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
+        if (ad_sdk.stageCallBack) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeDismiss, @"", nil, nil);
+            });
+        }
+        
+    }
+}
+
+void AdSDKDelegate::ClickSucceed() {
+    if (oc_prt_) {
+        OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
+        if (ad_sdk.stageCallBack) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeClick, @"", nil, nil);
+            });
+        }
+        
+    }
+}
+
 END_NAMESPACE_ONETEN_AD

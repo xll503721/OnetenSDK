@@ -11,15 +11,14 @@
 #define AppId @"6877"//应用ID
 #define AppKey @"eccdcdbd9adbd4a7"//应用key
 #define FullScreenVideoAdPlacementId @"f21b862c1cd"//插屏广告位ID
+#define SplashAdPlacementId @"ea1f8f9bd12"//开屏广告位ID
 
-@interface TENSigmobSource ()<WindIntersititialAdDelegate, OTAdSourceProtocol>
+@interface TENSigmobSource ()<WindIntersititialAdDelegate, WindSplashAdViewDelegate, OTAdSourceProtocol>
 
 //@property (nonatomic, strong) WindIntersititialAd *intersititialAd;
 //@property (nonatomic, strong) WindSplashAdView *splashAdView;
 //@property (nonatomic, strong) WindNativeAdsManager *nativeAdsManager;
 //@property (nonatomic, strong) WindRewardVideoAd *rewardVideoAd;
-
-@property (nonatomic, strong) id<OTAdSourceDelegate> delegate;
 
 @end
 
@@ -52,7 +51,9 @@
         }
             break;
         case OTAdSourceCategroyTypeSplash: {
-            
+            if ([self.delegate.adSourceObject isKindOfClass:[WindSplashAdView class]]) {
+                return [(WindSplashAdView *)self.delegate.adSourceObject isAdValid];
+            }
         }
             break;
         case OTAdSourceCategroyTypeRewardedVideo: {
@@ -79,7 +80,9 @@
         }
             break;
         case OTAdSourceCategroyTypeSplash: {
-            
+            if ([self.delegate.adSourceObject isKindOfClass:[WindSplashAdView class]]) {
+                [(WindSplashAdView *)self.delegate.adSourceObject setRootViewController:viewController];
+            }
         }
             break;
         case OTAdSourceCategroyTypeRewardedVideo: {
@@ -101,7 +104,9 @@
         case OTAdSourceCategroyTypeInterstitial:
             [self loadInterstitialWithType:type userInfo:userInfo];
             break;
-            
+        case OTAdSourceCategroyTypeSplash:
+            [self loadSplashWithType:type userInfo:userInfo];
+            break;
         default:
             break;
     }
@@ -109,7 +114,6 @@
 
 #pragma mark - Interstitial
 - (void)loadInterstitialWithType:(OTAdSourceType)type userInfo:(NSDictionary *)userInfo {
-    
     WindAdRequest *request = [WindAdRequest request];
     request.userId = @"user_id";
     request.placementId = FullScreenVideoAdPlacementId;
@@ -145,9 +149,52 @@
     }
 }
 
+- (void)intersititialAdWillVisible:(WindIntersititialAd *)intersititialAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithCategroyType:error:)]) {
+        [self.delegate adWillShowWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
+    }
+}
+
+- (void)intersititialAdDidVisible:(WindIntersititialAd *)intersititialAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithCategroyType:error:)]) {
+        [self.delegate adDidShowWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
+    }
+}
+
+- (void)intersititialAdDidClick:(WindIntersititialAd *)intersititialAd {
+    
+}
+
+- (void)intersititialAdDidClickSkip:(WindIntersititialAd *)intersititialAd {
+    
+}
+
+- (void)intersititialAdDidClose:(WindIntersititialAd *)intersititialAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidDismissWithCategroyType:error:)]) {
+        [self.delegate adDidDismissWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
+    }
+}
+
+- (void)intersititialAdDidPlayFinish:(WindIntersititialAd *)intersititialAd didFailWithError:(NSError *)error {
+    
+}
+
+- (void)intersititialAdServerResponse:(WindIntersititialAd *)intersititialAd isFillAd:(BOOL)isFillAd {
+    
+}
+
 #pragma mark - Splash
 - (void)loadSplashWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
+    WindAdRequest *request = [WindAdRequest request];
+    request.placementId = SplashAdPlacementId;
+    request.userId = @"your user id";
+    WindSplashAdView *splashAdView = [[WindSplashAdView alloc] initWithRequest:request];
+    splashAdView.delegate = self;
+    [splashAdView loadAdData];
     
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithCategroyType:adSourceObject:)]) {
+        [self.delegate adWillLoadWithCategroyType:OTAdSourceCategroyTypeInterstitial adSourceObject:splashAdView];
+    }
 }
 
 #pragma mark - Banner
@@ -172,5 +219,47 @@
 - (void)sendLossNotificationWithType:(OTAdSourceCategroyType)categroyType userInfo:(NSDictionary *)userInfo {
 }
 
+#pragma mark - WindMillSplashAdDelegate
+- (void)onSplashAdDidLoad:(WindSplashAdView *)splashAdView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithCategroyType:error:)]) {
+        [self.delegate adDidLoadWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
+    }
+}
+
+- (void)onSplashAdLoadFail:(WindSplashAdView *)splashAdView error:(NSError *)error {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithCategroyType:error:)]) {
+        [self.delegate adDidLoadWithCategroyType:OTAdSourceCategroyTypeSplash error:error];
+    }
+}
+
+- (void)onSplashAdSuccessPresentScreen:(WindSplashAdView *)splashAdView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithCategroyType:error:)]) {
+        [self.delegate adDidShowWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
+    }
+}
+
+- (void)onSplashAdFailToPresent:(WindSplashAdView *)splashAdView withError:(NSError *)error {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithCategroyType:error:)]) {
+        [self.delegate adDidShowWithCategroyType:OTAdSourceCategroyTypeSplash error:error];
+    }
+}
+
+- (void)onSplashAdClicked:(WindSplashAdView *)splashAdView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithCategroyType:)]) {
+        [self.delegate adDidClickWithCategroyType:OTAdSourceCategroyTypeSplash];
+    }
+}
+
+- (void)onSplashAdSkiped:(WindSplashAdView *)splashAdView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithCategroyType:)]) {
+        [self.delegate adDidCloseWithCategroyType:OTAdSourceCategroyTypeSplash];
+    }
+}
+
+- (void)onSplashAdClosed:(WindSplashAdView *)splashAdView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidDismissWithCategroyType:error:)]) {
+        [self.delegate adDidDismissWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
+    }
+}
 
 @end
