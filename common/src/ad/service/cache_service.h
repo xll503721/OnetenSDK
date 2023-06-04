@@ -27,6 +27,7 @@ public:
     }
     
     void Save(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement);
+    void Remove(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement);
     
     std::shared_ptr<AdSourceCache> GetHighestPrice(const std::string& placement_id);
     

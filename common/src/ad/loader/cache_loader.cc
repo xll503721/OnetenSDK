@@ -23,6 +23,10 @@ void CacheLoader::Save(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Plac
     cache_service_->Save(ad_source, placement);
 }
 
+void CacheLoader::Remove(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement) {
+    
+}
+
 void CacheLoader::End() {
     super_class::End();
     otlog_info << "";

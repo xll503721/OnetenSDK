@@ -28,6 +28,10 @@ void CacheService::Save(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Pla
     cacheModel_->Save(placement_cache);
 }
 
+void CacheService::Remove(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Placement> placement) {
+    cacheModel_->Remove("");
+}
+
 std::shared_ptr<AdSourceCache> CacheService::GetHighestPrice(const std::string& placement_id) {
     std::shared_ptr<EntityInterface> entity = cacheModel_->Read(placement_id);
     if (!entity) {

@@ -26,8 +26,7 @@ void NormalLoader::Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Pla
             if (!error) {
                 ONETEN_AD::OnetenAdSDK::GetInstance().GetCacheLoader()->Save(ad_source, placement);
                 
-                std::string placement_id;
-                ONETEN_AD::OnetenAdSDK::GetInstance().EndAdLoad(placement_id);
+                ONETEN_AD::OnetenAdSDK::GetInstance().EndAdLoad(placement->Identifier());
                 return;
             }
             ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->StartFlow(ad_source->GetLevel() + 1, placement);
@@ -35,27 +34,21 @@ void NormalLoader::Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Pla
         
         ad_source_service_->Show([=](int32_t categroy_type, ONETEN::Error* error) {
             if (!error) {
-                std::string placement_id;
-                ONETEN_AD::OnetenAdSDK::GetInstance().DidShowAd(placement_id);
+                ONETEN_AD::OnetenAdSDK::GetInstance().DidShowAd(placement->Identifier());
             }
         });
         
         ad_source_service_->Dismiss([=](int32_t categroy_type, ONETEN::Error* error) {
             if (!error) {
-                std::string placement_id;
-                ONETEN_AD::OnetenAdSDK::GetInstance().DidCloseAd(placement_id);
+                ONETEN_AD::OnetenAdSDK::GetInstance().DidCloseAd(placement->Identifier());
             }
         });
         
         ad_source_service_->Click([=](int32_t categroy_type, ONETEN::Error* error) {
             if (!error) {
-                ONETEN_AD::OnetenAdSDK::GetInstance().GetCacheLoader()->Save(ad_source, placement);
-                
-                std::string placement_id;
-                ONETEN_AD::OnetenAdSDK::GetInstance().EndAdLoad(placement_id);
+                ONETEN_AD::OnetenAdSDK::GetInstance().DidClickAd(placement->Identifier());
                 return;
             }
-            ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->StartFlow(ad_source->GetLevel() + 1, placement);
         });
     }
 }

@@ -197,28 +197,6 @@
     }
 }
 
-#pragma mark - Banner
-- (void)loadBannerWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
-    
-}
-
-#pragma mark - RewardedVideo
-- (void)loadRewardedVideoWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
-    
-}
-
-#pragma mark - Navite
-- (void)loadNaviteWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
-    
-}
-
-#pragma mark - Send Win Loss
-- (void)sendWinNotificationWithType:(OTAdSourceCategroyType)categroyType userInfo:(NSDictionary *)userInfo {
-}
-
-- (void)sendLossNotificationWithType:(OTAdSourceCategroyType)categroyType userInfo:(NSDictionary *)userInfo {
-}
-
 #pragma mark - WindMillSplashAdDelegate
 - (void)onSplashAdDidLoad:(WindSplashAdView *)splashAdView {
     if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithCategroyType:error:)]) {
@@ -260,6 +238,28 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(adDidDismissWithCategroyType:error:)]) {
         [self.delegate adDidDismissWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
     }
+}
+
+#pragma mark - Banner
+- (void)loadBannerWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
+    
+}
+
+#pragma mark - RewardedVideo
+- (void)loadRewardedVideoWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
+    
+}
+
+#pragma mark - Navite
+- (void)loadNaviteWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
+    
+}
+
+#pragma mark - Send Win Loss
+- (void)sendWinNotificationWithType:(OTAdSourceCategroyType)categroyType userInfo:(NSDictionary *)userInfo {
+}
+
+- (void)sendLossNotificationWithType:(OTAdSourceCategroyType)categroyType userInfo:(NSDictionary *)userInfo {
 }
 
 @end

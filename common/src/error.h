@@ -15,6 +15,10 @@ public:
     Error() = default;
     Error(int32_t code, const std::string& msg, std::map<std::string, std::string>& user_info);
     
+    inline std::string GetMsg() {
+        return msg_;
+    }
+    
 private:
     int32_t code_;
     std::string msg_;

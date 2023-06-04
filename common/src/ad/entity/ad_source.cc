@@ -90,7 +90,7 @@ std::shared_ptr<BASE_JSON::Json> AdSource::GetJson() {
 #pragma mark - AdSourceDelegate
 void AdSource::LoadCompletion(int32_t categroy_type, ONETEN::Error* error) {
     if (error) {
-        otlog_info << "failed";
+        otlog_info << "failed:" << error->GetMsg();
     } else {
         otlog_info << "success";
     }
