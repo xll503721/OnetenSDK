@@ -12,6 +12,10 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
+PlacementLoader::~PlacementLoader() {
+    
+}
+
 PlacementLoader::PlacementLoader(std::shared_ptr<LoaderInterface> loader): MainLoader(loader) {
     otlog_info << "";
 }
@@ -20,7 +24,7 @@ void PlacementLoader::Start(const std::string& placement_id) {
     super_class::Start(placement_id);
     otlog_info << "placement request";
     
-    std::string placement_json_string = "{\"id\": \"123456789\", \"ad_sources\": [{\"clazz_name\": \"TENSigmobSource\", \"category\": 0}]}";
+    std::string placement_json_string = "{\"id\": \"123456789\", \"ad_sources\": [{\"clazz_name\": \"TENSigmobSource\", \"style\": 1}]}";
     std::shared_ptr<Placement> placement = std::make_shared<Placement>(placement_json_string);
     
     ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->Classify(placement);

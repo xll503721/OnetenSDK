@@ -68,7 +68,7 @@
     
     auto ad_source = ONETEN_AD::OnetenAdSDK::GetInstance().ShowAd(placementId.UTF8String, _sdk_delegate);
     void* platformObj = ad_source->GetPlatformObj();
-    OTAdViewController *adViewController = [[OTAdViewController alloc] initWithAdSource:(__bridge id<OTAdSourceProtocol>)platformObj category:(OTAdSourceCategroyType)ad_source->GetCategory()];
+    OTAdViewController *adViewController = [[OTAdViewController alloc] initWithAdSource:(__bridge id<OTAdSourceProtocol>)platformObj category:(OTAdSourceStyleType)ad_source->GetStyle()];
     
     return adViewController;
 }

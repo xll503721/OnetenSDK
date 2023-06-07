@@ -20,7 +20,7 @@
 @interface OTAdViewController ()
 
 @property (nonatomic, strong) id<OTAdSourceProtocol> adSource;
-@property (nonatomic, assign) OTAdSourceCategroyType category;
+@property (nonatomic, assign) OTAdSourceStyleType category;
 
 @property (nonatomic, assign) BOOL isShowing;
 
@@ -32,7 +32,7 @@
     
 }
 
-- (instancetype)initWithAdSource:(id<OTAdSourceProtocol>)adSource category:(OTAdSourceCategroyType)category
+- (instancetype)initWithAdSource:(id<OTAdSourceProtocol>)adSource category:(OTAdSourceStyleType)category
 {
     self = [super init];
     if (self) {
@@ -56,14 +56,14 @@
     if (!self.isShowing) {
         self.isShowing = !self.isShowing;
         
-        if (self.category == OTAdSourceCategroyTypeSplash && [self.adSource.delegate.adSourceObject isKindOfClass:[UIView class]]) {
+        if (self.category == OTAdSourceStyleTypeSplash && [self.adSource.delegate.adSourceObject isKindOfClass:[UIView class]]) {
             UIView *splashView = (UIView *)self.adSource.delegate.adSourceObject;
             splashView.frame = self.frame;
             [self.view addSubview:splashView];
         }
         
-        if ([self.adSource respondsToSelector:@selector(showWithCategroyType:rootViewController:)]) {
-            [self.adSource showWithCategroyType:self.category rootViewController:self];
+        if ([self.adSource respondsToSelector:@selector(showWithstyleType:rootViewController:)]) {
+            [self.adSource showWithstyleType:self.category rootViewController:self];
         }
     }
 }

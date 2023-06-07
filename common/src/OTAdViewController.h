@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OTAdViewController : UIViewController
 
-- (instancetype)initWithAdSource:(id<OTAdSourceProtocol>)adSource category:(OTAdSourceCategroyType)category;
+- (instancetype)initWithAdSource:(id<OTAdSourceProtocol>)adSource category:(OTAdSourceStyleType)category;
 
 @property (nonatomic, assign) CGRect frame;
 

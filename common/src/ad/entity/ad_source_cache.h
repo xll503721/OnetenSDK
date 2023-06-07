@@ -23,7 +23,7 @@ public:
     static std::shared_ptr<AdSourceCache> Convert(std::shared_ptr<AdSource> ad_source);
     
     std::string Identifier() override;
-    AdSource::Category GetCategory();
+    AdSource::Style GetStyle();
     bool IsReady();
     
 private:
@@ -33,7 +33,7 @@ private:
     PLATFORM_GENERATE()
     std::shared_ptr<BASE_JSON::Json> json_;
     
-    AdSource::Category category_;
+    AdSource::Style style_;
 };
 
 END_NAMESPACE_ONETEN_AD

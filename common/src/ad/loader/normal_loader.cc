@@ -21,9 +21,9 @@ void NormalLoader::Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<Pla
     super_class::Flow(ad_source, placement);
     otlog_info << "";
     
-    if (ad_source->GetType() == AdSource::Type::kNormal) {
+    if (ad_source->GetRequestType() == AdSource::RequestType::kNormal) {
         ad_source_service_->Load(ad_source, [=](int32_t categroy_type, ONETEN::Error* error) {
-            if (!error) {
+            if (error == nullptr) {
                 ONETEN_AD::OnetenAdSDK::GetInstance().GetCacheLoader()->Save(ad_source, placement);
                 
                 ONETEN_AD::OnetenAdSDK::GetInstance().EndAdLoad(placement->Identifier());

@@ -7,6 +7,10 @@
 
 #include "oneten_object.h"
 
-BEGIN_NAMESPACE_ONETEN_AD
+BEGIN_NAMESPACE_ONETEN
 
-END_NAMESPACE_ONETEN_AD
+Object::~Object() {
+    
+}
+
+END_NAMESPACE_ONETEN

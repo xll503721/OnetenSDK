@@ -13,12 +13,12 @@ typedef NS_ENUM(NSUInteger, OTAdSourceType) {
     OTAdSourceTypeNormal,
 };
 
-typedef NS_ENUM(NSUInteger, OTAdSourceCategroyType) {
-    OTAdSourceCategroyTypeSplash,
-    OTAdSourceCategroyTypeInterstitial,
-    OTAdSourceCategroyTypeBanner,
-    OTAdSourceCategroyTypeRewardedVideo,
-    OTAdSourceCategroyTypeNative,
+typedef NS_ENUM(NSUInteger, OTAdSourceStyleType) {
+    OTAdSourceStyleTypeSplash,
+    OTAdSourceStyleTypeInterstitial,
+    OTAdSourceStyleTypeBanner,
+    OTAdSourceStyleTypeRewardedVideo,
+    OTAdSourceStyleTypeNative,
 };
 
 typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
@@ -36,19 +36,19 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 
 @protocol OTAdSourceDelegate <NSObject>
 
-- (void)adWillLoadWithCategroyType:(OTAdSourceCategroyType)categroyType adSourceObject:(id)adSourceObject;
-- (void)adDidLoadWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error;
+- (void)adWillLoadWithstyleType:(OTAdSourceStyleType)styleType adSourceObject:(id)adSourceObject;
+- (void)adDidLoadWithstyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
 
-- (void)adWillShowWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error;
-- (void)adDidShowWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error;
+- (void)adWillShowWithstyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
+- (void)adDidShowWithstyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
 
-- (void)adWillDismissWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error;
-- (void)adDidDismissWithCategroyType:(OTAdSourceCategroyType)categroyType error:(NSError *)error;
+- (void)adWillDismissWithstyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
+- (void)adDidDismissWithstyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
 
-- (void)adWillCloseWithCategroyType:(OTAdSourceCategroyType)categroyType;
-- (void)adDidCloseWithCategroyType:(OTAdSourceCategroyType)categroyType;
+- (void)adWillCloseWithstyleType:(OTAdSourceStyleType)styleType;
+- (void)adDidCloseWithstyleType:(OTAdSourceStyleType)styleType;
 
-- (void)adDidClickWithCategroyType:(OTAdSourceCategroyType)categroyType;
+- (void)adDidClickWithstyleType:(OTAdSourceStyleType)styleType;
 
 @property (nonatomic, readonly) id adSourceObject;
 
@@ -62,10 +62,10 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 
 @property (nonatomic, strong) id<OTAdSourceDelegate> delegate;
 
-- (BOOL)isReadyWithType:(OTAdSourceCategroyType)categroyType;
-- (void)showWithCategroyType:(OTAdSourceCategroyType)categroyType rootViewController:(UIViewController *)viewController;
+- (BOOL)isReadyWithStyle:(OTAdSourceStyleType)styleType;
+- (void)showWithstyleType:(OTAdSourceStyleType)styleType rootViewController:(UIViewController *)viewController;
 
-- (void)loadWithCategoryType:(OTAdSourceCategroyType)categroyType adSourceType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo;
+- (void)loadWithCategoryType:(OTAdSourceStyleType)styleType adSourceType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo;
 
 @optional
 
@@ -94,7 +94,7 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 /// @param userInfo info
 - (void)loadNaviteWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo;
 
-- (void)sendWinNotificationWithType:(OTAdSourceCategroyType)categroyType userInfo:(NSDictionary *)userInfo;
-- (void)sendLossNotificationWithType:(OTAdSourceCategroyType)categroyType userInfo:(NSDictionary *)userInfo;
+- (void)sendWinNotificationWithType:(OTAdSourceStyleType)styleType userInfo:(NSDictionary *)userInfo;
+- (void)sendLossNotificationWithType:(OTAdSourceStyleType)styleType userInfo:(NSDictionary *)userInfo;
 
 @end

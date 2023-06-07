@@ -18,6 +18,7 @@ class MainLoader:   public ONETEN::Object,
     
 public:
     MainLoader() = default;
+    virtual ~MainLoader();
     MainLoader(std::shared_ptr<LoaderInterface> loader);
     void Start(const std::string& placement_id) override;
 

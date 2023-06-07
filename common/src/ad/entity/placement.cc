@@ -8,6 +8,10 @@
 #include "placement.h"
 BEGIN_NAMESPACE_ONETEN_AD
 
+Placement::~Placement() {
+    
+}
+
 Placement::Placement(const std::string& json_string) {
     Parse(json_string);
 }
@@ -38,15 +42,15 @@ void Placement::ParseAdSource() {
             
             ad_sources_.push_back(ad_source);
             
-            if (ad_source->GetType() == AdSource::Type::kS2S) {
+            if (ad_source->GetRequestType() == AdSource::RequestType::kS2S) {
                 s2s_ad_sources_.push_back(ad_source);
             }
             
-            if (ad_source->GetType() == AdSource::Type::kNormal) {
+            if (ad_source->GetRequestType() == AdSource::RequestType::kNormal) {
                 normal_ad_sources_.push_back(ad_source);
             }
             
-            if (ad_source->GetType() == AdSource::Type::kC2S) {
+            if (ad_source->GetRequestType() == AdSource::RequestType::kC2S) {
                 c2s_ad_sources_.push_back(ad_source);
             }
         }

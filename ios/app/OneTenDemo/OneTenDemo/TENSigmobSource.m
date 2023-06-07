@@ -42,25 +42,25 @@
     return self;
 }
 
-- (BOOL)isReadyWithType:(OTAdSourceCategroyType)categroyType {
-    switch (categroyType) {
-        case OTAdSourceCategroyTypeInterstitial: {
+- (BOOL)isReadyWithStyle:(OTAdSourceStyleType)styleType {
+    switch (styleType) {
+        case OTAdSourceStyleTypeInterstitial: {
             if ([self.delegate.adSourceObject isKindOfClass:[WindIntersititialAd class]]) {
                 return [(WindIntersititialAd *)self.delegate.adSourceObject isAdReady];
             }
         }
             break;
-        case OTAdSourceCategroyTypeSplash: {
+        case OTAdSourceStyleTypeSplash: {
             if ([self.delegate.adSourceObject isKindOfClass:[WindSplashAdView class]]) {
                 return [(WindSplashAdView *)self.delegate.adSourceObject isAdValid];
             }
         }
             break;
-        case OTAdSourceCategroyTypeRewardedVideo: {
+        case OTAdSourceStyleTypeRewardedVideo: {
             
         }
             break;
-        case OTAdSourceCategroyTypeNative: {
+        case OTAdSourceStyleTypeNative: {
             
         }
             break;
@@ -71,25 +71,25 @@
     return NO;
 }
 
-- (void)showWithCategroyType:(OTAdSourceCategroyType)categroyType rootViewController:(UIViewController *)viewController {
-    switch (categroyType) {
-        case OTAdSourceCategroyTypeInterstitial: {
+- (void)showWithstyleType:(OTAdSourceStyleType)styleType rootViewController:(UIViewController *)viewController {
+    switch (styleType) {
+        case OTAdSourceStyleTypeInterstitial: {
             if ([self.delegate.adSourceObject isKindOfClass:[WindIntersititialAd class]]) {
                 return [(WindIntersititialAd *)self.delegate.adSourceObject showAdFromRootViewController:viewController options:nil];
             }
         }
             break;
-        case OTAdSourceCategroyTypeSplash: {
+        case OTAdSourceStyleTypeSplash: {
             if ([self.delegate.adSourceObject isKindOfClass:[WindSplashAdView class]]) {
                 [(WindSplashAdView *)self.delegate.adSourceObject setRootViewController:viewController];
             }
         }
             break;
-        case OTAdSourceCategroyTypeRewardedVideo: {
+        case OTAdSourceStyleTypeRewardedVideo: {
             
         }
             break;
-        case OTAdSourceCategroyTypeNative: {
+        case OTAdSourceStyleTypeNative: {
             
         }
             break;
@@ -99,12 +99,12 @@
     }
 }
 
-- (void)loadWithCategoryType:(OTAdSourceCategroyType)categroyType adSourceType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
-    switch (categroyType) {
-        case OTAdSourceCategroyTypeInterstitial:
+- (void)loadWithCategoryType:(OTAdSourceStyleType)styleType adSourceType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
+    switch (styleType) {
+        case OTAdSourceStyleTypeInterstitial:
             [self loadInterstitialWithType:type userInfo:userInfo];
             break;
-        case OTAdSourceCategroyTypeSplash:
+        case OTAdSourceStyleTypeSplash:
             [self loadSplashWithType:type userInfo:userInfo];
             break;
         default:
@@ -130,34 +130,34 @@
     }
     [intersititialAd loadAdData];
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithCategroyType:adSourceObject:)]) {
-        [self.delegate adWillLoadWithCategroyType:OTAdSourceCategroyTypeInterstitial adSourceObject:intersititialAd];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithstyleType:adSourceObject:)]) {
+        [self.delegate adWillLoadWithstyleType:OTAdSourceStyleTypeInterstitial adSourceObject:intersititialAd];
     }
 }
 
 #pragma mark - Interstitial Delegate
 - (void)intersititialAdDidLoad:(WindIntersititialAd *)intersititialAd {
     NSLog(@"回调成功");
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithCategroyType:error:)]) {
-        [self.delegate adDidLoadWithCategroyType:OTAdSourceCategroyTypeInterstitial error:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithstyleType:error:)]) {
+        [self.delegate adDidLoadWithstyleType:OTAdSourceStyleTypeInterstitial error:nil];
     }
 }
 
 - (void)intersititialAdDidLoad:(WindIntersititialAd *)intersititialAd didFailWithError:(NSError *)error {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithCategroyType:error:)]) {
-        [self.delegate adDidLoadWithCategroyType:OTAdSourceCategroyTypeInterstitial error:error];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithstyleType:error:)]) {
+        [self.delegate adDidLoadWithstyleType:OTAdSourceStyleTypeInterstitial error:error];
     }
 }
 
 - (void)intersititialAdWillVisible:(WindIntersititialAd *)intersititialAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithCategroyType:error:)]) {
-        [self.delegate adWillShowWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithstyleType:error:)]) {
+        [self.delegate adWillShowWithstyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 
 - (void)intersititialAdDidVisible:(WindIntersititialAd *)intersititialAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithCategroyType:error:)]) {
-        [self.delegate adDidShowWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithstyleType:error:)]) {
+        [self.delegate adDidShowWithstyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 
@@ -170,8 +170,8 @@
 }
 
 - (void)intersititialAdDidClose:(WindIntersititialAd *)intersititialAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidDismissWithCategroyType:error:)]) {
-        [self.delegate adDidDismissWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidDismissWithstyleType:error:)]) {
+        [self.delegate adDidDismissWithstyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 
@@ -192,51 +192,51 @@
     splashAdView.delegate = self;
     [splashAdView loadAdData];
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithCategroyType:adSourceObject:)]) {
-        [self.delegate adWillLoadWithCategroyType:OTAdSourceCategroyTypeInterstitial adSourceObject:splashAdView];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithstyleType:adSourceObject:)]) {
+        [self.delegate adWillLoadWithstyleType:OTAdSourceStyleTypeInterstitial adSourceObject:splashAdView];
     }
 }
 
 #pragma mark - WindMillSplashAdDelegate
 - (void)onSplashAdDidLoad:(WindSplashAdView *)splashAdView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithCategroyType:error:)]) {
-        [self.delegate adDidLoadWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithstyleType:error:)]) {
+        [self.delegate adDidLoadWithstyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 
 - (void)onSplashAdLoadFail:(WindSplashAdView *)splashAdView error:(NSError *)error {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithCategroyType:error:)]) {
-        [self.delegate adDidLoadWithCategroyType:OTAdSourceCategroyTypeSplash error:error];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithstyleType:error:)]) {
+        [self.delegate adDidLoadWithstyleType:OTAdSourceStyleTypeSplash error:error];
     }
 }
 
 - (void)onSplashAdSuccessPresentScreen:(WindSplashAdView *)splashAdView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithCategroyType:error:)]) {
-        [self.delegate adDidShowWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithstyleType:error:)]) {
+        [self.delegate adDidShowWithstyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 
 - (void)onSplashAdFailToPresent:(WindSplashAdView *)splashAdView withError:(NSError *)error {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithCategroyType:error:)]) {
-        [self.delegate adDidShowWithCategroyType:OTAdSourceCategroyTypeSplash error:error];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithstyleType:error:)]) {
+        [self.delegate adDidShowWithstyleType:OTAdSourceStyleTypeSplash error:error];
     }
 }
 
 - (void)onSplashAdClicked:(WindSplashAdView *)splashAdView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithCategroyType:)]) {
-        [self.delegate adDidClickWithCategroyType:OTAdSourceCategroyTypeSplash];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithstyleType:)]) {
+        [self.delegate adDidClickWithstyleType:OTAdSourceStyleTypeSplash];
     }
 }
 
 - (void)onSplashAdSkiped:(WindSplashAdView *)splashAdView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithCategroyType:)]) {
-        [self.delegate adDidCloseWithCategroyType:OTAdSourceCategroyTypeSplash];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithstyleType:)]) {
+        [self.delegate adDidCloseWithstyleType:OTAdSourceStyleTypeSplash];
     }
 }
 
 - (void)onSplashAdClosed:(WindSplashAdView *)splashAdView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidDismissWithCategroyType:error:)]) {
-        [self.delegate adDidDismissWithCategroyType:OTAdSourceCategroyTypeSplash error:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidDismissWithstyleType:error:)]) {
+        [self.delegate adDidDismissWithstyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 
@@ -256,10 +256,10 @@
 }
 
 #pragma mark - Send Win Loss
-- (void)sendWinNotificationWithType:(OTAdSourceCategroyType)categroyType userInfo:(NSDictionary *)userInfo {
+- (void)sendWinNotificationWithType:(OTAdSourceStyleType)styleType userInfo:(NSDictionary *)userInfo {
 }
 
-- (void)sendLossNotificationWithType:(OTAdSourceCategroyType)categroyType userInfo:(NSDictionary *)userInfo {
+- (void)sendLossNotificationWithType:(OTAdSourceStyleType)styleType userInfo:(NSDictionary *)userInfo {
 }
 
 @end

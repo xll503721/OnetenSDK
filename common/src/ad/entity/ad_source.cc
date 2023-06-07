@@ -22,8 +22,8 @@ AdSource::~AdSource() {
     
 }
 
-AdSource::Type AdSource::GetType() {
-    return AdSource::Type::kNormal;
+AdSource::RequestType AdSource::GetRequestType() {
+    return AdSource::RequestType::kNormal;
 }
 
 void AdSource::InitSDK() {
@@ -34,8 +34,8 @@ void AdSource::Load(std::shared_ptr<AdSourceDelegate> delegate) {
     otlog_info << "";
     delegate_ = delegate;
     
-    BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=] () {
-        auto category_type = PLATFORM_VAR_GENERATE(static_cast<int32_t>(category_));
+    BASE_THREAD::ThreadPool::DefaultPool().ScheduleTransfer(BASE_THREAD::Thread::Type::kMain, [=] () {
+        auto category_type = PLATFORM_VAR_GENERATE(static_cast<int32_t>(style_));
         auto ad_source_type = PLATFORM_VAR_GENERATE(2);
         
         std::unordered_map<std::string, BASE_PLATFORM::Platform::Var> map;
@@ -71,9 +71,9 @@ void AdSource::Parse() {
         identifier_ = id.AsString();
     }
     
-    BASE_JSON::Json category = json_->operator[]("category");
-    if (category.IsInteger()) {
-        category_ = static_cast<Category>(category.AsInteger());
+    BASE_JSON::Json style = json_->operator[]("style");
+    if (style.IsInteger()) {
+        style_ = static_cast<Style>(style.AsInteger());
     }
 }
 
@@ -90,12 +90,12 @@ std::shared_ptr<BASE_JSON::Json> AdSource::GetJson() {
 #pragma mark - AdSourceDelegate
 void AdSource::LoadCompletion(int32_t categroy_type, ONETEN::Error* error) {
     if (error) {
-        otlog_info << "failed:" << error->GetMsg();
+        otlog_info << "failed code:" << error->GetCode() << ", msg:" << error->GetMsg();
     } else {
         otlog_info << "success";
     }
     if (delegate_) {
-        BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kOther, [=] () {
+        BASE_THREAD::ThreadPool::DefaultPool().ScheduleTransferBack(BASE_THREAD::Thread::Type::kOther, [=] () {
             delegate_->LoadCompletion(categroy_type, error);
         });
     }

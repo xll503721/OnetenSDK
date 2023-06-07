@@ -18,6 +18,9 @@ public:
     inline std::string GetMsg() {
         return msg_;
     }
+    inline int32_t GetCode() {
+        return code_;
+    }
     
 private:
     int32_t code_;

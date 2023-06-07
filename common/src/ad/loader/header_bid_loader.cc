@@ -20,8 +20,8 @@ void HeaderBidLoader::Flow(std::shared_ptr<AdSource> ad_source, std::shared_ptr<
     super_class::Flow(ad_source, placement);
     otlog_info << "";
     
-    if (ad_source->GetType() == AdSource::Type::kS2S ||
-        ad_source->GetType() == AdSource::Type::kC2S) {
+    if (ad_source->GetRequestType() == AdSource::RequestType::kS2S ||
+        ad_source->GetRequestType() == AdSource::RequestType::kC2S) {
         
 //        ad_source_service_->Load(ad_source, [=](int categroy_type, ONETEN::Error* error) {
 //            if (!error) {

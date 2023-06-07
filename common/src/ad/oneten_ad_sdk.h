@@ -40,10 +40,10 @@ private:
     OnetenAdSDK();
     ~OnetenAdSDK();
     
-    std::shared_ptr<LoaderInterface> start_loader_;
-    std::shared_ptr<LoaderInterface> waterfall_loader_;
-    std::shared_ptr<LoaderInterface> request_loader_;
-    std::shared_ptr<LoaderInterface> cache_loader_;
+    thread_local static std::shared_ptr<LoaderInterface> start_loader_;
+    thread_local static std::shared_ptr<LoaderInterface> waterfall_loader_;
+    thread_local static std::shared_ptr<LoaderInterface> request_loader_;
+    thread_local static std::shared_ptr<LoaderInterface> cache_loader_;
     
     AdSDKDelegate* delegate_;
     std::map<std::string, std::string> user_info_;

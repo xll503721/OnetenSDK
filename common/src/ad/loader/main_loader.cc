@@ -9,6 +9,10 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
+MainLoader::~MainLoader() {
+    
+}
+
 MainLoader::MainLoader(std::shared_ptr<LoaderInterface> loader)
 :mainloader_(loader) {
 }

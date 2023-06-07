@@ -24,8 +24,8 @@ std::shared_ptr<AdSourceCache> AdSourceCache::Convert(std::shared_ptr<AdSource> 
     return ad_source_cache;
 }
 
-AdSource::Category AdSourceCache::GetCategory() {
-    return category_;
+AdSource::Style AdSourceCache::GetStyle() {
+    return style_;
 }
 
 void AdSourceCache::Parse() {
@@ -34,16 +34,17 @@ void AdSourceCache::Parse() {
         identifier_ = id.AsString();
     }
     
-    BASE_JSON::Json category = json_->operator[]("category");
-    if (category.IsInteger()) {
-        category_ = static_cast<AdSource::Category>(category.AsInteger());
+    BASE_JSON::Json style = json_->operator[]("style");
+    if (style.IsInteger()) {
+        style_ = static_cast<AdSource::Style>(style.AsInteger());
     }
     json_ = nullptr;
 }
 
 bool AdSourceCache::IsReady() {
-    auto type = PLATFORM_VAR_GENERATE(static_cast<int32_t>(GetCategory()));
-    PLATFORM_INVOKE(&type)
+    auto style = PLATFORM_VAR_GENERATE(static_cast<int32_t>(GetStyle()));
+    PLATFORM_INVOKE(&style)
+    PLATFORM_INVOKE_RESULT;
     return static_cast<bool>(GET_PLATFORM_INVOKE_RESULT);
 }
 

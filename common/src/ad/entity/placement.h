@@ -18,6 +18,7 @@ class Placement: public EntityInterface {
     
 public:
     explicit Placement(const std::string& json_string);
+    virtual ~Placement();
     
     std::vector<std::shared_ptr<AdSource>> GetRequestAdSources();
     

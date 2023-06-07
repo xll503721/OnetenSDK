@@ -14,15 +14,16 @@ BEGIN_NAMESPACE_ONETEN_AD
 
 class PlacementLoader: public MainLoader {
     
-private:
-    using super_class = MainLoader;
-    
 public:
+    ~PlacementLoader();
     PlacementLoader(std::shared_ptr<LoaderInterface> loader);
     void Start(const std::string& placement_id) override;
     void End() override;
     
     void RequestPlacement(const std::string& placement_id) override;
+    
+private:
+    using super_class = MainLoader;
 };
 
 END_NAMESPACE_ONETEN_AD

@@ -26,13 +26,13 @@ public:
 
 class AdSource: public AdSourceDelegate, public EntityInterface {
 public:
-    enum class Type {
+    enum class RequestType {
         kS2S,
         kC2S,
         kNormal,
     };
     
-    enum class Category {
+    enum class Style {
         kSplash,
         kInterstitial,
         kBanner,
@@ -48,7 +48,7 @@ public:
     
     AdSource(std::shared_ptr<BASE_JSON::Json> json);
     virtual ~AdSource();
-    Type GetType();
+    RequestType GetRequestType();
     
     void Load(std::shared_ptr<AdSourceDelegate> delegate);
     void SetLevel(int32_t level);
@@ -68,8 +68,8 @@ public:
     void ClickCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
     
 private:
-    Type type_;
-    Category category_;
+    RequestType type_;
+    Style style_;
     
     int32_t level_;
     std::string clazz_name_;

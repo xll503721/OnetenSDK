@@ -21,7 +21,10 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-//thread_local AdSDKDelegate* delegate_ = nullptr;
+thread_local std::shared_ptr<LoaderInterface> OnetenAdSDK::start_loader_ = nullptr;
+thread_local std::shared_ptr<LoaderInterface> OnetenAdSDK::waterfall_loader_ = nullptr;
+thread_local std::shared_ptr<LoaderInterface> OnetenAdSDK::request_loader_ = nullptr;
+thread_local std::shared_ptr<LoaderInterface> OnetenAdSDK::cache_loader_ = nullptr;
 
 OnetenAdSDK &OnetenAdSDK::GetInstance() {
     static OnetenAdSDK ad_sdk;
@@ -43,18 +46,22 @@ void OnetenAdSDK::Register(const std::string& app_id) {
 }
 
 std::shared_ptr<LoaderInterface> OnetenAdSDK::GetMainLoader() {
+    otlog_info << "start loader:" << start_loader_;
     return start_loader_;
 }
 
 std::shared_ptr<LoaderInterface> OnetenAdSDK::GetWaterfallLoader() {
+    otlog_info << "waterfall loader:" << waterfall_loader_;
     return waterfall_loader_;
 }
 
 std::shared_ptr<LoaderInterface> OnetenAdSDK::GetCacheLoader() {
+    otlog_info << "cache loader:" << cache_loader_;
     return cache_loader_;
 }
 
 std::shared_ptr<LoaderInterface> OnetenAdSDK::GetRequestLoader() {
+    otlog_info << "request loader:" << request_loader_;
     return request_loader_;
 }
 
