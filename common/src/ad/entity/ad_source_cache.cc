@@ -44,7 +44,6 @@ void AdSourceCache::Parse() {
 bool AdSourceCache::IsReady() {
     auto style = PLATFORM_VAR_GENERATE(static_cast<int32_t>(GetStyle()));
     PLATFORM_INVOKE(&style)
-    PLATFORM_INVOKE_RESULT;
     return static_cast<bool>(GET_PLATFORM_INVOKE_RESULT);
 }
 

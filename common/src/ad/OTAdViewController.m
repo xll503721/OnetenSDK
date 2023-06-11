@@ -62,8 +62,8 @@
             [self.view addSubview:splashView];
         }
         
-        if ([self.adSource respondsToSelector:@selector(showWithstyleType:rootViewController:)]) {
-            [self.adSource showWithstyleType:self.category rootViewController:self];
+        if ([self.adSource respondsToSelector:@selector(showWithStyleType:rootViewController:)]) {
+            [self.adSource showWithStyleType:self.category rootViewController:self];
         }
     }
 }

@@ -71,7 +71,7 @@
     return NO;
 }
 
-- (void)showWithstyleType:(OTAdSourceStyleType)styleType rootViewController:(UIViewController *)viewController {
+- (void)showWithStyleType:(OTAdSourceStyleType)styleType rootViewController:(UIViewController *)viewController {
     switch (styleType) {
         case OTAdSourceStyleTypeInterstitial: {
             if ([self.delegate.adSourceObject isKindOfClass:[WindIntersititialAd class]]) {
