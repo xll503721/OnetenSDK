@@ -99,7 +99,7 @@
     }
 }
 
-- (void)loadWithCategoryType:(OTAdSourceStyleType)styleType adSourceType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
+- (void)loadWithStyleType:(OTAdSourceStyleType)styleType adSourceType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
     switch (styleType) {
         case OTAdSourceStyleTypeInterstitial:
             [self loadInterstitialWithType:type userInfo:userInfo];

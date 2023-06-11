@@ -65,7 +65,7 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 - (BOOL)isReadyWithStyle:(OTAdSourceStyleType)styleType;
 - (void)showWithstyleType:(OTAdSourceStyleType)styleType rootViewController:(UIViewController *)viewController;
 
-- (void)loadWithCategoryType:(OTAdSourceStyleType)styleType adSourceType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo;
+- (void)loadWithStyleType:(OTAdSourceStyleType)styleType adSourceType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo;
 
 @optional
 

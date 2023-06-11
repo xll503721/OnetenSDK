@@ -99,7 +99,7 @@ static NSString *kOTOnetenSDKDelegate = @"ObjectDelegate";
                 }
                     break;
                 case BASE_PLATFORM::Platform::Var::Type::kTypeMap: {
-                    std::unordered_map<std::string, BASE_PLATFORM::Platform::Var>* var_map = param->GetMap();
+                    std::map<std::string, BASE_PLATFORM::Platform::Var>* var_map = param->GetMap();
                     NSMutableDictionary<NSString *, id> *var_dict = [NSMutableDictionary dictionary];
                     for (auto iter = var_map->begin(); iter != var_map->end(); ++iter) {
                         NSString *key = [NSString stringWithUTF8String:iter->first.c_str()];

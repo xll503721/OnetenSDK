@@ -35,15 +35,15 @@ void AdSource::Load(std::shared_ptr<AdSourceDelegate> delegate) {
     delegate_ = delegate;
     
     BASE_THREAD::ThreadPool::DefaultPool().ScheduleTransfer(BASE_THREAD::Thread::Type::kMain, [=] () {
-        auto category_type = PLATFORM_VAR_GENERATE(static_cast<int32_t>(style_));
+        auto style_type = PLATFORM_VAR_GENERATE(static_cast<int32_t>(style_));
         auto ad_source_type = PLATFORM_VAR_GENERATE(2);
         
-        std::unordered_map<std::string, BASE_PLATFORM::Platform::Var> map;
+        std::map<std::string, BASE_PLATFORM::Platform::Var> map;
         map["1"] = PLATFORM_VAR_GENERATE(1);
         
         std::vector<BASE_PLATFORM::Platform::Var> vector;
         BASE_PLATFORM::Platform::Var user_info = &map;
-        PLATFORM_INVOKE(&category_type, &ad_source_type, &user_info)
+        PLATFORM_INVOKE(&style_type, &ad_source_type, &user_info)
     });
 }
 
