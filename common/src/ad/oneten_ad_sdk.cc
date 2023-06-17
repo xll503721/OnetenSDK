@@ -18,6 +18,8 @@
 #include <ad/model/model_factory.h>
 
 #include <thread/thread_pool.h>
+#include <storage/database/database.h>
+#include <device/device.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -25,6 +27,8 @@ thread_local std::shared_ptr<LoaderInterface> OnetenAdSDK::start_loader_ = nullp
 thread_local std::shared_ptr<LoaderInterface> OnetenAdSDK::waterfall_loader_ = nullptr;
 thread_local std::shared_ptr<LoaderInterface> OnetenAdSDK::request_loader_ = nullptr;
 thread_local std::shared_ptr<LoaderInterface> OnetenAdSDK::cache_loader_ = nullptr;
+
+static const std::string database_name = "sdk_db";
 
 OnetenAdSDK &OnetenAdSDK::GetInstance() {
     static OnetenAdSDK ad_sdk;
@@ -36,6 +40,34 @@ OnetenAdSDK::OnetenAdSDK() {
     REGISTER_MODEL(CacheModel)
     
     cache_service_ = std::make_shared<CacheService>();
+    
+    auto db = BASE_STORAGE_DATABASE::DataBase(BASE_DEVICE::Device::DefaultInstance().GetFile()->GetCachesPath() + "/" + database_name);
+    const char* sql_create_table =
+            "CREATE TABLE IF NOT EXISTS Users ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            "name TEXT,"
+            "age INTEGER);";
+    db.CreateTable(sql_create_table);
+    
+    const char* sql_insert_data = "Users";
+    auto age = PLATFORM_VAR_GENERATE(1);
+    auto name = PLATFORM_VAR_GENERATE("Alice");
+    std::map<std::string, BASE_PLATFORM::Platform::Var> map;
+    map["name"] = name;
+    map["age"] = age;
+    
+    BASE_PLATFORM::Platform::Var row_var = &map;
+    db.Insert(sql_insert_data, row_var);
+    
+    auto select_age = PLATFORM_VAR_GENERATE(0);
+    auto select_name = PLATFORM_VAR_GENERATE("");
+    std::map<std::string, BASE_PLATFORM::Platform::Var> select_map;
+    select_map["name"] = select_name;
+    select_map["age"] = select_age;
+    
+    BASE_PLATFORM::Platform::Var select_row_var = &select_map;
+    db.Select(sql_insert_data, select_row_var);
+    printf("");
 }
 
 OnetenAdSDK::~OnetenAdSDK() {
@@ -124,7 +156,7 @@ void OnetenAdSDK::DidClickAd(const std::string& placement_id) {
 
 bool OnetenAdSDK::IsReady(const std::string& placement_id) {
     auto cache = cache_service_->GetHighestPrice(placement_id);
-    bool isReady = (cache != nullptr && cache->IsReady());
+    bool isReady = (cache && cache->IsReady());
     otlog_info << "placement id:" << placement_id << ", is ready:" << isReady;
     return isReady;
 }
